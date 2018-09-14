@@ -1,4 +1,4 @@
-# Christmas iOt
+# Christmas IoT Hunt Leaderboard
 
 ## Overview
 
@@ -21,8 +21,9 @@ will only add points to a team once.
 ## Requirements
 
 * Endpoint to record a button press
+```
 GET button/<number>?token=xxxxxxx
-
+```
 - Button number will be associated with a team for that day.
 - only one request per day will make anything happen
 
@@ -43,4 +44,11 @@ Team 2 - Button 3
 Team 9 = Button 10
 Team 10 - Button 1
 ```
-
+## Test
+```
+npm test
+```
+## Run
+```
+npm start
+```
