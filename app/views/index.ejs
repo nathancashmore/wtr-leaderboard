@@ -16,7 +16,7 @@
 
         <% for(var i=0; i < standing.length; i++) { %>
         <tr>
-            <td><%= standing[i].name %></td>
+            <td data-test="name-<%=i%>"><%= standing[i].name %></td>
             <td><%= standing[i].score %></td>
         </tr>
         <% } %>

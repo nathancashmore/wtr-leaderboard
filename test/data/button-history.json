@@ -1,0 +1,8 @@
+[
+  { "team": "A", "button" : 1, "day": 1, "time":"10:00:00", "score": 10 },
+  { "team": "B", "button" : 2, "day": 1, "time":"10:01:00", "score": 9 },
+  { "team": "C", "button" : 3, "day": 1, "time":"10:02:00", "score": 8 },
+  { "team": "B", "button" : 2, "day": 2, "time":"10:00:00", "score": 10 },
+  { "team": "A", "button" : 2, "day": 2, "time":"10:01:00", "score": 9 },
+  { "team": "B", "button" : 3, "day": 3, "time":"10:01:00", "score": 10 }
+]

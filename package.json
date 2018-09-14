@@ -13,7 +13,10 @@
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "http-server": "^0.11.1",
-    "morgan": "~1.9.0"
+    "jsonfile-promised": "0.0.1",
+    "morgan": "~1.9.0",
+    "winson": "^1.0.0",
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

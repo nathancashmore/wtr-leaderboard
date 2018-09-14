@@ -1,6 +1,8 @@
+const expect = require('chai').expect;
 
 const DataHelper = require('../app/helper/data-helper');
 const helper = new DataHelper();
+const logger = require('winston');
 
 describe('Integration', function () {
     let page;
@@ -27,13 +29,28 @@ describe('Integration', function () {
 
         expect(heading).to.eql('Christmas IoT Hunt');
     });
+
+    it('should show the leader', async function () {
+        const LEADER = '[data-test="name-0"]';
+        await page.waitFor(LEADER);
+
+        leader = await page.$eval(LEADER, leader => leader.innerText);
+
+        expect(leader.replace('\t', '')).to.eql("B");
+    })
 });
 
 describe('Helper', function() {
+
     describe('Data Helper', function() {
+
         it('should retrieve current standing', () => {
-            const result = helper.getStanding();
-            expect(result).to.not.equal(null);
+            return helper.getStanding()
+                .then(result => {
+                    expect(result[0].name).to.equal("B");
+                    expect(result[0].score).to.equal(29);
+            })
         });
+
     });
 });

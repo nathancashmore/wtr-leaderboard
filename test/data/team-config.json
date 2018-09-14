@@ -1,12 +1,12 @@
 [
-  { "name": "First D  ay", "teams" : [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" ] },
-  { "name": "Second Day", "teams" : [ "B", "C", "D", "E", "F", "G", "H", "I", "J", "A" ] },
-  { "name": "Third Day", "teams" : [ "C", "D", "E", "F", "G", "H", "I", "J", "A", "B" ] },
-  { "name": "Fourth Day", "teams" : [ "D", "E", "F", "G", "H", "I", "J", "A", "B", "C" ] },
-  { "name": "Fifth Day", "teams" : [ "E", "F", "G", "H", "I", "J", "A", "B", "C", "D" ] },
-  { "name": "Sixth Day", "teams" : [ "F", "G", "H", "I", "J", "A", "B", "C", "D", "E" ] },
-  { "name": "Seventh Day", "teams" : [ "G", "H", "I", "J", "A", "B", "C", "D", "E", "F" ] },
-  { "name": "Eighth Day", "teams" : [ "H", "I", "J", "A", "B", "C", "D", "E", "F", "G" ] },
-  { "name": "Ninth Day", "teams" : [ "I", "J", "A", "B", "C", "D", "E", "F", "G", "H" ] },
-  { "name": "Tenth Day", "teams" : [ "J", "A", "B", "C", "D", "E", "F", "G", "H", "I" ] }
+  { "day": 1, "teams" : [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" ] },
+  { "day": 2, "teams" : [ "B", "C", "D", "E", "F", "G", "H", "I", "J", "A" ] },
+  { "day": 3, "teams" : [ "C", "D", "E", "F", "G", "H", "I", "J", "A", "B" ] },
+  { "day": 4, "teams" : [ "D", "E", "F", "G", "H", "I", "J", "A", "B", "C" ] },
+  { "day": 5, "teams" : [ "E", "F", "G", "H", "I", "J", "A", "B", "C", "D" ] },
+  { "day": 6, "teams" : [ "F", "G", "H", "I", "J", "A", "B", "C", "D", "E" ] },
+  { "day": 7, "teams" : [ "G", "H", "I", "J", "A", "B", "C", "D", "E", "F" ] },
+  { "day": 8, "teams" : [ "H", "I", "J", "A", "B", "C", "D", "E", "F", "G" ] },
+  { "day": 9, "teams" : [ "I", "J", "A", "B", "C", "D", "E", "F", "G", "H" ] },
+  { "day": 10, "teams" : [ "J", "A", "B", "C", "D", "E", "F", "G", "H", "I" ] }
 ]
