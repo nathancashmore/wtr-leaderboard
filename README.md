@@ -1,6 +1,6 @@
-#Christmas iOt
+# Christmas IoT Hunt Leaderboard
 
-##Overview
+## Overview
 
 Create a leaderboard to display results from the '10 days of Christmas' event.
 In the event 10 iot devices will be hidden around / near the office.  Each team
@@ -10,7 +10,7 @@ Points will be awarded to the team when their days button is pressed.  The point
 total will be displayed on a leaderboard (this !!)
 
 
-##Rules
+## Rules
 
 - First button to be pressed on any given day will recieve
 10 points for the team, then 9 and so on.
@@ -18,11 +18,12 @@ total will be displayed on a leaderboard (this !!)
 - A button can only be pressed once per day.  So if button 2 is pressed twice it
 will only add points to a team once.
 
-##Requirements
+## Requirements
 
 * Endpoint to record a button press
+```
 GET button/<number>?token=xxxxxxx
-
+```
 - Button number will be associated with a team for that day.
 - only one request per day will make anything happen
 
@@ -43,4 +44,11 @@ Team 2 - Button 3
 Team 9 = Button 10
 Team 10 - Button 1
 ```
-
+## Test
+```
+npm test
+```
+## Run
+```
+npm start
+```
