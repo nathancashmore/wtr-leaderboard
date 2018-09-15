@@ -1,6 +1,6 @@
 ![leaderboard logo](https://raw.githubusercontent.com/nathancashmore/wtr-leaderboard/master/public/images/ChristmasIoTLeaderboard.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Christmas IoT Hunt Leaderboard")
 
-![Build Status](https://camo.githubusercontent.com/18b9991b8d293d6ce648e28cc273ccdfdcbdffaa/68747470733a2f2f7472617669732d63692e636f6d2f6e617468616e636173686d6f72652f7774722d6c6561646572626f6172642e7376673f746f6b656e3d784a384a795271586f624578586b384c63486341266272616e63683d6d6173746572?_sm_au_=iVVZfNPkkLqVLsVt "https://travis-ci.com/nathancashmore/wtr-leaderboard")
+[![Build Status](https://travis-ci.com/nathancashmore/wtr-leaderboard.svg?token=xJ8JyRqXobExXk8LcHcA&branch=master)](https://travis-ci.com/nathancashmore/wtr-leaderboard)
 
 # Christmas IoT Hunt Leaderboard
 
