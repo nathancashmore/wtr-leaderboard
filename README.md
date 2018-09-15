@@ -1,3 +1,5 @@
+![leaderboard logo](https://raw.githubusercontent.com/nathancashmore/wtr-leaderboard/master/public/images/ChristmasIoTLeaderboard.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Christmas IoT Hunt Leaderboard")
+
 # Christmas IoT Hunt Leaderboard
 
 ## Overview
