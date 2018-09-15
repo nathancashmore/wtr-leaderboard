@@ -1,3 +1,5 @@
+![leaderboard logo](https://github.com/nathancashmore/wtr-leaderboard/blob/master/public/images/ChristmasIoTLeaderboard.png "Christmas IoT Hunt Leaderboard")
+
 # Christmas IoT Hunt Leaderboard
 
 ## Overview
