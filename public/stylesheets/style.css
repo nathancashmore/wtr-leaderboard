@@ -1,7 +1,18 @@
+/* @font-face kit by Fonts2u (http://www.fonts2u.com) */
+@font-face {
+  font-family: "Minecraft Regular";
+  src: url("../fonts/Minecraft_Regular/minecraft_font_by_pwnage_block-d37t6nb.eot?") format("eot"),
+  url("../fonts/Minecraft_Regular/minecraft_font_by_pwnage_block-d37t6nb.woff") format("woff"),
+  url("../fonts/Minecraft_Regular/minecraft_font_by_pwnage_block-d37t6nb.ttf") format("truetype"),
+  url("../fonts/Minecraft_Regular/minecraft_font_by_pwnage_block-d37t6nb.svg#Minecraft") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: black;
+  font-family: "Minecraft Regular";
+  background: #111111;
   color: white;
   text-align: center;
 }

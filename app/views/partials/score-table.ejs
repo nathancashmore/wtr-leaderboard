@@ -1,0 +1,23 @@
+<p>
+    <% if (standing.length > 1) { %>
+    <div>
+        <table>
+            <tr>
+                <th>Team Name</th>
+                <th>Points</th>
+            </tr>
+
+            <% for(var i=0; i < standing.length; i++) { %>
+            <tr>
+                <td data-test="name-<%=i%>"><%= standing[i].name %></td>
+                <td><%= standing[i].score %></td>
+            </tr>
+            <% } %>
+        </table>
+    </div>
+<% } else { %>
+<p> HO HO HO ... </p>
+<% } %>
+
+
+

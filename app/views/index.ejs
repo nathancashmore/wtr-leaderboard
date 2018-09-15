@@ -3,25 +3,19 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/refresh.js"></script>
+
   </head>
   <body>
+
     <img src="/images/christmastree.png">
     <h1 class="center" [data-test="title"]><%= title %></h1>
 
-    <table>
-        <tr>
-            <th>Team Name</th>
-            <th>Points</th>
-        </tr>
-
-        <% for(var i=0; i < standing.length; i++) { %>
-        <tr>
-            <td data-test="name-<%=i%>"><%= standing[i].name %></td>
-            <td><%= standing[i].score %></td>
-        </tr>
-        <% } %>
-
-    </table>
+    <div id="score-table">
+    <%- include('partials/score-table', {standing}); %>
+    </div>
 
   </body>
 </html>

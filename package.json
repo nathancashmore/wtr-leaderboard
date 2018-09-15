@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha --exit --recursive"
+    "test": "NODE_ENV=test mocha --exit --recursive"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",

@@ -10,4 +10,9 @@ router.get('/', async function(req, res, next) {
   res.render('index', { title: 'Christmas IoT Hunt', standing: standing})
 });
 
+router.get('/score-table', async function(req, res, next) {
+    let standing = await helper.getStanding();
+    res.render('partials/score-table', { standing: standing})
+});
+
 module.exports = router;

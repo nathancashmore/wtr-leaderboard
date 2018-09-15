@@ -1,55 +1,82 @@
 const expect = require('chai').expect;
-
 const DataHelper = require('../app/helper/data-helper');
+const bootstrap = require('./bootstrap');
+
 const helper = new DataHelper();
-const logger = require('winston');
 
 describe('Integration', function () {
-    let page;
 
-    before (async function () {
-        page = await browser.newPage();
-        await page.goto('http://localhost:3000');
-    });
+    describe('Main Page', function () {
 
-    after (async function () {
-        await page.close();
-    });
+        let page;
 
-    it('should have the correct page title', async function () {
-        expect(await page.title()).to.eql('Christmas IoT Hunt');
-    });
+        before(async function () {
+            page = await browser.newPage();
+            await page.goto('http://localhost:3000');
+        });
 
-    it('should have a heading', async function () {
-        const HEADING_SELECTOR = 'h1';
-        let heading;
+        after(async function () {
+            await page.close();
+        });
 
-        await page.waitFor(HEADING_SELECTOR);
-        heading = await page.$eval(HEADING_SELECTOR, heading => heading.innerText);
+        it('should have the correct page title', async function () {
+            expect(await page.title()).to.eql('Christmas IoT Hunt');
+        });
 
-        expect(heading).to.eql('Christmas IoT Hunt');
-    });
+        it('should have a heading', async function () {
+            const HEADING_SELECTOR = 'h1';
+            let heading;
 
-    it('should show the leader', async function () {
-        const LEADER = '[data-test="name-0"]';
-        await page.waitFor(LEADER);
+            await page.waitFor(HEADING_SELECTOR);
+            heading = await page.$eval(HEADING_SELECTOR, heading => heading.innerText);
 
-        leader = await page.$eval(LEADER, leader => leader.innerText);
+            expect(heading).to.eql('Christmas IoT Hunt');
+        });
 
-        expect(leader.replace('\t', '')).to.eql("B");
+        it('should show the leader', async function () {
+            const LEADER = '[data-test="name-0"]';
+            await page.waitFor(LEADER);
+
+            leader = await page.$eval(LEADER, leader => leader.innerText);
+
+            expect(leader.replace('\t', '')).to.eql("B");
+        })
+    })
+
+    describe('Score Table', function() {
+
+        let page;
+
+        before(async function () {
+            page = await browser.newPage();
+            await page.goto('http://localhost:3000/score-table');
+        });
+
+        after(async function () {
+            await page.close();
+        });
+
+        it('should show the leader', async function () {
+            const LEADER = '[data-test="name-0"]';
+            await page.waitFor(LEADER);
+
+            leader = await page.$eval(LEADER, leader => leader.innerText);
+
+            expect(leader.replace('\t', '')).to.eql("B");
+        })
     })
 });
 
-describe('Helper', function() {
+describe('Helper', function () {
 
-    describe('Data Helper', function() {
+    describe('Data Helper', function () {
 
         it('should retrieve current standing', () => {
             return helper.getStanding()
                 .then(result => {
                     expect(result[0].name).to.equal("B");
                     expect(result[0].score).to.equal(29);
-            })
+                })
         });
 
     });
