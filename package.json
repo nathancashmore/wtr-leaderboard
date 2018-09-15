@@ -11,6 +11,7 @@
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
+    "getconfig": "^4.5.0",
     "http-errors": "~1.6.2",
     "http-server": "^0.11.1",
     "jsonfile-promised": "0.0.1",
@@ -20,7 +21,6 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "getconfig": "^4.5.0",
     "mocha": "^5.2.0",
     "puppeteer": "^1.8.0",
     "zombie": "^6.1.3"
