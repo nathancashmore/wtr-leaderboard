@@ -15,7 +15,7 @@ require('../bin/www'); // This starts the web server, and ensures it is only
 // expose variables
 before (async function () {
     global.expect = expect;
-    global.browser = await puppeteer.launch(opts);
+    global.browser = await puppeteer.launch({args: ['--no-sandbox']});
 });
 
 // close browser and reset global variables
