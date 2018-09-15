@@ -7,7 +7,8 @@ const globalVariables = _.pick(global, ['browser', 'expect']);
 const opts = {
     headless: false,
     slowMo: 100,
-    timeout: 10000
+    timeout: 10000,
+    sandbox: false
 };
 
 require('../bin/www'); // This starts the web server, and ensures it is only
@@ -15,7 +16,7 @@ require('../bin/www'); // This starts the web server, and ensures it is only
 // expose variables
 before (async function () {
     global.expect = expect;
-    global.browser = await puppeteer.launch(opts, {args: ['--no-sandbox']});
+    global.browser = await puppeteer.launch(opts);
 });
 
 // close browser and reset global variables
