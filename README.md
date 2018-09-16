@@ -54,3 +54,5 @@ npm test
 ```
 npm start
 ```
+## Deploy
+This is currently being deployed to [Heroku](https://iot-hunt.herokuapp.com/)
