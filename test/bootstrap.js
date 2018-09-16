@@ -7,7 +7,8 @@ const globalVariables = _.pick(global, ['browser', 'expect']);
 const opts = {
     headless: false,
     slowMo: 100,
-    timeout: 10000
+    timeout: 10000,
+    sandbox: false
 };
 
 require('../bin/www'); // This starts the web server, and ensures it is only
