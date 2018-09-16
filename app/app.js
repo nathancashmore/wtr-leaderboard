@@ -34,6 +34,7 @@ app.use(function(err, req, res, next) {
 
   // set program locals
   res.locals.dataDirectory = process.env.DATA_DIR || config.DATA_DIR;
+  res.locals.noOfTeams = process.env.NO_OF_TEAMS || config.NO_OF_TEAMS;
 
   // render the error page
   res.status(err.status || 500);

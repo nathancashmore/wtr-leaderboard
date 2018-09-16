@@ -1,3 +1,4 @@
 {
-  "DATA_DIR" : "./app/data"
+  "DATA_DIR" : "./app/data",
+  "NO_OF_TEAMS" : 10
 }

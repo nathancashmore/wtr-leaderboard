@@ -1,12 +1,12 @@
 const config = require('getconfig');
 const logger = require('winston');
 const jsonFile = require('jsonfile-promised');
-const teamList = require('../data/team-list.json');
 
 module.exports = class DataHelper {
 
     constructor() {
         logger.info(`Data directory set to : ${config.DATA_DIR}`);
+        logger.info(`Total number of teams set to : ${config.NO_OF_TEAMS}`)
     }
 
     getStanding() {
@@ -15,7 +15,9 @@ module.exports = class DataHelper {
         let teamScores = [];
 
         return jsonFile.readFile(buttonHistoryFile).then(history => {
-            teamList.forEach(team => {
+            let team = 1;
+
+            while( team < config.NO_OF_TEAMS + 1 ) {
 
                 let teamHistory = history
                     .filter(history => history["team"] === team);
@@ -30,7 +32,8 @@ module.exports = class DataHelper {
                     teamScores.push({ name: team, score: 0 })
                 }
 
-            });
+                team++;
+            }
 
             teamScores.sort((a, b) => b.score - a.score)
 

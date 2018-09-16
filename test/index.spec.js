@@ -1,8 +1,5 @@
 const expect = require('chai').expect;
-const DataHelper = require('../app/helper/data-helper');
 const bootstrap = require('./bootstrap');
-
-const helper = new DataHelper();
 
 describe('Integration', function () {
 
@@ -39,9 +36,9 @@ describe('Integration', function () {
 
             leader = await page.$eval(LEADER, leader => leader.innerText);
 
-            expect(leader.replace('\t', '')).to.eql("B");
+            expect(leader.replace('\t', '')).to.eql("2");
         })
-    })
+    });
 
     describe('Score Table', function() {
 
@@ -57,27 +54,35 @@ describe('Integration', function () {
         });
 
         it('should show the leader', async function () {
-            const LEADER = '[data-test="name-0"]';
-            await page.waitFor(LEADER);
+            const FIRST_PLACE_NAME = '[data-test="name-0"]';
+            const SECOND_PLACE_NAME = '[data-test="name-1"]';
+            const THIRD_PLACE_NAME = '[data-test="name-2"]';
 
-            leader = await page.$eval(LEADER, leader => leader.innerText);
+            const FIRST_PLACE_SCORE = '[data-test="score-0"]';
+            const SECOND_PLACE_SCORE = '[data-test="score-1"]';
+            const THIRD_PLACE_SCORE = '[data-test="score-2"]';
 
-            expect(leader.replace('\t', '')).to.eql("B");
+            await page.waitFor(FIRST_PLACE_NAME);
+
+            first_name = await page.$eval(FIRST_PLACE_NAME, html => html.innerText);
+            first_score = await page.$eval(FIRST_PLACE_SCORE, html => html.innerText);
+
+            second_name = await page.$eval(SECOND_PLACE_NAME, html => html.innerText);
+            second_score = await page.$eval(SECOND_PLACE_SCORE, html => html.innerText);
+
+            third_name = await page.$eval(THIRD_PLACE_NAME, html => html.innerText);
+            third_score = await page.$eval(THIRD_PLACE_SCORE, html => html.innerText);
+
+            expect(first_name.replace('\t', '')).to.eql("2");
+            expect(first_score.replace('\t', '')).to.eql("29");
+
+            expect(second_name.replace('\t', '')).to.eql("1");
+            expect(second_score.replace('\t', '')).to.eql("19");
+
+            expect(third_name.replace('\t', '')).to.eql("3");
+            expect(third_score.replace('\t', '')).to.eql("8");
+
         })
     })
 });
 
-describe('Helper', function () {
-
-    describe('Data Helper', function () {
-
-        it('should retrieve current standing', () => {
-            return helper.getStanding()
-                .then(result => {
-                    expect(result[0].name).to.equal("B");
-                    expect(result[0].score).to.equal(29);
-                })
-        });
-
-    });
-});
