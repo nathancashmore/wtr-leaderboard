@@ -81,7 +81,6 @@ describe('Integration', function () {
 
             expect(third_name.replace('\t', '')).to.eql("3");
             expect(third_score.replace('\t', '')).to.eql("8");
-
         })
     })
 });

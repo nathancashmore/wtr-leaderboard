@@ -1,3 +1,4 @@
 {
-  "DATA_DIR" : "./test/data"
+  "DATA_DIR" : "./test/data",
+  "NO_OF_TEAMS" : 3
 }
