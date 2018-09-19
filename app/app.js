@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const config = require('getconfig');
 const bodyParser = require("body-parser");
 
 const indexRouter = require('./routes/index');
@@ -36,10 +35,6 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // set program locals
-  res.locals.dataDirectory = process.env.DATA_DIR || config.DATA_DIR;
-  res.locals.noOfTeams = process.env.NO_OF_TEAMS || config.NO_OF_TEAMS;
 
   // render the error page
   res.status(err.status || 500);

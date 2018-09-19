@@ -2,8 +2,9 @@ const expect = require('chai').expect;
 const DataHelper = require('../app/helper/data-helper');
 const bootstrap = require('./bootstrap');
 const moment = require('moment');
+const config = require('getconfig');
 
-const helper = new DataHelper();
+const helper = new DataHelper(config.DATA_DIR, config.NO_OF_TEAMS, config.REDISCLOUD_URL);
 
 describe('Helper', function () {
 
