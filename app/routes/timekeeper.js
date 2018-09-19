@@ -1,14 +1,13 @@
 const express = require('express');
-const router = express.Router();
+const config = require('getconfig');
+const DataHelper = require('../helper/data-helper');
 
-const Helper = require('../helper/data-helper');
-const helper = new Helper();
+const router = express.Router();
+const helper = new DataHelper(config.DATA_DIR, config.NO_OF_TEAMS, config.REDISCLOUD_URL);
 
 router.post('/', async function(req, res, next) {
     const startDate = req.body.start;
-
     await helper.setStartDate(startDate);
-
     res.json({ startDate });
 });
 

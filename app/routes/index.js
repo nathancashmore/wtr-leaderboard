@@ -1,8 +1,9 @@
 const express = require('express');
+const DataHelper = require('../helper/data-helper');
+const config = require('getconfig');
 const router = express.Router();
-const Helper = require('../helper/data-helper');
 
-const helper = new Helper();
+const helper = new DataHelper(config.DATA_DIR, config.NO_OF_TEAMS, config.REDISCLOUD_URL);
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
