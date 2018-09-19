@@ -11,8 +11,6 @@ before (async function () {
     global.browser = await puppeteer.launch(
         {
             args: ['--no-sandbox'],
-            headless: false,
-            slowMo: 100,
             timeout: 10000
         });
 });
