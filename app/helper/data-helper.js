@@ -4,7 +4,7 @@ const jsonFile = require('jsonfile-promised');
 const moment = require('moment');
 
 const asyncRedis = require("async-redis");
-const client = asyncRedis.createClient();
+const client = asyncRedis.createClient(process.env.REDISCLOUD_URL|'127.0.0.1', {no_ready_check: true});
 
 module.exports = class DataHelper {
 
