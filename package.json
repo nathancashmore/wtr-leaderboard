@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "NODE_ENV=test mocha --exit --recursive"
+    "test": "NODE_ENV=test mocha --exit --recursive --timeout 10000"
   },
   "dependencies": {
+    "async-redis": "^1.1.4",
+    "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
@@ -15,12 +17,15 @@
     "http-errors": "~1.6.2",
     "http-server": "^0.11.1",
     "jsonfile-promised": "0.0.1",
+    "moment": "^2.22.2",
     "morgan": "~1.9.0",
+    "redis": "^2.8.0",
     "winson": "^1.0.0",
     "winston": "^3.1.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
     "mocha": "^5.2.0",
     "puppeteer": "^1.8.0",
     "zombie": "^6.1.3"
