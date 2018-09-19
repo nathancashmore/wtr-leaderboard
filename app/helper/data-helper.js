@@ -1,12 +1,25 @@
 const config = require('getconfig');
 const logger = require('winston');
 const jsonFile = require('jsonfile-promised');
+const moment = require('moment');
+
+const asyncRedis = require("async-redis");
+const client = asyncRedis.createClient();
 
 module.exports = class DataHelper {
 
     constructor() {
         logger.info(`Data directory set to : ${config.DATA_DIR}`);
         logger.info(`Total number of teams set to : ${config.NO_OF_TEAMS}`)
+    }
+
+    async setStartDate(startDate) {
+        await client.set("startDate", startDate);
+    }
+
+    async getDay() {
+        let startDate = await client.get("startDate");
+        return moment().diff(moment(startDate), 'days');
     }
 
     getStanding() {
