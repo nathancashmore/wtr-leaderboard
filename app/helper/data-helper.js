@@ -1,17 +1,13 @@
 const logger = require('winston');
-const jsonFile = require('jsonfile-promised');
 const moment = require('moment');
-
 const asyncRedis = require("async-redis");
 
 module.exports = class DataHelper {
 
-    constructor(dataDir, noOfTeams, redisUrl) {
-        logger.info(`Data directory set to : ${dataDir}`);
+    constructor(noOfTeams, redisUrl) {
         logger.info(`Total number of teams set to : ${noOfTeams}`);
         logger.info(`Redis URL set  to: ${redisUrl}`);
 
-        this.dataDir = dataDir;
         this.noOfTeams = noOfTeams;
         this.client = asyncRedis.createClient(redisUrl, {no_ready_check: true});
     }
@@ -25,35 +21,33 @@ module.exports = class DataHelper {
         return moment().diff(moment(startDate), 'days');
     }
 
-    getStanding() {
-        // for each team in button- history add up their points
-        const buttonHistoryFile = `${this.dataDir}/button-history.json`;
+    async getStanding() {
         let teamScores = [];
 
-        return jsonFile.readFile(buttonHistoryFile).then(history => {
-            let team = 1;
+        let history = JSON.parse(await this.client.get("buttonHistory"));
 
-            while( team < this.noOfTeams + 1 ) {
+        let team = 1;
 
-                let teamHistory = history
-                    .filter(history => history["team"] === team);
+        while( team < this.noOfTeams + 1 ) {
 
-                if(teamHistory.length !== 0) {
-                    const score = teamHistory
-                        .map(x => x.score)
-                        .reduce((prev, curr) => prev + curr);
+            let teamHistory = history
+                .filter(history => history["team"] === team);
 
-                    teamScores.push({ name: team, score })
-                } else {
-                    teamScores.push({ name: team, score: 0 })
-                }
+            if(teamHistory.length !== 0) {
+                const score = teamHistory
+                    .map(x => x.score)
+                    .reduce((prev, curr) => prev + curr);
 
-                team++;
+                teamScores.push({ name: team, score })
+            } else {
+                teamScores.push({ name: team, score: 0 })
             }
 
-            teamScores.sort((a, b) => b.score - a.score);
+            team++;
+        }
 
-            return teamScores;
-        }).catch(e => logger.log('error', e));
+        teamScores.sort((a, b) => b.score - a.score);
+
+        return teamScores;
     }
 };
