@@ -4,7 +4,7 @@ const bootstrap = require('./bootstrap');
 const moment = require('moment');
 const config = require('getconfig');
 
-const helper = new DataHelper(config.DATA_DIR, config.NO_OF_TEAMS, config.REDISCLOUD_URL);
+const helper = new DataHelper(config.DATA_DIR, config.NO_OF_TEAMS, config.REDIS_URL);
 
 describe('Helper', function () {
 

@@ -4,8 +4,6 @@ const moment = require('moment');
 
 const asyncRedis = require("async-redis");
 
-let client, dataDir, noOfTeams;
-
 module.exports = class DataHelper {
 
     constructor(dataDir, noOfTeams, redisUrl) {
@@ -15,7 +13,7 @@ module.exports = class DataHelper {
 
         this.dataDir = dataDir;
         this.noOfTeams = noOfTeams;
-        this.client = asyncRedis.createClient(6379, redisUrl, {no_ready_check: true});
+        this.client = asyncRedis.createClient(redisUrl, {no_ready_check: true});
     }
 
     async setStartDate(startDate) {

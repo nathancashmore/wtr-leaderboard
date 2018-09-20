@@ -1,4 +1,5 @@
 {
   "DATA_DIR" : "./app/data",
-  "NO_OF_TEAMS" : 10
+  "NO_OF_TEAMS" : 10,
+  "REDIS_URL" : "redis://localhost:6379/1"
 }
