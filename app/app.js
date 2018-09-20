@@ -4,11 +4,21 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require("body-parser");
+const config = require('getconfig');
+
+const DataHelper = require('./helper/data-helper');
 
 const indexRouter = require('./routes/index');
 const timekeeperRouter = require('./routes/timekeeper');
 
-const app = express();
+const app = module.exports = express();
+
+// Global variables
+const redisUrl = process.env.REDIS_URL || config.REDIS_URL;
+const noOfTeams = process.env.NO_OF_TEAMS || config.NO_OF_TEAMS;
+const dataDir = process.env.DATA_DIR || config.DATA_DIR;
+
+app.locals.dataHelper = new DataHelper(dataDir, noOfTeams, redisUrl);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

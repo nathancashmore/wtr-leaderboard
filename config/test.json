@@ -1,5 +1,4 @@
 {
   "DATA_DIR" : "./test/data",
-  "NO_OF_TEAMS" : 3,
-  "REDISCLOUD_URL" : "localhost"
+  "NO_OF_TEAMS" : 3
 }
