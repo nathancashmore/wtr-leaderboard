@@ -3,6 +3,10 @@ const bootstrap = require('./bootstrap');
 
 describe('Integration', function () {
 
+    before(async function () {
+        await bootstrap.withButtonHistoryData();
+    });
+
     describe('Main Page', function () {
 
         let page;

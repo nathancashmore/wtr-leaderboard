@@ -1,6 +1,6 @@
 const logger = require('winston');
 const moment = require('moment');
-const asyncRedis = require("async-redis");
+const asyncRedis = require('async-redis');
 
 module.exports = class DataHelper {
 
@@ -13,25 +13,29 @@ module.exports = class DataHelper {
     }
 
     async setStartDate(startDate) {
-        await this.client.set("startDate", startDate);
+        await this.client.set('startDate', startDate);
     }
 
     async getDay() {
-        let startDate = await this.client.get("startDate");
+        let startDate = await this.client.get('startDate');
         return moment().diff(moment(startDate), 'days');
     }
 
     async getStanding() {
+        let team = 1;
         let teamScores = [];
 
-        let history = JSON.parse(await this.client.get("buttonHistory"));
+        let cachedHistory = await this.client.get('buttonHistory')
+            .catch(logger.info('No button press history found... returning empty list'));
 
-        let team = 1;
+        if ( cachedHistory === null ) { return [] }
+
+        let history = JSON.parse(cachedHistory);
 
         while( team < this.noOfTeams + 1 ) {
 
             let teamHistory = history
-                .filter(history => history["team"] === team);
+                .filter(history => history['team'] === team);
 
             if(teamHistory.length !== 0) {
                 const score = teamHistory
