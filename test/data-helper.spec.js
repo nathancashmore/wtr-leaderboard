@@ -1,7 +1,6 @@
-const expect = require('chai').expect;
+const bootstrap = require('./bootstrap');
 const moment = require('moment');
 const config = require('getconfig');
-const bootstrap = require('./bootstrap');
 
 const DataHelper = require('../app/helper/data-helper');
 

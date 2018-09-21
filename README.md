@@ -63,3 +63,9 @@ npm start
 ```
 ## Deploy
 This is currently being deployed to [Heroku](https://iot-hunt.herokuapp.com/)
+
+## iot scripts
+
+This directory contains snippits of python code that can be
+dropped onto a raspberry pi and used with a module to turn
+it into an IoT device.
