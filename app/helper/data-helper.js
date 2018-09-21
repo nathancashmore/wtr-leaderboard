@@ -13,12 +13,19 @@ module.exports = class DataHelper {
     }
 
     async setStartDate(startDate) {
-        await this.client.set('startDate', startDate);
+        if (startDate === undefined ) {
+            return new Error('Unable to set start date as input was undefined');
+        }
+
+        await this.client.set('startDate', startDate)
+            .catch((e) => { logger.error(`Call to setStartDate failed due to : ${e}`) });
     }
 
     async getDay() {
-        let startDate = await this.client.get('startDate');
-        return moment().diff(moment(startDate), 'days');
+        let startDate = await this.client.get('startDate')
+            .catch((e) => { logger.error(`Call to getDay failed due to : ${e}`) });
+
+        return moment().diff(moment(startDate, 'YYYY-MM-DD'), 'days');
     }
 
     async getStanding() {
