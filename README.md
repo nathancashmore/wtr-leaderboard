@@ -46,6 +46,13 @@ Team 2 - Button 3
 Team 9 = Button 10
 Team 10 - Button 1
 ```
+### Prerequisites
+* REDIS running locally
+```
+brew install redis
+redis-server
+```
+
 ## Test
 ```
 npm test

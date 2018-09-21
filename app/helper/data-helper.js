@@ -54,4 +54,19 @@ module.exports = class DataHelper {
 
         return teamScores;
     }
+
+    async pressButton(buttonNumber, team, day, score) {
+        let history = [];
+
+        let cachedHistory = await this.client.get('buttonHistory')
+            .catch(logger.info('No button press history found, will start a new history log'));
+
+        if ( cachedHistory !== null ) {
+            history = JSON.parse(cachedHistory);
+        }
+
+        history.push({"team": team, "button": buttonNumber, "day": day, "time": moment().format('HH:mm:ss'), "score": score});
+
+        return await this.client.set('buttonHistory', JSON.stringify(history));
+    }
 };
