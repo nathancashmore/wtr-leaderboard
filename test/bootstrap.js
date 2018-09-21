@@ -33,7 +33,7 @@ async function withButtonHistoryData() {
         {"team": 3, "button": 3, "day": 1, "time": "10:02:00", "score": 8},
         {"team": 2, "button": 2, "day": 2, "time": "10:00:00", "score": 10},
         {"team": 1, "button": 2, "day": 2, "time": "10:01:00", "score": 9},
-        {"team": 2, "button": 3, "day": 3, "time": "10:01:00", "score": 10}
+        {"team": 2, "button": 3, "day": 3, "time": "10:01:00", "score": 8}
     ];
 
     const client = await asyncRedis.createClient(config.REDIS_URL, {no_ready_check: true});

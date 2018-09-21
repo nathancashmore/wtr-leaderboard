@@ -78,7 +78,7 @@ describe('Integration', function () {
             third_score = await page.$eval(THIRD_PLACE_SCORE, html => html.innerText);
 
             expect(first_name.replace('\t', '')).to.eql("2");
-            expect(first_score.replace('\t', '')).to.eql("29");
+            expect(first_score.replace('\t', '')).to.eql("27");
 
             expect(second_name.replace('\t', '')).to.eql("1");
             expect(second_score.replace('\t', '')).to.eql("19");
