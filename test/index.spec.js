@@ -1,4 +1,3 @@
-const expect = require('chai').expect;
 const bootstrap = require('./bootstrap');
 
 describe('Integration', function () {

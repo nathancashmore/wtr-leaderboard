@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const asyncRedis = require("async-redis");
+const asyncRedis = require('async-redis');
 const config = require('getconfig');
 const { expect } = require('chai');
 const _ = require('lodash');
@@ -45,5 +45,11 @@ async function withoutButtonHistoryData() {
     await client.del("buttonHistory");
 }
 
+async function withoutStartDate() {
+	const client = await asyncRedis.createClient(config.REDIS_URL, {no_ready_check: true});
+	await client.del("startDate");
+}
+
 module.exports.withButtonHistoryData = withButtonHistoryData;
 module.exports.withoutButtonHistoryData = withoutButtonHistoryData;
+module.exports.withoutStartDate = withoutStartDate;

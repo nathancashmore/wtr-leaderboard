@@ -1,45 +1,68 @@
+const bootstrap = require('./bootstrap');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const moment = require('moment');
-const expect = chai.expect;
-const should = chai.should();
 
-const bootstrap = require('./bootstrap');
+chai.use(chaiHttp);
+
 let server = require('../app/app');
+
+const START_DATE = moment().format('YYYY-MM-DD');
 
 chai.use(chaiHttp);
 
 describe('Timekeeper', function () {
 
-    describe('/GET', () => {
+	describe('Happy path', function () {
+		it('it should POST the date', (done) => {
+			const endpoint = '/timekeeper';
+			const payload = {
+				startDate: START_DATE
+			};
 
-        it('it should POST the date', (done) => {
+			chai.request(server)
+				.post(endpoint)
+				.send(payload)
+				.end((err, res) => {
+					expect(res.status).to.equal(200);
+					expect(res.body.startDate).to.equal(START_DATE);
+					done();
+				});
+		});
 
-            const endpoint = '/timekeeper';
-            const payload = {
-                startDate : moment().format('YYYY-MM-DD')
-            };
+		it('it should GET the current day no', (done) => {
+			const endpoint = '/timekeeper';
 
-            chai.request(server)
-                .post(endpoint)
-                .send(payload)
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    console.log(res.body);
-                    done();
-                });
-        });
+			chai.request(server)
+				.get(endpoint)
+				.end((err, res) => {
+					expect(res.status).to.equal(200);
+					expect(res.body.day).to.equal(0);
+					done();
+				});
+
+		});
+	});
+
+	describe('Unhappy path', function () {
+
+		before(async function () {
+			await bootstrap.withoutStartDate();
+		});
+
+		it('it should GET a default day no when not set', (done) => {
+			const endpoint = '/timekeeper';
+
+			chai.request(server)
+				.get(endpoint)
+				.end((err, res) => {
+					expect(res.status).to.equal(200);
+					expect(res.body.day).to.equal(-1);
+					done();
+				});
+		});
+	});
 
 
-        it('it should GET the current day no', (done) => {
-            chai.request(server)
-                .get('/timekeeper')
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    console.log(res.body);
-                    done();
-                });
-        });
-    });
 });
 

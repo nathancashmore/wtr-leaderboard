@@ -13,10 +13,6 @@ module.exports = class DataHelper {
     }
 
     async setStartDate(startDate) {
-        if (startDate === undefined ) {
-            return new Error('Unable to set start date as input was undefined');
-        }
-
         await this.client.set('startDate', startDate)
             .catch((e) => { logger.error(`Call to setStartDate failed due to : ${e}`) });
     }
