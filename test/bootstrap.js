@@ -27,17 +27,34 @@ after (function () {
 
 
 async function withButtonHistoryData() {
+    // Following should provide the standing:
+    // Team  --  Score
+    //   2   --    8
+    //   1   --    5
+    //   3   --    2
+
     const testData = [
-        {"team": 1, "button": 1, "day": 1, "time": "10:00:00", "score": 10},
-        {"team": 2, "button": 2, "day": 1, "time": "10:01:00", "score": 9},
-        {"team": 3, "button": 3, "day": 1, "time": "10:02:00", "score": 8},
-        {"team": 2, "button": 2, "day": 2, "time": "10:00:00", "score": 10},
-        {"team": 1, "button": 2, "day": 2, "time": "10:01:00", "score": 9},
-        {"team": 2, "button": 3, "day": 3, "time": "10:01:00", "score": 8}
-    ];
+        {"team": 1, "button": 1, "day": 0, "time": "10:00:00", "score": 3},
+        {"team": 2, "button": 2, "day": 0, "time": "10:01:00", "score": 2},
+        {"team": 3, "button": 3, "day": 0, "time": "10:02:00", "score": 1},
+
+		{"team": 2, "button": 3, "day": 1, "time": "10:00:00", "score": 3},
+		{"team": 1, "button": 2, "day": 1, "time": "10:01:00", "score": 2},
+		{"team": 3, "button": 1, "day": 1, "time": "10:02:00", "score": 1},
+
+		{"team": 2, "button": 1, "day": 2, "time": "10:00:00", "score": 3},
+		// {"team": 1, "button": 3, "day": 2, "time": "10:01:00", "score": 2},
+		// {"team": 3, "button": 2, "day": 2, "time": "10:02:00", "score": 1}
+	];
 
     const client = await asyncRedis.createClient(config.REDIS_URL, {no_ready_check: true});
     await client.set("buttonHistory", JSON.stringify(testData));
+
+    return [
+    	{ "team" : 2, "score" : 8 },
+    	{ "team" : 1, "score" : 5 },
+    	{ "team" : 3, "score" : 2 }
+	];
 }
 
 async function withoutButtonHistoryData() {

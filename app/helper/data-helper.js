@@ -24,6 +24,33 @@ module.exports = class DataHelper {
         return moment().diff(moment(startDate, 'YYYY-MM-DD'), 'days');
     }
 
+    async getScore(day) {
+        // Find all the entries for the current day and -1 ... e.g. first button press = no of teams - no of button presses
+		let cachedHistory = await this.client.get('buttonHistory')
+			.catch(logger.info('No button press history found. Must be the first button press ?'));
+
+		if ( cachedHistory === null ) { return this.noOfTeams }
+
+		let history = JSON.parse(cachedHistory);
+
+		let dayHistory = history.filter(history => history['day'] === day);
+
+		return this.noOfTeams - dayHistory.length
+	}
+
+    getTeam(buttonNumber, day) {
+        // Found out which team the button belongs to for the day.
+        // e.g. button number + day = team; if team > 10 .. team = team - no of teams
+        // e.g
+        // btn=1 day=0 -> team=1
+        // btn=10 day=0 -> team=10
+        // btn=1 day=10 -> team=11 - 10 = 1
+        // btn=10 day=10 -> team=20 - 10 = 10
+
+        const offset = buttonNumber + day;
+        return ( offset > this.noOfTeams ) ? offset - this.noOfTeams : offset;
+    }
+
     async getStanding() {
         let team = 1;
         let teamScores = [];
