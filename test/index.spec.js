@@ -1,9 +1,11 @@
 const bootstrap = require('./bootstrap');
 
+let expectedScores;
+
 describe('Integration', function () {
 
     before(async function () {
-        await bootstrap.withButtonHistoryData();
+        expectedScores = await bootstrap.withButtonHistoryData();
     });
 
     describe('Main Page', function () {
@@ -39,7 +41,7 @@ describe('Integration', function () {
 
             leader = await page.$eval(LEADER, leader => leader.innerText);
 
-            expect(leader.replace('\t', '')).to.eql("2");
+            expect(leader.replace('\t', '')).to.eql(expectedScores[0].team.toString());
         })
     });
 
@@ -76,14 +78,14 @@ describe('Integration', function () {
             third_name = await page.$eval(THIRD_PLACE_NAME, html => html.innerText);
             third_score = await page.$eval(THIRD_PLACE_SCORE, html => html.innerText);
 
-            expect(first_name.replace('\t', '')).to.eql("2");
-            expect(first_score.replace('\t', '')).to.eql("27");
+            expect(first_name.replace('\t', '')).to.eql(expectedScores[0].team.toString());
+            expect(first_score.replace('\t', '')).to.eql(expectedScores[0].score.toString());
 
-            expect(second_name.replace('\t', '')).to.eql("1");
-            expect(second_score.replace('\t', '')).to.eql("19");
+            expect(second_name.replace('\t', '')).to.eql(expectedScores[1].team.toString());
+            expect(second_score.replace('\t', '')).to.eql(expectedScores[1].score.toString());
 
-            expect(third_name.replace('\t', '')).to.eql("3");
-            expect(third_score.replace('\t', '')).to.eql("8");
+            expect(third_name.replace('\t', '')).to.eql(expectedScores[2].team.toString());
+            expect(third_score.replace('\t', '')).to.eql(expectedScores[2].score.toString());
         })
     })
 });
