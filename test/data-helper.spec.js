@@ -53,12 +53,12 @@ describe('Helper', function () {
 			});
 
 			it('should be able to set a date and work out the day no from it', async () => {
-				let yesterday = moment().subtract(2, 'days').format('YYYY-MM-DD');
+				let yesterday = moment().subtract(3, 'days').format('YYYY-MM-DD');
 
 				await helper.setStartDate(yesterday);
 				let day = await helper.getDay();
 
-				expect(day).to.equal(2)
+				expect(day).to.equal(3)
 			});
 
 			it('should increase a teams score when button pressed', async () => {

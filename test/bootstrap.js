@@ -67,6 +67,13 @@ async function withoutStartDate() {
 	await client.del("startDate");
 }
 
+async function withStartDate(dateInFormatYYYY_MM_DD) {
+	let startDate = dateInFormatYYYY_MM_DD;
+	const client = await asyncRedis.createClient(config.REDIS_URL, {no_ready_check: true});
+	await client.set("startDate", JSON.stringify(startDate));
+}
+
 module.exports.withButtonHistoryData = withButtonHistoryData;
 module.exports.withoutButtonHistoryData = withoutButtonHistoryData;
+module.exports.withStartDate = withStartDate;
 module.exports.withoutStartDate = withoutStartDate;

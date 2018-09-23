@@ -9,7 +9,8 @@ const config = require('getconfig');
 const DataHelper = require('./helper/data-helper');
 
 const indexRouter = require('./routes/index');
-const timekeeperRouter = require('./routes/timekeeper');
+const timeRouter = require('./routes/time');
+const buttonRouter = require('./routes/button');
 
 const app = module.exports = express();
 
@@ -32,7 +33,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/', indexRouter);
-app.use('/timekeeper', timekeeperRouter);
+app.use('/time', timeRouter);
+app.use('/buttons', buttonRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

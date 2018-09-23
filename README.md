@@ -14,7 +14,7 @@ total will be displayed on a leaderboard (this !!)
 
 ## Rules
 
-- First button to be pressed on any given day will recieve
+- Given 10 teams, the first button to be pressed on any given day will receive
 10 points for the team, then 9 and so on.
 
 - A button can only be pressed once per day.  So if button 2 is pressed twice it
@@ -22,30 +22,21 @@ will only add points to a team once.
 
 ## Requirements
 
-* Endpoint to record a button press
+Endpoint to record a button press
 ```
-GET button/<number>?token=xxxxxxx
+POST /buttons/<number>?token=xxxx
 ```
 - Button number will be associated with a team for that day.
 - only one request per day will make anything happen
 
-e.g.
+Endpoint to set startDate
 ```
-Day 1
+POST /time 
+{ startDate : "2018-09-23" }
 
-Team 1 - Button 1
-Team 2 - Button 2
-
-... etc
-
-Day 2
-Team 1 - Button 2
-Team 2 - Button 3
-...
-
-Team 9 = Button 10
-Team 10 - Button 1
 ```
+ 
+
 ### Prerequisites
 * REDIS running locally
 ```

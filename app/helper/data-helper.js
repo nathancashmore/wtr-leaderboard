@@ -47,8 +47,8 @@ module.exports = class DataHelper {
         // btn=1 day=10 -> team=11 - 10 = 1
         // btn=10 day=10 -> team=20 - 10 = 10
 
-        const offset = buttonNumber + day;
-        return ( offset > this.noOfTeams ) ? offset - this.noOfTeams : offset;
+        const offset = Number(buttonNumber) + Number(day);
+        return ( Number(offset) > Number(this.noOfTeams) ) ? Number(offset) - Number(this.noOfTeams) : offset;
     }
 
     async getStanding() {
@@ -97,6 +97,7 @@ module.exports = class DataHelper {
 
         history.push({"team": team, "button": buttonNumber, "day": day, "time": moment().format('HH:mm:ss'), "score": score});
 
-        return await this.client.set('buttonHistory', JSON.stringify(history));
+        return await this.client.set('buttonHistory', JSON.stringify(history))
+			.catch((e) => { logger.error(`Call to pressButton failed when setting buttonHistory due to : ${e}`) });
     }
 };
