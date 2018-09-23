@@ -9,7 +9,7 @@ const config = require('getconfig');
 const DataHelper = require('./helper/data-helper');
 
 const indexRouter = require('./routes/index');
-const timekeeperRouter = require('./routes/timekeeper');
+const timeRouter = require('./routes/time');
 
 const app = module.exports = express();
 
@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/', indexRouter);
-app.use('/timekeeper', timekeeperRouter);
+app.use('/time', timeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

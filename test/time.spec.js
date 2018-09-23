@@ -11,11 +11,11 @@ const START_DATE = moment().format('YYYY-MM-DD');
 
 chai.use(chaiHttp);
 
-describe('Timekeeper', function () {
+describe('Time', function () {
 
 	describe('Happy path', function () {
 		it('it should POST the date', (done) => {
-			const endpoint = '/timekeeper';
+			const endpoint = '/time';
 			const payload = {
 				startDate: START_DATE
 			};
@@ -31,7 +31,7 @@ describe('Timekeeper', function () {
 		});
 
 		it('it should GET the current day no', (done) => {
-			const endpoint = '/timekeeper';
+			const endpoint = '/time';
 
 			chai.request(server)
 				.get(endpoint)
@@ -51,7 +51,7 @@ describe('Timekeeper', function () {
 		});
 
 		it('it should GET a default day no when not set', (done) => {
-			const endpoint = '/timekeeper';
+			const endpoint = '/time';
 
 			chai.request(server)
 				.get(endpoint)
