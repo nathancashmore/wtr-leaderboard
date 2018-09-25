@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title><%=__('title')%></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -11,7 +11,7 @@
   <body>
 
     <img src="/images/christmastree.png">
-    <h1 class="center" [data-test="title"]><%= title %></h1>
+    <h1 class="center" [data-test="title"]><%=__('title')%></h1>
 
     <div id="score-table">
     <%- include('partials/score-table', {standing}); %>

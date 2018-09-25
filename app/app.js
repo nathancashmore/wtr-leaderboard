@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require("body-parser");
 const config = require('getconfig');
+const i18n = require('i18n');
 
 const DataHelper = require('./helper/data-helper');
 
@@ -18,6 +19,12 @@ const app = module.exports = express();
 const redisUrl = process.env.REDIS_URL || config.REDIS_URL;
 const noOfTeams = process.env.NO_OF_TEAMS || config.NO_OF_TEAMS;
 
+
+i18n.configure({
+	locales:['en'],
+	directory: __dirname + '/locales'
+});
+
 app.locals.dataHelper = new DataHelper(noOfTeams, redisUrl);
 
 // view engine setup
@@ -28,6 +35,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(i18n.init);
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
