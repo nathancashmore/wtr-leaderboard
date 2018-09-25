@@ -11,7 +11,11 @@
   <body>
 
     <img src="/images/christmastree.png">
-    <h1 class="center" [data-test="title"]><%=__('title')%></h1>
+    <h1 class="center" [data-test="title"]>
+        <%=__('title-1')%>
+        <span class="xmas-red"><%=__('title-2')%></span><%=__('title-3')%><span class="xmas-green"><%=__('title-4')%></span>
+        <%=__('title-5')%>
+    </h1>
 
     <div id="score-table">
     <%- include('partials/score-table', {standing}); %>
