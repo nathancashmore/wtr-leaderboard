@@ -9,10 +9,12 @@
 
   </head>
   <body>
+    <%- include('partials/snow'); %>
 
-    <img src="/images/christmastree.png">
-    <h1 class="center" [data-test="title"]><%= title %></h1>
-
+    <div id="header">
+        <img src="/images/christmastree.png">
+        <h1 class="center" [data-test="title"]><%= title %></h1>
+    </div>
     <div id="score-table">
     <%- include('partials/score-table', {standing}); %>
     </div>
