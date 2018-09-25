@@ -60,3 +60,10 @@ This is currently being deployed to [Heroku](https://iot-hunt.herokuapp.com/)
 This directory contains snippits of python code that can be
 dropped onto a raspberry pi and used with a module to turn
 it into an IoT device.
+
+To have the scripts start when the raspberry pi starts add them to the ```/etc/rc.local``` file.
+
+e.g.
+```
+/usr/bin/python /home/pi/button-push.py
+```
