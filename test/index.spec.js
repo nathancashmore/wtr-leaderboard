@@ -1,4 +1,5 @@
 const bootstrap = require('./bootstrap');
+const i18n = require('i18n');
 
 let expectedScores;
 
@@ -41,7 +42,7 @@ describe('Integration', function () {
 
             leader = await page.$eval(LEADER, leader => leader.innerText);
 
-            expect(leader.replace('\t', '')).to.eql(expectedScores[0].team.toString());
+            expect(leader.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[0].team}`));
         })
     });
 
@@ -78,13 +79,13 @@ describe('Integration', function () {
             third_name = await page.$eval(THIRD_PLACE_NAME, html => html.innerText);
             third_score = await page.$eval(THIRD_PLACE_SCORE, html => html.innerText);
 
-            expect(first_name.replace('\t', '')).to.eql(expectedScores[0].team.toString());
+            expect(first_name.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[0].team}`));
             expect(first_score.replace('\t', '')).to.eql(expectedScores[0].score.toString());
 
-            expect(second_name.replace('\t', '')).to.eql(expectedScores[1].team.toString());
+            expect(second_name.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[1].team}`));
             expect(second_score.replace('\t', '')).to.eql(expectedScores[1].score.toString());
 
-            expect(third_name.replace('\t', '')).to.eql(expectedScores[2].team.toString());
+            expect(third_name.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[2].team}`));
             expect(third_score.replace('\t', '')).to.eql(expectedScores[2].score.toString());
         })
     })

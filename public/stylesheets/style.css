@@ -41,6 +41,22 @@ center {
   text-align: center;
 }
 
+tr:nth-child(even) {
+  color : #2a942f;
+}
+
+th {
+  color : #ff0000;
+}
+
+.xmas-red {
+  color : #ff0000;
+}
+
+.xmas-green {
+  color : #2a942f;
+}
+
 #header img {
   width: 30vw;
 }
