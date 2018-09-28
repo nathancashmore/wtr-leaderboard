@@ -49,6 +49,10 @@ th {
   color : #ff0000;
 }
 
+td {
+  padding: 5px;
+}
+
 .xmas-red {
   color : #ff0000;
 }
