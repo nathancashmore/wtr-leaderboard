@@ -75,7 +75,7 @@ describe('Helper', function () {
 
 			it('should clear the button history', async() => {
 				let result = await helper.clearHistory();
-                expect(result).to.equal('OK');
+				expect(result).to.equal('OK');
 			})
 
 		});

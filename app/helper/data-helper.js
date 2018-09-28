@@ -25,12 +25,12 @@ module.exports = class DataHelper {
     }
 
     async clearHistory() {
-        let status = await this.client.del('buttonHistory')
+        let noOfKeysRemoved = await this.client.del('buttonHistory')
             .catch((e) => { logger.error(`Call to delete buttonHistory failed due to : ${e}`) });
 
-        if (status === 1 ) {
-            return 'OK'
-        }
+        logger.info(`Removed ${noOfKeysRemoved} from the cache`);
+
+        return 'OK'
     }
 
     async getScore(day) {

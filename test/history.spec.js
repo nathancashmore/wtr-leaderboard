@@ -22,7 +22,6 @@ describe('History', function () {
             await bootstrap.withStartDate(today);
         });
 
-
         it('it should clear the button history data', (done) => {
             const endpoint = '/history/clear';
 
@@ -51,10 +50,10 @@ describe('History', function () {
             const endpoint = '/history/clear';
 
             chai.request(server)
-                .post(endpoint)
+                .patch(endpoint)
                 .end((err, res) => {
                     expect(res.status).to.equal(200);
-                    expect(res.body).to.equal('OK');
+                    expect(res.body.status).to.equal('OK');
                     done();
                 });
         });
