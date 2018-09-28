@@ -12,6 +12,7 @@ const DataHelper = require('./helper/data-helper');
 const indexRouter = require('./routes/index');
 const timeRouter = require('./routes/time');
 const buttonRouter = require('./routes/button');
+const historyRouter = require('./routes/history');
 
 const app = module.exports = express();
 
@@ -43,6 +44,7 @@ app.use(bodyParser.json());
 app.use('/', indexRouter);
 app.use('/time', timeRouter);
 app.use('/buttons', buttonRouter);
+app.use('/history', historyRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

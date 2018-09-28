@@ -71,6 +71,11 @@ describe('Helper', function () {
 
 				expect(result[0].name).to.equal(1);
 				expect(result[0].score).to.equal(15);
+			});
+
+			it('should clear the button history', async() => {
+				let result = await helper.clearHistory();
+                expect(result).to.equal('OK');
 			})
 
 		});
