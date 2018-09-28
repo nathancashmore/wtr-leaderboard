@@ -24,6 +24,15 @@ module.exports = class DataHelper {
         return moment().diff(moment(startDate, 'YYYY-MM-DD'), 'days');
     }
 
+    async clearHistory() {
+        let noOfKeysRemoved = await this.client.del('buttonHistory')
+            .catch((e) => { logger.error(`Call to delete buttonHistory failed due to : ${e}`) });
+
+        logger.info(`Removed ${noOfKeysRemoved} from the cache`);
+
+        return 'OK'
+    }
+
     async getScore(day) {
         // Find all the entries for the current day and -1 ... e.g. first button press = no of teams - no of button presses
 		let cachedHistory = await this.client.get('buttonHistory')
