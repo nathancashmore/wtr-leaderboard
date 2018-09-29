@@ -104,9 +104,23 @@ module.exports = class DataHelper {
             history = JSON.parse(cachedHistory);
         }
 
-        history.push({"team": team, "button": buttonNumber, "day": day, "time": moment().format('HH:mm:ss'), "score": score});
+        let buttonAlreadyPushedHistory = history
+          .filter(x => x.button === buttonNumber)
+          .filter(y => y.team === team)
+          .filter(z => z.day === day);
 
-        return await this.client.set('buttonHistory', JSON.stringify(history))
-			.catch((e) => { logger.error(`Call to pressButton failed when setting buttonHistory due to : ${e}`) });
+        if ( buttonAlreadyPushedHistory.length !== 0 ) {
+
+          logger.info(`Button ${buttonNumber} for team ${team} has already been pressed today.  Action will not be recorded`);
+          return {"team": team, "button": buttonNumber, "day": day, "time": moment().format('HH:mm:ss'), "score": 0}
+
+        } else {
+
+          history.push({"team": team, "button": buttonNumber, "day": day, "time": moment().format('HH:mm:ss'), "score": score});
+
+          return await this.client.set('buttonHistory', JSON.stringify(history))
+            .catch((e) => { logger.error(`Call to pressButton failed when setting buttonHistory due to : ${e}`) });
+
+        }
     }
 };

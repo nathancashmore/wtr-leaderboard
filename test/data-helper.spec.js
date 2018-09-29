@@ -73,6 +73,21 @@ describe('Helper', function () {
 				expect(result[0].score).to.equal(15);
 			});
 
+			it('should not allow button to be pressed twice in one day', async () => {
+        // Where starting score for team 1 is 15
+        const button=3, team=1, day=2, score=5;
+
+        let buttonReseponse = await helper.pressButton(button, team, day, score);
+
+        expect(buttonReseponse.score).to.equal(0);
+
+        let standingResponse = await helper.getStanding();
+
+        expect(standingResponse[0].name).to.equal(1);
+        expect(standingResponse[0].score).to.equal(15);
+
+			});
+
 			it('should clear the button history', async() => {
 				let result = await helper.clearHistory();
 				expect(result).to.equal('OK');
