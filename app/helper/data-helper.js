@@ -21,7 +21,9 @@ module.exports = class DataHelper {
         let startDate = await this.client.get('startDate')
             .catch((e) => { logger.error(`Call to getDay failed due to : ${e}`) });
 
-        return moment().diff(moment(startDate, 'YYYY-MM-DD'), 'days');
+        let day = moment().diff(moment(startDate, 'YYYY-MM-DD'), 'days');
+
+        return ( !(day > -1) || day >= this.noOfTeams ) ? -1 : day;
     }
 
     async clearHistory() {
