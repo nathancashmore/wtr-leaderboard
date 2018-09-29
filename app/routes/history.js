@@ -1,4 +1,4 @@
-const logger = require('winston');
+const logger = require('heroku-logger');
 const express = require('express');
 const router = express.Router();
 

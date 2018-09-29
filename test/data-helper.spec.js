@@ -110,7 +110,10 @@ describe('Helper', function () {
 				const button=1, team=1, day=1, score=10;
 
 				let result = await helper.pressButton(button, team, day, score);
-				expect(result).to.equal('OK');
+				expect(result.button).to.equal(button);
+				expect(result.team).to.equal(team);
+				expect(result.day).to.equal(day);
+				expect(result.score).to.equal(score);
 			})
 		})
 	});

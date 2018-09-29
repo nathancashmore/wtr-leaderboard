@@ -1,4 +1,4 @@
-const logger = require('winston');
+const logger = require('heroku-logger');
 const moment = require('moment');
 const asyncRedis = require('async-redis');
 
@@ -118,9 +118,10 @@ module.exports = class DataHelper {
 
           history.push({"team": team, "button": buttonNumber, "day": day, "time": moment().format('HH:mm:ss'), "score": score});
 
-          return await this.client.set('buttonHistory', JSON.stringify(history))
+          await this.client.set('buttonHistory', JSON.stringify(history))
             .catch((e) => { logger.error(`Call to pressButton failed when setting buttonHistory due to : ${e}`) });
 
+          return {"team": team, "button": buttonNumber, "day": day, "time": moment().format('HH:mm:ss'), "score": score}
         }
     }
 };

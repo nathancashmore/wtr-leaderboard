@@ -8,9 +8,9 @@ router.post('/:button', async function(req, res, next) {
 	const team = req.app.locals.dataHelper.getTeam(button, day);
 	const score = await req.app.locals.dataHelper.getScore(day);
 
-	await req.app.locals.dataHelper.pressButton(button, team, day, score);
+	let result = await req.app.locals.dataHelper.pressButton(button, team, day, score);
 
-	res.json({ button, team, day, score });
+	res.json(result);
 });
 
 module.exports = router;

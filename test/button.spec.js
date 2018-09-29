@@ -58,7 +58,22 @@ describe('Button', function () {
 				});
 		});
 
-		it('it should POST to record press for button 3 on day 0', (done) => {
+    it('it should NOT POST to record press for button 2 on day 0 when the button has already been pressed that day', (done) => {
+      const endpoint = '/buttons/2';
+
+      chai.request(server)
+        .post(endpoint)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.button).to.equal(2);
+          expect(res.body.day).to.equal(0);
+          expect(res.body.team).to.equal(2);
+          expect(res.body.score).to.equal(0);
+          done();
+        });
+    });
+
+    it('it should POST to record press for button 3 on day 0', (done) => {
 			const endpoint = '/buttons/3';
 
 			chai.request(server)
