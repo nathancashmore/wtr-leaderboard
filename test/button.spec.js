@@ -13,7 +13,7 @@ chai.use(chaiHttp);
 // the scoring as each button is hit.
 
 let today = moment().format('YYYY-MM-DD');
-let yesterday = moment().subtract('days', 1).format('YYYY-MM-DD');
+let yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
 
 describe('Button', function () {
 	describe('Day 1', function () {
@@ -128,5 +128,26 @@ describe('Button', function () {
 		});
 
 	});
+
+	describe('Day is not yet set', function() {
+
+    before(async () => {
+      // Make sure the start date is set to today so
+      // we know that the day will be 0
+      await bootstrap.withStartDate(null);
+    });
+
+    it('should return error 405 Method Not Allowed if day not set', (done) => {
+      const endpoint = '/buttons/1';
+
+      chai.request(server)
+        .post(endpoint)
+        .end((err, res) => {
+          expect(res.status).to.equal(405);
+          done();
+        });
+    })
+  })
+
 });
 

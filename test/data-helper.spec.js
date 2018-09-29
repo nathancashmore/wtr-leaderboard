@@ -4,7 +4,9 @@ const config = require('getconfig');
 
 const DataHelper = require('../app/helper/data-helper');
 
-const helper = new DataHelper(3, config.REDIS_URL);
+const NO_OF_TEAMS = 3;
+
+const helper = new DataHelper(NO_OF_TEAMS, config.REDIS_URL);
 let expectedScores;
 
 describe('Helper', function () {
@@ -53,15 +55,27 @@ describe('Helper', function () {
 			});
 
 			it('should be able to set a date and work out the day no from it', async () => {
-				let yesterday = moment().subtract(3, 'days').format('YYYY-MM-DD');
+				let yesterday = moment().subtract(2, 'days').format('YYYY-MM-DD');
 
 				await helper.setStartDate(yesterday);
 				let day = await helper.getDay();
 
-				expect(day).to.equal(3)
+				expect(day).to.equal(2)
 			});
 
-			it('should increase a teams score when button pressed', async () => {
+			it('should return -1 for the day if startDate not set', async () => {
+        await helper.setStartDate(null);
+        let day = await helper.getDay();
+        expect(day).to.equal(-1)
+			});
+
+      it('should return -1 for the day if there are more days than teams', async () => {
+        await helper.setStartDate(moment().subtract(NO_OF_TEAMS, 'days').format('YYYY-MM-DD'));
+        let day = await helper.getDay();
+        expect(day).to.equal(-1)
+      });
+
+      it('should increase a teams score when button pressed', async () => {
 				// Where starting score for team 1 is 5
 				const button=3, team=1, day=2, score=10;
 
