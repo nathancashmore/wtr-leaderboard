@@ -67,3 +67,5 @@ e.g.
 ```
 sudo -H -u pi /usr/bin/python /home/pi/button-push.py &
 ```
+
+Any additional requirements for the scripts can be found in a comment at the top of each file.
