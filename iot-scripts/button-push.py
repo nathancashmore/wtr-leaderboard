@@ -1,3 +1,6 @@
+# You need to install the required libraries
+# sudo pip install requests
+
 import RPi.GPIO as GPIO
 import time
 import requests
@@ -7,7 +10,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)#Button to GPIO23
 GPIO.setup(24, GPIO.OUT)  #LED to GPIO24
 
-url = 'https://iot-hunt.herokuapp.com/timekeeper'
+url = 'https://iot-hunt.herokuapp.com/buttons/1'
 headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8'}
 
 try:
