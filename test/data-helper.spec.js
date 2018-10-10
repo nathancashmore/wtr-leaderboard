@@ -39,6 +39,27 @@ describe('Helper', function () {
 				});
 			});
 
+      [
+        {team: 1, day: 0, expectedButton: 1},
+        {team: 2, day: 0, expectedButton: 2},
+        {team: 3, day: 0, expectedButton: 3},
+        {team: 1, day: 1, expectedButton: 2},
+        {team: 2, day: 1, expectedButton: 3},
+        {team: 3, day: 1, expectedButton: 1},
+        {team: 1, day: 2, expectedButton: 3},
+        {team: 2, day: 2, expectedButton: 1},
+        {team: 3, day: 2, expectedButton: 2},
+        {team: 1, day: 3, expectedButton: 1},
+        {team: 2, day: 3, expectedButton: 2},
+        {team: 3, day: 3, expectedButton: 3}
+      ]
+        .forEach(x => {
+          it(`should return the button associated with the day when team=${x.team} and day=${x.day}`, async () => {
+            let result = helper.getButton(x.team, x.day);
+            expect(result).to.equal(x.expectedButton)
+          });
+        });
+      
 			it('should give a score based on other buttons pressed that day', async () => {
 				// Based on the following...
 				// {"team": 2, "button": 1, "day": 2, "time": "10:00:00", "score": 3}
@@ -46,6 +67,13 @@ describe('Helper', function () {
 				const day = 2;
 				expect(await helper.getScore(day)).to.equal(2);
 			});
+
+			it('should give a teams score', async () => {
+			  // Based on the previous test team 2 should have a score of 2
+			  expect(await helper.getTeamScore(expectedScores[0].team)).to.equal(expectedScores[0].score);
+			  expect(await helper.getTeamScore(expectedScores[1].team)).to.equal(expectedScores[1].score);
+			  expect(await helper.getTeamScore(expectedScores[2].team)).to.equal(expectedScores[2].score);
+      });
 
 			it('should retrieve current standing', async () => {
 				let result = await helper.getStanding();
@@ -120,7 +148,13 @@ describe('Helper', function () {
 				expect(result.length).to.equal(0);
 			});
 
-			it('should add history when button pressed', async () => {
+      it('should give a teams score of zero', async () => {
+        expect(await helper.getTeamScore(1)).to.equal(0);
+        expect(await helper.getTeamScore(2)).to.equal(0);
+        expect(await helper.getTeamScore(3)).to.equal(0);
+      });
+
+      it('should add history when button pressed', async () => {
 				const button=1, team=1, day=1, score=10;
 
 				let result = await helper.pressButton(button, team, day, score);
@@ -128,7 +162,7 @@ describe('Helper', function () {
 				expect(result.team).to.equal(team);
 				expect(result.day).to.equal(day);
 				expect(result.score).to.equal(score);
-			})
+			});
 		})
 	});
 });

@@ -13,7 +13,6 @@ body {
   font-family: "Minecraft Regular";
   background: #111111;
   color: white;
-  text-align: center;
   font-size: 2.0vw;
 }
 
@@ -37,7 +36,7 @@ table {
   overflow:auto;
 }
 
-center {
+.center {
   text-align: center;
 }
 
@@ -53,12 +52,36 @@ td {
   padding: 5px;
 }
 
+dl {
+  display: grid;
+}
+
+dt {
+  grid-column-start: 1;
+}
+
+dd {
+  grid-column-start: 2;
+}
+
 .xmas-red {
   color : #ff0000;
 }
 
 .xmas-green {
   color : #2a942f;
+}
+
+.content {
+  max-width: 500px;
+  margin: auto;
+}
+
+.image-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 #header img {

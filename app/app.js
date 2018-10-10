@@ -13,6 +13,7 @@ const indexRouter = require('./routes/index');
 const timeRouter = require('./routes/time');
 const buttonRouter = require('./routes/button');
 const historyRouter = require('./routes/history');
+const teamRouter = require('./routes/team');
 
 const app = module.exports = express();
 
@@ -45,6 +46,7 @@ app.use('/', indexRouter);
 app.use('/time', timeRouter);
 app.use('/buttons', buttonRouter);
 app.use('/history', historyRouter);
+app.use('/team', teamRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
