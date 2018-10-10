@@ -65,5 +65,7 @@ To have the scripts start when the raspberry pi starts add them to the ```/etc/r
 
 e.g.
 ```
-/usr/bin/python /home/pi/button-push.py
+sudo -H -u pi /usr/bin/python /home/pi/button-push.py &
 ```
+
+Any additional requirements for the scripts can be found in a comment at the top of each file.
