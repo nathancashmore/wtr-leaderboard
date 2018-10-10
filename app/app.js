@@ -19,7 +19,7 @@ const app = module.exports = express();
 
 // Global variables
 const redisUrl = process.env.REDIS_URL || config.REDIS_URL;
-const noOfTeams = process.env.NO_OF_TEAMS || config.NO_OF_TEAMS;
+const noOfTeams = Number(process.env.NO_OF_TEAMS) || Number(config.NO_OF_TEAMS);
 
 
 i18n.configure({
