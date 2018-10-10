@@ -21,8 +21,6 @@
 	"team-8": "Eight maids a milking",
 	"team-9": "Nine ladies dancing",
 	"team-10": "Ten lords a-leaping",
-	"team-11": "Eleven pipers piping",
-	"team-12": "Twelve drummers drumming",
 	"button-name-1": "One",
 	"button-name-2": "Two",
 	"button-name-3": "Three",
@@ -33,8 +31,6 @@
 	"button-name-8": "Eight",
 	"button-name-9": "Nine",
 	"button-name-10": "Ten",
-	"button-name-11": "Eleven",
-	"button-name-12": "Twelve",
 	"button-clue-1": "Clue to find 1",
 	"button-clue-2": "Clue to find 2",
 	"button-clue-3": "Clue to find 3",
@@ -45,9 +41,5 @@
 	"button-clue-8": "Clue to find 8",
 	"button-clue-9": "Clue to find 9",
 	"button-clue-10": "Clue to find 10",
-	"button-clue-11": "Clue to find 11",
-	"button-clue-12": "Clue to find 12",
-	"button-name-0": "button-name-0",
-	"button-clue-0": "button-clue-0",
 	"team-game-over": "Sorry there are not more buttons to find :-("
 }
