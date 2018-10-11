@@ -13,7 +13,6 @@ body {
   font-family: "Minecraft Regular";
   background: #111111;
   color: white;
-  text-align: center;
   font-size: 2.0vw;
 }
 
@@ -37,7 +36,7 @@ table {
   overflow:auto;
 }
 
-center {
+.center {
   text-align: center;
 }
 
@@ -61,12 +60,21 @@ td {
   color : #2a942f;
 }
 
+#header {
+  text-align: center;
+}
+
 #header img {
   width: 30vw;
 }
 
 #header h1 {
   font-size: 3.0vw;
+}
+
+.limited-width {
+  max-width: 70%;
+  margin: auto;
 }
 
 /* S N O W */

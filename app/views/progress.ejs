@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=__('title')%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/refresh.js"></script>
+    <script type="text/javascript" src="/javascripts/circle-progress-min.js"></script>
+
+</head>
+<body>
+<%- include('partials/snow'); %>
+<div id="header">
+    <img src="/images/christmastree.png">
+    <h1 [data-test="title"]>
+        <%=__('title-1')%>
+        <span class="xmas-red"><%=__('title-2')%></span><%=__('title-3')%><span class="xmas-green"><%=__('title-4')%></span>
+        <%=__('title-5')%>
+    </h1>
+</div>
+<div id="progress">
+    <div id="circle" class="center">
+        <%= total %>
+    </div>
+
+</div>
+
+</body>
+</html>

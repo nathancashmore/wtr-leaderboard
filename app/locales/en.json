@@ -18,5 +18,17 @@
 	"team-9": "Nine ladies dancing",
 	"team-10": "Ten lords a-leaping",
 	"team-11": "Eleven pipers piping",
-	"team-12": "Twelve drummers drumming"
+	"team-12": "Twelve drummers drumming",
+	"intro.text-1": "Welcome to the Christmas IoT hunt.",
+	"intro.text-2": "If you've found yourself here you are 1 of {{noOfTeams}} teams looking for several hidden IoT devices.",
+	"intro.text-3": "The aim is simple:",
+	"intro.rule-1": "Get yourself in a team",
+	"intro.rule-2": "Each day your team will have a clue that will lead them to a button",
+	"intro.rule-3": "Find and press the button",
+	"intro.text-4": "During the day the first team to press their button will get {{noOfTeams}} points.",
+	"intro.text-5": "The second team to press their button will get {{noOfTeamsLessOne}} points... and so on.",
+	"intro.text-6": "The following day you will get a new clue and a new button to find",
+	"intro.text-7": "Make sure you keep an eye on the ",
+	"intro.text-8": "so you know how your team is doing",
+	"intro.text-9": "Merry Christmas and Happy Hunting"
 }

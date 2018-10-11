@@ -13,6 +13,9 @@ const indexRouter = require('./routes/index');
 const timeRouter = require('./routes/time');
 const buttonRouter = require('./routes/button');
 const historyRouter = require('./routes/history');
+const introRouter = require('./routes/intro');
+const wcsRouter = require('./routes/wcs');
+const progressRouter = require('./routes/progress');
 
 const app = module.exports = express();
 
@@ -45,6 +48,9 @@ app.use('/', indexRouter);
 app.use('/time', timeRouter);
 app.use('/buttons', buttonRouter);
 app.use('/history', historyRouter);
+app.use('/intro', introRouter);
+app.use('/shop', wcsRouter);
+app.use('/progress', progressRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
