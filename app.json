@@ -1,0 +1,30 @@
+{
+  "name": "wtr-leaderboard",
+  "scripts": {
+  },
+  "env": {
+    "REDIS_URL": {
+      "required": true
+    },
+    "REDISCLOUD_BLACK_URL": {
+      "required": true
+    },
+    "REDISCLOUD_URL": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "heroku-redis",
+    "rediscloud"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
