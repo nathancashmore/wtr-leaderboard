@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/:team', async function(req, res, next) {
+router.get('/:team', async function (req, res, next) {
   const team = Number(req.params.team);
   let gameOver = false;
 
@@ -9,11 +9,11 @@ router.get('/:team', async function(req, res, next) {
   const button = req.app.locals.dataHelper.getButton(team, day);
   const score = await req.app.locals.dataHelper.getTeamScore(team);
 
-  if(day === -1) {
+  if (day === -1) {
     gameOver = true;
   }
 
-  res.render('team', { gameOver, team, button, score})
+  res.render('team', {gameOver, team, button, score})
 });
 
 module.exports = router;

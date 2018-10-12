@@ -3,22 +3,14 @@ const router = express.Router();
 
 const METHOD_NOT_ALLOWED = 405;
 
-router.post('/:button', async function(req, res, next) {
-	const button = Number(req.params.button);
+router.post('/:button', async function (req, res, next) {
+  const button = Number(req.params.button);
+  const result = await req.app.locals.dataHelper.pressButtonOnly(button);
 
-	const day = await req.app.locals.dataHelper.getDay();
-	const team = req.app.locals.dataHelper.getTeam(button, day);
-	const score = await req.app.locals.dataHelper.getScore(day);
-
-	let result = {};
-
-  if ( day === -1) {
+  if(result.error) {
     res.status(METHOD_NOT_ALLOWED);
-  } else {
-    result = await req.app.locals.dataHelper.pressButton(button, team, day, score);
-	}
-
-	res.json(result);
+  }
+  res.json(result);
 });
 
 router.get('/', async function(req, res, next) {

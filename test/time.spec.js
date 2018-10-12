@@ -13,55 +13,55 @@ chai.use(chaiHttp);
 
 describe('Time', function () {
 
-	describe('Happy path', function () {
-		it('it should POST the date', (done) => {
-			const endpoint = '/time';
-			const payload = {
-				startDate: START_DATE
-			};
+  describe('Happy path', function () {
+    it('it should POST the date', (done) => {
+      const endpoint = '/time';
+      const payload = {
+        startDate: START_DATE
+      };
 
-			chai.request(server)
-				.post(endpoint)
-				.send(payload)
-				.end((err, res) => {
-					expect(res.status).to.equal(200);
-					expect(res.body.startDate).to.equal(START_DATE);
-					done();
-				});
-		});
+      chai.request(server)
+        .post(endpoint)
+        .send(payload)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.startDate).to.equal(START_DATE);
+          done();
+        });
+    });
 
-		it('it should GET the current day no', (done) => {
-			const endpoint = '/time';
+    it('it should GET the current day no', (done) => {
+      const endpoint = '/time';
 
-			chai.request(server)
-				.get(endpoint)
-				.end((err, res) => {
-					expect(res.status).to.equal(200);
-					expect(res.body.day).to.equal(0);
-					done();
-				});
+      chai.request(server)
+        .get(endpoint)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.day).to.equal(0);
+          done();
+        });
 
-		});
-	});
+    });
+  });
 
-	describe('Unhappy path', function () {
+  describe('Unhappy path', function () {
 
-		before(async function () {
-			await bootstrap.withoutStartDate();
-		});
+    before(async function () {
+      await bootstrap.withoutStartDate();
+    });
 
-		it('it should GET a default day no when not set', (done) => {
-			const endpoint = '/time';
+    it('it should GET a default day no when not set', (done) => {
+      const endpoint = '/time';
 
-			chai.request(server)
-				.get(endpoint)
-				.end((err, res) => {
-					expect(res.status).to.equal(200);
-					expect(res.body.day).to.equal(-1);
-					done();
-				});
-		});
-	});
+      chai.request(server)
+        .get(endpoint)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.day).to.equal(-1);
+          done();
+        });
+    });
+  });
 
 
 });
