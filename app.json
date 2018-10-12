@@ -6,9 +6,6 @@
     "REDIS_URL": {
       "required": true
     },
-    "REDISCLOUD_BLACK_URL": {
-      "required": true
-    },
     "REDISCLOUD_URL": {
       "required": true
     }

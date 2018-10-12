@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=__('title')%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/refresh.js"></script>
+
+</head>
+<body class="content">
+<%- include('partials/snow'); %>
+<div id="header">
+    <img class=image-center src="/images/christmastree.png">
+    <h1 class="center" [data-test="title"]>
+        <%=__('title-1')%>
+        <span class="xmas-red"><%=__('title-2')%></span><%=__('title-3')%><span class="xmas-green"><%=__('title-4')%></span>
+        <%=__('title-5')%>
+    </h1>
+</div>
+<div id="button-detail">
+    button detail here
+</div>
+
+</body>
+</html>
