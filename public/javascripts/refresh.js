@@ -4,5 +4,5 @@ function reload() {
   $('#score-table').load(`${location.href}score-table`, ''); // eslint-disable-line
 }
 
-// setInterval(reload, 10000);
+setInterval(reload, 3000);
 console.log("STARTING");

@@ -2,20 +2,21 @@
 <div>
     <table>
         <tr>
-            <th><%=__('team-label')%></th>
-            <th><%=__('points-label')%></th>
+            <th><%= __('team-label') %></th>
+            <th><%= __('points-label') %></th>
         </tr>
 
-        <% for(var i=0; i < standing.length; i++) { %>
+        <% for(var i = 0; i < standing.length; i++) { %>
         <tr>
-            <td data-test="name-<%=i%>"><%=__(`team-${standing[i].name}`)%></td>
-            <td data-test="score-<%=i%>" class="center"><%= standing[i].score %></td>
+            <td data-test="name-<%= i %>"><%= __(`team-${standing[i].name}`) %></td>
+            <td data-test="score-<%= i %>" class="center"><%= standing[i].score %></td>
         </tr>
         <% } %>
     </table>
 </div>
 <% } else { %>
-<p class="center"><%=__('waiting-text')%></p>
+<p class="center"><%=__('waiting-text-1')%></p>
+<p class="center"><%=__('waiting-text-2')%></p>
 <% } %>
 
 
