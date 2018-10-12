@@ -92,18 +92,18 @@ describe('Helper', function () {
 			});
 
 			it('should return -1 for the day if startDate not set', async () => {
-        await helper.setStartDate(null);
-        let day = await helper.getDay();
-        expect(day).to.equal(-1)
+		        await helper.setStartDate(null);
+				let day = await helper.getDay();
+				expect(day).to.equal(-1)
 			});
 
-      it('should return -1 for the day if there are more days than teams', async () => {
-        await helper.setStartDate(moment().subtract(NO_OF_TEAMS, 'days').format('YYYY-MM-DD'));
-        let day = await helper.getDay();
-        expect(day).to.equal(-1)
-      });
+            it('should return -1 for the day if there are more days than teams', async () => {
+                await helper.setStartDate(moment().subtract(NO_OF_TEAMS, 'days').format('YYYY-MM-DD'));
+                let day = await helper.getDay();
+		        expect(day).to.equal(-1)
+      		});
 
-      it('should increase a teams score when button pressed', async () => {
+			it('should increase a teams score when button pressed', async () => {
 				// Where starting score for team 1 is 5
 				const button=3, team=1, day=2, score=10;
 
@@ -116,25 +116,27 @@ describe('Helper', function () {
 			});
 
 			it('should not allow button to be pressed twice in one day', async () => {
-        // Where starting score for team 1 is 15
-        const button=3, team=1, day=2, score=5;
+				// Where starting score for team 1 is 15
+				const button=3, team=1, day=2, score=5;
 
-        let buttonReseponse = await helper.pressButton(button, team, day, score);
+				let buttonReseponse = await helper.pressButton(button, team, day, score);
 
-        expect(buttonReseponse.score).to.equal(0);
+				expect(buttonReseponse.score).to.equal(0);
 
-        let standingResponse = await helper.getStanding();
+				let standingResponse = await helper.getStanding();
 
-        expect(standingResponse[0].name).to.equal(1);
-        expect(standingResponse[0].score).to.equal(15);
-
+				expect(standingResponse[0].name).to.equal(1);
+				expect(standingResponse[0].score).to.equal(15);
 			});
 
 			it('should clear the button history', async() => {
 				let result = await helper.clearHistory();
 				expect(result).to.equal('OK');
-			})
+			});
 
+			it('should return the number of teams', () => {
+				expect(helper.noOfTeams).to.equal(NO_OF_TEAMS);
+			})
 		});
 
 		describe('With NO button history data', function () {

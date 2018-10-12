@@ -21,4 +21,8 @@ router.post('/:button', async function(req, res, next) {
 	res.json(result);
 });
 
+router.get('/', async function(req, res, next) {
+    res.render('buttons', { percentFound: 40, foundNum: 2, totalNum: 5 })
+});
+
 module.exports = router;

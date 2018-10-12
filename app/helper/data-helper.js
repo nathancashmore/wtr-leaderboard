@@ -12,6 +12,10 @@ module.exports = class DataHelper {
         this.client = asyncRedis.createClient(redisUrl, {no_ready_check: true});
     }
 
+    getNoOfTeams() {
+        return this.noOfTeams;
+    }
+
     async setStartDate(startDate) {
         await this.client.set('startDate', startDate)
             .catch((e) => { logger.error(`Call to setStartDate failed due to : ${e}`) });

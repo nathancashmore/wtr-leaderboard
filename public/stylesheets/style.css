@@ -36,10 +36,6 @@ table {
   overflow:auto;
 }
 
-.center {
-  text-align: center;
-}
-
 tr:nth-child(even) {
   color : #2a942f;
 }
@@ -72,8 +68,21 @@ dd {
   color : #2a942f;
 }
 
+.center {
+  text-align: center;
+}
+
+.large {
+  font-size: large;
+}
+
 .content {
   max-width: 500px;
+  margin: auto;
+}
+
+.limited-width {
+  max-width: 70%;
   margin: auto;
 }
 
@@ -82,6 +91,10 @@ dd {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+#header {
+  text-align: center;
 }
 
 #header img {
@@ -111,6 +124,7 @@ dd {
   width: 100%;
   top: 0;
   left: 0;
+  z-index: -1;
 }
 
 .snow .svg {

@@ -22,7 +22,7 @@ describe('Team Integration', function () {
 
       before(async function () {
         page = await browser.newPage();
-        await page.goto('http://localhost:3000/team/1');
+        await page.goto('http://localhost:3000/teams/1');
       });
 
       after(async function () {
@@ -81,7 +81,7 @@ describe('Team Integration', function () {
 
       before(async function () {
         page = await browser.newPage();
-        await page.goto('http://localhost:3000/team/1');
+        await page.goto('http://localhost:3000/teams/1');
       });
 
       after(async function () {
@@ -106,14 +106,6 @@ describe('Team Integration', function () {
         expect(text.replace('\t', '')).to.eql(`${expectedScores[1].score}`);
       });
 
-      it('should tell the player its GAME OVER', async function () {
-        const TAG = '[data-test="team-game-over"]';
-        await page.waitFor(TAG);
-
-        text = await page.$eval(TAG, element => element.innerText);
-
-        expect(text.replace('\t', '')).to.eql(i18n.__('team-game-over'));
-      });
     })
 
   });

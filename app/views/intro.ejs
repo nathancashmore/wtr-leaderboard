@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=__('title')%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/refresh.js"></script>
+
+  </head>
+  <body class="limited-width">
+    <%- include('partials/snow'); %>
+    <div id="header">
+        <img src="/images/christmastree.png">
+        <h1 [data-test="title"]>
+            <%=__('title-1')%>
+            <span class="xmas-red"><%=__('title-2')%></span><%=__('title-3')%><span class="xmas-green"><%=__('title-4')%></span>
+            <%=__('title-5')%>
+        </h1>
+    </div>
+    <div id="introduction">
+        <p class="center">
+            <%=__('intro.text-1')%>
+        </p>
+        <p>
+            <%=__('intro.text-2', { noOfTeams })%>
+        </p>
+        <p>
+            <%=__('intro.text-3')%>
+        </p>
+        <ul>
+            <li><%=__('intro.rule-1')%></li>
+            <li><%=__('intro.rule-2')%></li>
+            <li><%=__('intro.rule-3')%></li>
+        </ul>
+        <p>
+            <%=__('intro.text-4', { noOfTeams } )%>
+            <%=__('intro.text-5', { noOfTeamsLessOne } )%>
+        </p>
+        <p>
+            <%=__('intro.text-6')%>
+        </p>
+        <p>
+            <%=__('intro.text-7')%>
+
+            <a href="/" class="button"><%=__('intro.leaderboard-button')%></a>
+            <%=__('intro.text-8')%>
+        </p>
+        <p class="center xmas-red large">
+            <%=__('intro.text-9')%>
+        </p>
+    </div>
+
+  </body>
+</html>
