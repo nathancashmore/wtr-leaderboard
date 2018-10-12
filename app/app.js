@@ -13,15 +13,15 @@ const indexRouter = require('./routes/index');
 const timeRouter = require('./routes/time');
 const buttonRouter = require('./routes/button');
 const historyRouter = require('./routes/history');
+const teamRouter = require('./routes/team');
 const introRouter = require('./routes/intro');
-const wcsRouter = require('./routes/wcs');
 const progressRouter = require('./routes/progress');
 
 const app = module.exports = express();
 
 // Global variables
 const redisUrl = process.env.REDIS_URL || config.REDIS_URL;
-const noOfTeams = process.env.NO_OF_TEAMS || config.NO_OF_TEAMS;
+const noOfTeams = Number(process.env.NO_OF_TEAMS) || Number(config.NO_OF_TEAMS);
 
 
 i18n.configure({
@@ -49,8 +49,8 @@ app.use('/time', timeRouter);
 app.use('/buttons', buttonRouter);
 app.use('/history', historyRouter);
 app.use('/intro', introRouter);
-app.use('/shop', wcsRouter);
 app.use('/progress', progressRouter);
+app.use('/team', teamRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

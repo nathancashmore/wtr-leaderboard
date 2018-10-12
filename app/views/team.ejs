@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%=__('title')%></title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+    <body class="content">
+    <%- include('partials/snow'); %>
+    <div id="header">
+        <img class=image-center src="/images/christmastree.png">
+        <h1 class="center" data-test="title">
+            <%=__('title-1')%>
+            <span class="xmas-red"><%=__('title-2')%></span><%=__('title-3')%><span class="xmas-green"><%=__('title-4')%></span>
+            <%=__('title-5')%>
+        </h1>
+    </div>
+    <h1 class="xmas-green"><%=__('team-title')%></h1>
+    <div id="team-info">
+        <dl>
+            <dt><%=__('team-label')%></dt>
+            <dd data-test="team-name"><%=__(`team-${team}`)%></dd>
+            <dt><%=__('score-label')%></dt>
+            <dd data-test="team-score"><%= score %></dd>
+
+            <%if (gameOver) { %>
+        </dl>
+        <span data-test="team-game-over"><%=__('team-game-over')%></span>
+
+            <% } else { %>
+                <dt><%=__('button-label')%></dt>
+                <dd data-test="button-name"><%=__(`button-name-${button}`)%></dd>
+                <dt><%=__('clue-label')%></dt>
+                <dd data-test="button-clue"><%=__(`button-clue-${button}`)%></dd>
+            </dl>
+        <% } %>
+    </div>
+    </body>
+</html>

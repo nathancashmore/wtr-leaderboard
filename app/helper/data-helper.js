@@ -39,6 +39,27 @@ module.exports = class DataHelper {
         return 'OK'
     }
 
+    async getTeamScore(team) {
+      let cachedHistory = await this.client.get('buttonHistory')
+        .catch(logger.info('No button press history found. Must be the first button press ?'));
+
+      let score = 0;
+      if ( cachedHistory === null ) { return score }
+
+      let history = JSON.parse(cachedHistory);
+
+      let teamHistory = history
+        .filter(history => history['team'] === team);
+
+      if(teamHistory.length !== 0) {
+        score = teamHistory
+          .map(x => x.score)
+          .reduce((prev, curr) => prev + curr);
+      }
+
+      return score;
+    }
+
     async getScore(day) {
         // Find all the entries for the current day and -1 ... e.g. first button press = no of teams - no of button presses
 		let cachedHistory = await this.client.get('buttonHistory')
@@ -64,6 +85,11 @@ module.exports = class DataHelper {
 
         const offset = Number(buttonNumber) + Number(day);
         return ( Number(offset) > Number(this.noOfTeams) ) ? Number(offset) - Number(this.noOfTeams) : offset;
+    }
+
+    getButton(teamNumber, day) {
+      const offset = Number(teamNumber) + Number(day);
+      return ( Number(offset) > Number(this.noOfTeams) ) ? Number(offset) - Number(this.noOfTeams) : offset;
     }
 
     async getStanding() {

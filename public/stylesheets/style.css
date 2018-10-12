@@ -36,10 +36,6 @@ table {
   overflow:auto;
 }
 
-.center {
-  text-align: center;
-}
-
 tr:nth-child(even) {
   color : #2a942f;
 }
@@ -52,12 +48,45 @@ td {
   padding: 5px;
 }
 
+dl {
+  display: grid;
+}
+
+dt {
+  grid-column-start: 1;
+}
+
+dd {
+  grid-column-start: 2;
+}
+
 .xmas-red {
   color : #ff0000;
 }
 
 .xmas-green {
   color : #2a942f;
+}
+
+.center {
+    text-align: center;
+}
+
+.content {
+  max-width: 500px;
+  margin: auto;
+}
+
+.limited-width {
+  max-width: 70%;
+  margin: auto;
+}
+
+.image-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 #header {
@@ -70,11 +99,6 @@ td {
 
 #header h1 {
   font-size: 3.0vw;
-}
-
-.limited-width {
-  max-width: 70%;
-  margin: auto;
 }
 
 /* S N O W */
