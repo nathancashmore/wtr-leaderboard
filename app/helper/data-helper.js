@@ -183,4 +183,24 @@ module.exports = class DataHelper {
       return {"team": team, "button": buttonNumber, "day": day, "time": moment().format('HH:mm:ss'), "score": score}
     }
   }
+
+  async progress() {
+    let history = [];
+
+    let cachedHistory = await this.client.get('buttonHistory')
+      .catch(logger.info('No button press history found, will start a new history log'));
+
+    if (cachedHistory !== null) {
+      history = JSON.parse(cachedHistory);
+    }
+
+    let percentage = 100 / Number(this.noOfTeams) * history.length;
+    let nextButton =  history.length + 1;
+    let finished = false;
+    if (nextButton > this.noOfTeams) {
+      finished = true;
+    }
+
+    return { percentage, nextButton, finished }
+  }
 };

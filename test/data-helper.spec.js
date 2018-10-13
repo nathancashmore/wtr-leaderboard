@@ -160,12 +160,17 @@ describe('Helper', function () {
       it('should add history when button pressed', async () => {
         const button = 1, team = 1, day = 1, score = 10;
 
-        let result = await helper.pressButton(button, team, day, score);
-        expect(result.button).to.equal(button);
-        expect(result.team).to.equal(team);
-        expect(result.day).to.equal(day);
-        expect(result.score).to.equal(score);
-      });
-    })
-  });
+				let result = await helper.pressButton(button, team, day, score);
+				expect(result.button).to.equal(button);
+				expect(result.team).to.equal(team);
+				expect(result.day).to.equal(day);
+				expect(result.score).to.equal(score);
+			});
+
+	it('should provide progress', async () => {
+        let result = await helper.progress();
+        expect(result.percentage).to.equal(33.333333333333336);
+        expect(result.nextButton).to.equal(2);
+        expect(result.finished).to.equal(false);
+      })})});
 });
