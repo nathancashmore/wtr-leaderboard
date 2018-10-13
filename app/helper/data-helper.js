@@ -82,19 +82,17 @@ module.exports = class DataHelper {
   }
 
   getTeam(buttonNumber, day) {
-    // Found out which team the button belongs to for the day.
-    // e.g. button number + day = team; if team > 10 .. team = team - no of teams
-    // e.g
-    // btn=1 day=0 -> team=1
-    // btn=10 day=0 -> team=10
-    // btn=1 day=10 -> team=11 - 10 = 1
-    // btn=10 day=10 -> team=20 - 10 = 10
+    // Based on the formula:
+    // Team = Button - Day
 
-    const offset = Number(buttonNumber) + Number(day);
-    return ( Number(offset) > Number(this.noOfTeams) ) ? Number(offset) - Number(this.noOfTeams) : offset;
+    const offset = Number(buttonNumber) - Number(day);
+    return ( Number(offset) <= 0 ) ? Number(offset) + Number(this.noOfTeams) : offset;
   }
 
   getButton(teamNumber, day) {
+    // Based on the formula:
+    // Button = Day + Team
+
     const offset = Number(teamNumber) + Number(day);
     return ( Number(offset) > Number(this.noOfTeams) ) ? Number(offset) - Number(this.noOfTeams) : offset;
   }
