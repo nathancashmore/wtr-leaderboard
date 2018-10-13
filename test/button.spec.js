@@ -106,7 +106,7 @@ describe('Button', function () {
           expect(res.status).to.equal(200);
           expect(res.body.button).to.equal(3);
           expect(res.body.day).to.equal(1);
-          expect(res.body.team).to.equal(1);
+          expect(res.body.team).to.equal(2);
           expect(res.body.score).to.equal(3);
           done();
         });
@@ -121,7 +121,7 @@ describe('Button', function () {
           expect(res.status).to.equal(200);
           expect(res.body.button).to.equal(2);
           expect(res.body.day).to.equal(1);
-          expect(res.body.team).to.equal(3);
+          expect(res.body.team).to.equal(1);
           expect(res.body.score).to.equal(2);
           done();
         });
