@@ -10,7 +10,7 @@ router.get('/', async function (req, res, next) {
 router.get('/update', async function (req, res, next) {
   let progress = await req.app.locals.dataHelper.progress();
 
-  res.render('progress', {  "data" : progress } )
+  res.render('partials/progress-bar', {  "data" : progress } )
 });
 
 module.exports = router;

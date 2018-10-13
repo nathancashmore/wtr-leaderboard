@@ -1,20 +1,23 @@
-<div class="progress-bar-container">
-    <div class="progress vertical progress-xlg">
-        <div role="progressbar" style="height: <%=data.percentage%>%;" class="progress-bar progress-bar-default"><span class="sr-only"></span></div>
+<div id="progress-section">
+    <div class="progress-bar-container">
+        <div class="progress vertical progress-xlg">
+            <div role="progressbar" style="height: <%= data.percentage %>%;" class="progress-bar progress-bar-default">
+                <span class="sr-only"></span></div>
+        </div>
+        <%= data.percentage %>%
     </div>
-    <%=data.percentage%>%
-</div>
 
-<%if (data.finished) { %>
+    <% if (data.finished) { %>
     Congratulations you are a winner... you host has a bag full of goodies for you !!!!
-<% } else { %>
-<p>
-    Your next button is:
-</p>
+    <% } else { %>
+    <p>
+        Your next button is:
+    </p>
     <span class="xmas-red"><%= __(`button-name-${data.nextButton}`) %></span>
-<p>
-    And your next clue is:
-</p>
+    <p>
+        And your next clue is:
+    </p>
     <span class="xmas-red"><%= __(`button-clue-${data.nextButton}`) %></span>
 
-<% } %>
+    <% } %>
+</div>
