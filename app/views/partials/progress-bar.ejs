@@ -8,7 +8,8 @@
     </div>
 
     <% if (data.finished) { %>
-    Congratulations you are a winner... you host has a bag full of goodies for you !!!!
+        <p class="xmas-red strong center">Congratulations you found them all !!</p>
+        <p class="xmas-green strong center">Well Done. Your host has some goodies for you as a prize</p>
     <% } else { %>
     <p>
         Your next button is:
@@ -17,7 +18,7 @@
     <p>
         And your next clue is:
     </p>
-    <span class="xmas-red"><%= __(`button-clue-${data.nextButton}`) %></span>
+    <span class="xmas-green"><%= __(`button-clue-${data.nextButton}`) %></span>
 
     <% } %>
 </div>
