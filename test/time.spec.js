@@ -1,23 +1,22 @@
-const bootstrap = require('./bootstrap');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const moment = require('moment');
+const { testHelper } = require('./bootstrap');
 
 chai.use(chaiHttp);
 
-let server = require('../app/app');
+const server = require('../app/app');
 
 const START_DATE = moment().format('YYYY-MM-DD');
 
 chai.use(chaiHttp);
 
-describe('Time', function () {
-
-  describe('Happy path', function () {
+describe('Time', () => {
+  describe('Happy path', () => {
     it('it should POST the date', (done) => {
       const endpoint = '/time';
       const payload = {
-        startDate: START_DATE
+        startDate: START_DATE,
       };
 
       chai.request(server)
@@ -40,14 +39,12 @@ describe('Time', function () {
           expect(res.body.day).to.equal(0);
           done();
         });
-
     });
   });
 
-  describe('Unhappy path', function () {
-
-    before(async function () {
-      await bootstrap.withoutStartDate();
+  describe('Unhappy path', () => {
+    before(async () => {
+      await testHelper.withoutStartDate();
     });
 
     it('it should GET a default day no when not set', (done) => {
@@ -62,7 +59,4 @@ describe('Time', function () {
         });
     });
   });
-
-
 });
-

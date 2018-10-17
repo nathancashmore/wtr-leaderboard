@@ -1,32 +1,18 @@
-const bootstrap = require('./bootstrap');
-const i18n = require('i18n');
+describe('Integration', () => {
+  describe('Introduction Page', () => {
+    let page;
 
-let expectedScores;
-
-describe('Integration', function () {
-
-    before(async function () {
-        expectedScores = await bootstrap.withButtonHistoryData();
+    before(async () => {
+      page = await global.browser.newPage();
+      await page.goto('http://localhost:3000/intro');
     });
 
-    describe('Introduction Page', function () {
-
-        let page;
-
-        before(async function () {
-            page = await browser.newPage();
-            await page.goto('http://localhost:3000/intro');
-        });
-
-        after(async function () {
-            await page.close();
-        });
-
-        it('should have the correct page title', async function () {
-            expect(await page.title()).to.eql('Christmas IoT Hunt');
-        });
-
+    after(async () => {
+      await page.close();
     });
 
+    it('should have the correct page title', async () => {
+      expect(await page.title()).to.eql('Christmas IoT Hunt');
+    });
+  });
 });
-

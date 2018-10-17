@@ -3,58 +3,60 @@ const moment = require('moment');
 const asyncRedis = require('async-redis');
 
 module.exports = class DataHelper {
-
   constructor(noOfTeams, redisUrl) {
     logger.info(`Total number of teams set to : ${noOfTeams}`);
     logger.info(`Redis URL set  to: ${redisUrl}`);
 
     this.noOfTeams = noOfTeams;
-    this.client = asyncRedis.createClient(redisUrl, {no_ready_check: true});
+    this.client = asyncRedis.createClient(redisUrl, { no_ready_check: true });
   }
 
-    getNoOfTeams() {
-        return this.noOfTeams;
-    }async setStartDate(startDate) {
-        await this.client.set('startDate', startDate)
-            .catch((e) => { logger.error(`Call to setStartDate failed due to : ${e}`)
-    });
+  getNoOfTeams() {
+    return this.noOfTeams;
+  }
+
+  async setStartDate(startDate) {
+    await this.client.set('startDate', startDate)
+      .catch((e) => {
+        logger.error(`Call to setStartDate failed due to : ${e}`);
+      });
   }
 
   async getDay() {
-    let startDate = await this.client.get('startDate')
+    const startDate = await this.client.get('startDate')
       .catch((e) => {
-        logger.error(`Call to getDay failed due to : ${e}`)
+        logger.error(`Call to getDay failed due to : ${e}`);
       });
 
-    let day = moment().diff(moment(startDate, 'YYYY-MM-DD'), 'days');
+    const day = moment().diff(moment(startDate, 'YYYY-MM-DD'), 'days');
 
-    return ( !(day > -1) || day >= this.noOfTeams ) ? -1 : day;
+    return (!(day > -1) || day >= this.noOfTeams) ? -1 : day;
   }
 
   async clearHistory() {
-    let noOfKeysRemoved = await this.client.del('buttonHistory')
+    const noOfKeysRemoved = await this.client.del('buttonHistory')
       .catch((e) => {
-        logger.error(`Call to delete buttonHistory failed due to : ${e}`)
+        logger.error(`Call to delete buttonHistory failed due to : ${e}`);
       });
 
     logger.info(`Removed ${noOfKeysRemoved} from the cache`);
 
-    return 'OK'
+    return 'OK';
   }
 
   async getTeamScore(team) {
-    let cachedHistory = await this.client.get('buttonHistory')
+    const cachedHistory = await this.client.get('buttonHistory')
       .catch(logger.info('No button press history found. Must be the first button press ?'));
 
     let score = 0;
     if (cachedHistory === null) {
-      return score
+      return score;
     }
 
-    let history = JSON.parse(cachedHistory);
+    const history = JSON.parse(cachedHistory);
 
-    let teamHistory = history
-      .filter(history => history['team'] === team);
+    const teamHistory = history
+      .filter(x => x.team === team);
 
     if (teamHistory.length !== 0) {
       score = teamHistory
@@ -66,19 +68,20 @@ module.exports = class DataHelper {
   }
 
   async getScore(day) {
-    // Find all the entries for the current day and -1 ... e.g. first button press = no of teams - no of button presses
-    let cachedHistory = await this.client.get('buttonHistory')
+    // Find all the entries for the current day and -1 ...
+    // e.g. first button press = no of teams - no of button presses
+    const cachedHistory = await this.client.get('buttonHistory')
       .catch(logger.info('No button press history found. Must be the first button press ?'));
 
     if (cachedHistory === null) {
-      return this.noOfTeams
+      return this.noOfTeams;
     }
 
-    let history = JSON.parse(cachedHistory);
+    const history = JSON.parse(cachedHistory);
 
-    let dayHistory = history.filter(history => history['day'] === day);
+    const dayHistory = history.filter(x => x.day === day);
 
-    return this.noOfTeams - dayHistory.length
+    return this.noOfTeams - dayHistory.length;
   }
 
   getTeam(buttonNumber, day) {
@@ -86,7 +89,7 @@ module.exports = class DataHelper {
     // Team = Button - Day
 
     const offset = Number(buttonNumber) - Number(day);
-    return ( Number(offset) <= 0 ) ? Number(offset) + Number(this.noOfTeams) : offset;
+    return (Number(offset) <= 0) ? Number(offset) + Number(this.noOfTeams) : offset;
   }
 
   getButton(teamNumber, day) {
@@ -94,38 +97,38 @@ module.exports = class DataHelper {
     // Button = Day + Team
 
     const offset = Number(teamNumber) + Number(day);
-    return ( Number(offset) > Number(this.noOfTeams) ) ? Number(offset) - Number(this.noOfTeams) : offset;
+    return (Number(offset) > Number(this.noOfTeams))
+      ? Number(offset) - Number(this.noOfTeams) : offset;
   }
 
   async getStanding() {
     let team = 1;
-    let teamScores = [];
+    const teamScores = [];
 
-    let cachedHistory = await this.client.get('buttonHistory')
+    const cachedHistory = await this.client.get('buttonHistory')
       .catch(logger.info('No button press history found... returning empty list'));
 
     if (cachedHistory === null) {
-      return []
+      return [];
     }
 
-    let history = JSON.parse(cachedHistory);
+    const history = JSON.parse(cachedHistory);
 
     while (team < this.noOfTeams + 1) {
-
-      let teamHistory = history
-        .filter(history => history['team'] === team);
+      const teamIndex = team;
+      const teamHistory = history.filter(x => x.team === teamIndex);
 
       if (teamHistory.length !== 0) {
         const score = teamHistory
           .map(x => x.score)
           .reduce((prev, curr) => prev + curr);
 
-        teamScores.push({name: team, score})
+        teamScores.push({ name: team, score });
       } else {
-        teamScores.push({name: team, score: 0})
+        teamScores.push({ name: team, score: 0 });
       }
 
-      team++;
+      team += 1;
     }
 
     teamScores.sort((a, b) => b.score - a.score);
@@ -139,7 +142,7 @@ module.exports = class DataHelper {
     const score = await this.getScore(day);
 
     if (day === -1) {
-      return { error : true}
+      return { error: true };
     }
 
     return this.pressButton(buttonNumber, team, day, score);
@@ -148,59 +151,60 @@ module.exports = class DataHelper {
   async pressButton(buttonNumber, team, day, score) {
     let history = [];
 
-    let cachedHistory = await this.client.get('buttonHistory')
+    const cachedHistory = await this.client.get('buttonHistory')
       .catch(logger.info('No button press history found, will start a new history log'));
 
     if (cachedHistory !== null) {
       history = JSON.parse(cachedHistory);
     }
 
-    let buttonAlreadyPushedHistory = history
+    const buttonAlreadyPushedHistory = history
       .filter(x => x.button === buttonNumber)
       .filter(y => y.team === team)
       .filter(z => z.day === day);
 
     if (buttonAlreadyPushedHistory.length !== 0) {
-
       logger.info(`Button ${buttonNumber} for team ${team} has already been pressed today.  Action will not be recorded`);
-      return {"team": team, "button": buttonNumber, "day": day, "time": moment().format('HH:mm:ss'), "score": 0}
+      return {
+        team, button: buttonNumber, day, time: moment().format('HH:mm:ss'), score: 0,
+      };
+    }
 
-    } else {
+    history.push({
+      team,
+      button: buttonNumber,
+      day,
+      time: moment().format('HH:mm:ss'),
+      score,
+    });
 
-      history.push({
-        "team": team,
-        "button": buttonNumber,
-        "day": day,
-        "time": moment().format('HH:mm:ss'),
-        "score": score
+    await this.client.set('buttonHistory', JSON.stringify(history))
+      .catch((e) => {
+        logger.error(`Call to pressButton failed when setting buttonHistory due to : ${e}`);
       });
 
-      await this.client.set('buttonHistory', JSON.stringify(history))
-        .catch((e) => {
-          logger.error(`Call to pressButton failed when setting buttonHistory due to : ${e}`)
-        });
-
-      return {"team": team, "button": buttonNumber, "day": day, "time": moment().format('HH:mm:ss'), "score": score}
-    }
+    return {
+      team, button: buttonNumber, day, time: moment().format('HH:mm:ss'), score,
+    };
   }
 
   async progress() {
     let history = [];
 
-    let cachedHistory = await this.client.get('buttonHistory')
+    const cachedHistory = await this.client.get('buttonHistory')
       .catch(logger.info('No button press history found, will start a new history log'));
 
     if (cachedHistory !== null) {
       history = JSON.parse(cachedHistory);
     }
 
-    let percentage = 100 / Number(this.noOfTeams) * history.length;
-    let nextButton =  history.length + 1;
+    const percentage = 100 / Number(this.noOfTeams) * history.length;
+    const nextButton = history.length + 1;
     let finished = false;
     if (nextButton > this.noOfTeams) {
       finished = true;
     }
 
-    return { percentage, nextButton, finished }
+    return { percentage, nextButton, finished };
   }
 };

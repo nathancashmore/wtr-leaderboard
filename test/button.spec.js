@@ -1,30 +1,28 @@
-const bootstrap = require('./bootstrap');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const moment = require('moment');
+const { testHelper } = require('./bootstrap');
 
 chai.use(chaiHttp);
 
-let server = require('../app/app');
+const server = require('../app/app');
 
 chai.use(chaiHttp);
 
 // NOTE : This test requires all of the tests to be run in sequence to test
 // the scoring as each button is hit.
 
-let today = moment().format('YYYY-MM-DD');
-let yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
+const today = moment().format('YYYY-MM-DD');
+const yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
 
-describe('Button', function () {
-  describe('Day 1', function () {
-
-
+describe('Button', () => {
+  describe('Day 1', () => {
     before(async () => {
       // Make sure the start date is set to today so
       // we know that the day will be 0
 
-      await bootstrap.withoutButtonHistoryData();
-      await bootstrap.withStartDate(today);
+      await testHelper.withoutButtonHistoryData();
+      await testHelper.withStartDate(today);
     });
 
 
@@ -88,12 +86,11 @@ describe('Button', function () {
         });
     });
   });
-  describe('Day 2', function () {
-
+  describe('Day 2', () => {
     before(async () => {
       // Make sure the start date is set to today so
       // we know that the day will be 0
-      await bootstrap.withStartDate(yesterday);
+      await testHelper.withStartDate(yesterday);
     });
 
 
@@ -126,15 +123,13 @@ describe('Button', function () {
           done();
         });
     });
-
   });
 
-  describe('Day is not yet set', function () {
-
+  describe('Day is not yet set', () => {
     before(async () => {
       // Make sure the start date is set to today so
       // we know that the day will be 0
-      await bootstrap.withStartDate(null);
+      await testHelper.withStartDate(null);
     });
 
     it('should return error 405 Method Not Allowed if day not set', (done) => {
@@ -146,8 +141,6 @@ describe('Button', function () {
           expect(res.status).to.equal(405);
           done();
         });
-    })
-  })
-
+    });
+  });
 });
-
