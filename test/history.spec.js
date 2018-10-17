@@ -1,25 +1,24 @@
-const bootstrap = require('./bootstrap');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const moment = require('moment');
+const { testHelper } = require('./bootstrap');
 
 chai.use(chaiHttp);
 
-let server = require('../app/app');
+const server = require('../app/app');
 
 chai.use(chaiHttp);
 
-let today = moment().format('YYYY-MM-DD');
+const today = moment().format('YYYY-MM-DD');
 
-describe('History', function () {
-  describe('Withdata', function () {
-
+describe('History', () => {
+  describe('Withdata', () => {
     before(async () => {
       // Make sure the start date is set to today so
       // we know that the day will be 0
 
-      await bootstrap.withButtonHistoryData();
-      await bootstrap.withStartDate(today);
+      await testHelper.withButtonHistoryData();
+      await testHelper.withStartDate(today);
     });
 
     it('it should clear the button history data', (done) => {
@@ -35,14 +34,13 @@ describe('History', function () {
     });
   });
 
-  describe('Withoutdata', function () {
-
+  describe('Withoutdata', () => {
     before(async () => {
       // Make sure the start date is set to today so
       // we know that the day will be 0
 
-      await bootstrap.withoutButtonHistoryData();
-      await bootstrap.withStartDate(today);
+      await testHelper.withoutButtonHistoryData();
+      await testHelper.withStartDate(today);
     });
 
 
@@ -58,7 +56,4 @@ describe('History', function () {
         });
     });
   });
-
-
 });
-

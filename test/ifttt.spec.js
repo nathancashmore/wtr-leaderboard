@@ -1,12 +1,13 @@
-const bootstrap = require('./bootstrap');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 
-let server = require('../app/app');
+require('./bootstrap');
+
+const server = require('../app/app');
+
 chai.use(chaiHttp);
 
-describe('IFTTT', function () {
-
+describe('IFTTT', () => {
   it('should provide IFTTT with 200 valid status', (done) => {
     const endpoint = '/ifttt/v1/status';
 
@@ -32,6 +33,4 @@ describe('IFTTT', function () {
         done();
       });
   });
-
 });
-

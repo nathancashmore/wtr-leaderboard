@@ -1,7 +1,8 @@
 const express = require('express');
+
 const router = express.Router();
 
-router.get('/:team', async function (req, res, next) {
+router.get('/:team', async (req, res) => {
   const team = Number(req.params.team);
   let gameOver = false;
 
@@ -13,7 +14,9 @@ router.get('/:team', async function (req, res, next) {
     gameOver = true;
   }
 
-  res.render('team', {gameOver, team, button, score})
+  res.render('team', {
+    gameOver, team, button, score,
+  });
 });
 
 module.exports = router;
