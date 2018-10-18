@@ -8,7 +8,11 @@
 
         <% for(var i = 0; i < standing.length; i++) { %>
         <tr>
-            <td data-test="name-<%= i %>"><%= __(`team-${standing[i].name}`) %></td>
+            <td data-test="name-<%= i %>">
+                <a href="teams/<%= standing[i].name %>">
+                    <%= __(`team-${standing[i].name}`) %>
+                </a>
+            </td>
             <td data-test="score-<%= i %>" class="center"><%= standing[i].score %></td>
         </tr>
         <% } %>
