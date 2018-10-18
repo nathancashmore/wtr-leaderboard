@@ -6,7 +6,7 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
-<body class="content">
+<body>
 <%- include('partials/snow'); %>
 <div id="header">
     <img class=image-center src="/images/christmastree.png">
@@ -17,20 +17,21 @@
         <%= __('title-5') %>
     </h1>
 </div>
-<h1 class="xmas-green"><%= __('team-title') %></h1>
-<div id="team-info">
+<h1 class="xmas-green center"><%= __('team-title') %></h1>
+
+<div id="team-info" class="limited-width">
     <dl>
-        <dt><%= __('team-label') %></dt>
+        <dt class="xmas-red"><%= __('team-label') %></dt>
         <dd data-test="team-name"><%= __(`team-${team}`) %></dd>
-        <dt><%= __('score-label') %></dt>
+        <dt class="xmas-red"><%= __('score-label') %></dt>
         <dd data-test="team-score"><%= score %></dd>
 
             <%if (gameOver) { %>
         </dl>
         <% } else { %>
-                <dt><%=__('button-label')%></dt>
+                <dt class="xmas-red"><%=__('button-label')%></dt>
                 <dd data-test="button-name"><%=__(`button-name-${button}`)%></dd>
-                <dt><%=__('clue-label')%></dt>
+                <dt class="xmas-red"><%=__('clue-label')%></dt>
                 <dd data-test="button-clue"><%=__(`button-clue-${button}`)%></dd>
             </dl>
         <% } %>
