@@ -13,19 +13,11 @@ body {
   font-family: "Minecraft Regular";
   background: #111111;
   color: white;
-  font-size: 2.0vw;
+  font-size: 2.2vw;
 }
 
 a {
   color: #00B7FF;
-}
-
-th {
-  padding: 20px;
-}
-
-td, th {
-  border: 1px solid white;
 }
 
 table {
@@ -36,28 +28,25 @@ table {
   overflow:auto;
 }
 
+td, th {
+  border: 1px solid white;
+}
+
 tr:nth-child(even) {
   color : #2a942f;
 }
 
 th {
   color : #ff0000;
+  padding: 1vw;
 }
 
 td {
-  padding: 5px;
-}
-
-dl {
-  display: grid;
+  padding: 1.0vh;
 }
 
 dt {
-  grid-column-start: 1;
-}
-
-dd {
-  grid-column-start: 2;
+  padding-bottom: 1vh;
 }
 
 .xmas-red {
@@ -72,17 +61,8 @@ dd {
   text-align: center;
 }
 
-.large {
-  font-size: large;
-}
-
-.content {
-  max-width: 500px;
-  margin: auto;
-}
-
 .limited-width {
-  max-width: 70%;
+  max-width: 70vw;
   margin: auto;
 }
 
@@ -90,7 +70,6 @@ dd {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
 }
 
 #header {
