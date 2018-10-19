@@ -84,5 +84,25 @@ describe('Integration', () => {
       expect(thirdName.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[2].team}`));
       expect(thirdScore.replace('\t', '')).to.eql(expectedScores[2].score.toString());
     });
+
+    it('should link to the different teams pages', async () => {
+      const FIRST_PLACE_NAME = '[data-test="name-0"]';
+      const SECOND_PLACE_NAME = '[data-test="name-1"]';
+      const THIRD_PLACE_NAME = '[data-test="name-2"]';
+
+      await page.waitFor(FIRST_PLACE_NAME);
+      await page.click(FIRST_PLACE_NAME);
+      expect(page.url()).to.contain('teams/2');
+
+      await page.goto('http://localhost:3000/score-table');
+      await page.waitFor(SECOND_PLACE_NAME);
+      await page.click(SECOND_PLACE_NAME);
+      expect(page.url()).to.contain('teams/1');
+
+      await page.goto('http://localhost:3000/score-table');
+      await page.waitFor(THIRD_PLACE_NAME);
+      await page.click(THIRD_PLACE_NAME);
+      expect(page.url()).to.contain('teams/3');
+    });
   });
 });

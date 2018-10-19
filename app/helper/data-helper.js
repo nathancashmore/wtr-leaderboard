@@ -46,7 +46,9 @@ module.exports = class DataHelper {
 
   async getTeamScore(team) {
     const cachedHistory = await this.client.get('buttonHistory')
-      .catch(logger.info('No button press history found. Must be the first button press ?'));
+      .catch((e) => {
+        logger.info(`No button press history found : ${e}`);
+      });
 
     let score = 0;
     if (cachedHistory === null) {
@@ -71,7 +73,9 @@ module.exports = class DataHelper {
     // Find all the entries for the current day and -1 ...
     // e.g. first button press = no of teams - no of button presses
     const cachedHistory = await this.client.get('buttonHistory')
-      .catch(logger.info('No button press history found. Must be the first button press ?'));
+      .catch((e) => {
+        logger.info(`No button press history found : ${e}`);
+      });
 
     if (cachedHistory === null) {
       return this.noOfTeams;
@@ -106,7 +110,9 @@ module.exports = class DataHelper {
     const teamScores = [];
 
     const cachedHistory = await this.client.get('buttonHistory')
-      .catch(logger.info('No button press history found... returning empty list'));
+      .catch((e) => {
+        logger.info(`No button press history found : ${e}`);
+      });
 
     if (cachedHistory === null) {
       return [];
@@ -152,7 +158,9 @@ module.exports = class DataHelper {
     let history = [];
 
     const cachedHistory = await this.client.get('buttonHistory')
-      .catch(logger.info('No button press history found, will start a new history log'));
+      .catch((e) => {
+        logger.info(`No button press history found : ${e}`);
+      });
 
     if (cachedHistory !== null) {
       history = JSON.parse(cachedHistory);
@@ -192,7 +200,9 @@ module.exports = class DataHelper {
     let history = [];
 
     const cachedHistory = await this.client.get('buttonHistory')
-      .catch(logger.info('No button press history found, will start a new history log'));
+      .catch((e) => {
+        logger.info(`No button press history found : ${e}`);
+      });
 
     if (cachedHistory !== null) {
       history = JSON.parse(cachedHistory);
