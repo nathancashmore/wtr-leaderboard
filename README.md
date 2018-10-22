@@ -11,7 +11,6 @@ will have to find the button on a particular day and press the button.
 Points will be awarded to the team when their days button is pressed.  The points
 total will be displayed on a leaderboard (this !!)
 
-
 ## Rules
 
 - Given 10 teams, the first button to be pressed on any given day will receive
@@ -20,22 +19,18 @@ total will be displayed on a leaderboard (this !!)
 - A button can only be pressed once per day.  So if button 2 is pressed twice it
 will only add points to a team once.
 
-## Requirements
+- The button to be pressed by a team will change each day.  There will be as many buttons as teams.
 
-Endpoint to record a button press
-```
-POST /buttons/<number>?token=xxxx
-```
-- Button number will be associated with a team for that day.
-- only one request per day will make anything happen
+## Endpoints
 
-Endpoint to set startDate
-```
-POST /time 
-{ startDate : "2018-09-23" }
+| Action | Endpoint | Payload | Description |
+| ------ | -------- | ------- |
+| ```GET```    | ```/time```    | --     | Returns the current day number (0 indexed).  -1 returned if start date not set or hunt over. |
+| ```POST```   | ```/time```    | ```{ "StartDate" : "YYYY-MM-DD" }```  | Set the start date |
+| ```PATCH```   | ```/history/clear```    | --  | Clears all button press history. |
+| ```GET```   | ```/teams/<team-number>```   | --  | Returns the team information included current days button and clue |
+| ```POST``` | ```/buttons/<button-number>``` | -- | Adds a record to the button press history |	
 
-```
- 
 
 ### Prerequisites
 * REDIS running locally
@@ -55,7 +50,7 @@ npm start
 ## Deploy
 This is currently being deployed to [Heroku](https://iot-hunt.herokuapp.com/)
 
-## iot scripts
+## IoT Scripts
 
 This directory contains snippits of python code that can be
 dropped onto a raspberry pi and used with a module to turn
@@ -69,3 +64,7 @@ sudo -H -u pi /usr/bin/python /home/pi/button-push.py &
 ```
 
 Any additional requirements for the scripts can be found in a comment at the top of each file.
+
+### button-push.py
+![Button Push wiring](https://raw.githubusercontent.com/nathancashmore/wtr-leaderboard/master/iot-scripts/button-push-diagram.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Button Push wiring")
+

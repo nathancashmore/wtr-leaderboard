@@ -9,24 +9,46 @@ import RPi.GPIO as GPIO
 import time
 import requests
 
-GPIO.setmode(GPIO.BCM)
+ButtonNumber = 5
 
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)#Button to GPIO23
-GPIO.setup(24, GPIO.OUT)  #LED to GPIO24
+LedPin = 11    # pin11 --- led
+BtnPin = 12    # pin12 --- button
 
-url = 'https://iot-hunt.herokuapp.com/buttons/1'
+Led_status = 1
+
+url = 'https://iot-hunt.herokuapp.com/buttons/' + str(ButtonNumber)
 headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8'}
 
-try:
+def setup():
+    GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
+    GPIO.setup(LedPin, GPIO.OUT)   # Set LedPin's mode is output
+    GPIO.setup(BtnPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)    # Set BtnPin's mode is input, and pull up to high level(3.3V)
+    GPIO.output(LedPin, GPIO.LOW) # Set LedPin high(+3.3V) to off led
+
+def swLed(ev=None):
+    global Led_status
+
+    GPIO.output(LedPin, GPIO.HIGH)
+
+    r = requests.post(url, headers=headers)
+    print(r.json)
+
+    time.sleep(1)
+
+    GPIO.output(LedPin, GPIO.LOW)
+
+def loop():
+    GPIO.add_event_detect(BtnPin, GPIO.RISING, callback=swLed, bouncetime=5000)
     while True:
-        button_state = GPIO.input(23)
-        if button_state == False:
-            GPIO.output(24, True)
-            print('Button Pressed...')
-            r = requests.post(url, headers=headers)
-            print(r.json)
-            time.sleep(0.2)
-        else:
-            GPIO.output(24, False)
-except:
+        time.sleep(2)   # Don't do anything
+
+def destroy():
+    GPIO.output(LedPin, GPIO.LOW)
     GPIO.cleanup()
+
+if __name__ == '__main__':     # Program start from here
+    setup()
+    try:
+        loop()
+    except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
+        destroy()
