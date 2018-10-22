@@ -66,5 +66,5 @@ sudo -H -u pi /usr/bin/python /home/pi/button-push.py &
 Any additional requirements for the scripts can be found in a comment at the top of each file.
 
 ### button-push.py
-![Button Push wiring](https://raw.githubusercontent.com/nathancashmore/wtr-leaderboard/master/iot-scripts/button-push-diagram.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Button Push wiring")
+![Button Push wiring](https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/button-push-diagram.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Button Push wiring")
 
