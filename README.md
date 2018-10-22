@@ -23,13 +23,13 @@ will only add points to a team once.
 
 ## Endpoints
 
-| Action | Endpoint | Payload | Description |
-| ------ | -------- | ------- |
-| ```GET```    | ```/time```    | --     | Returns the current day number (0 indexed).  -1 returned if start date not set or hunt over. |
-| ```POST```   | ```/time```    | ```{ "StartDate" : "YYYY-MM-DD" }```  | Set the start date |
-| ```PATCH```   | ```/history/clear```    | --  | Clears all button press history. |
-| ```GET```   | ```/teams/<team-number>```   | --  | Returns the team information included current days button and clue |
-| ```POST``` | ```/buttons/<button-number>``` | -- | Adds a record to the button press history |	
+| Action     | Endpoint                      | Payload                               | Description |
+| ---------- | ----------------------------  | ------------------------------------- | ----------- |
+| ```GET```  | ```/time```                   | --                                    | Returns the current day number (0 indexed).  -1 returned if start date not set or hunt over. |
+| ```POST``` | ```/time```                   | ```{ "startDate" : "YYYY-MM-DD" }```  | Set the start date |
+| ```PATCH```| ```/history/clear```          | --                                    | Clears all button press history. |
+| ```GET```  | ```/teams/<team-number>```    | --                                    | Returns the team information included current days button and clue |
+| ```POST``` | ```/buttons/<button-number>```| --                                    | Adds a record to the button press history |	
 
 
 ### Prerequisites
