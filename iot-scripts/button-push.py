@@ -8,8 +8,11 @@
 import RPi.GPIO as GPIO
 import time
 import requests
+import socket
 
-ButtonNumber = 5
+ButtonNumber = socket.gethostname().split("-")[1]
+
+print("Button number determined as : " + str(ButtonNumber))
 
 LedPin = 11    # pin11 --- led
 BtnPin = 12    # pin12 --- button

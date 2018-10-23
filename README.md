@@ -63,6 +63,16 @@ e.g.
 sudo -H -u pi /usr/bin/python /home/pi/button-push.py &
 ```
 
+The scripts will determine the button number to use based on the hostname of the device.
+e.g. 
+```
+button-5
+```
+To change the hostname, wifi setup or the ability to SSH to the device use
+```
+sudo raspi-config
+```
+
 Any additional requirements for the scripts can be found in a comment at the top of each file.
 
 ### button-push.py
