@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const asyncRedis = require('async-redis');
 const config = require('getconfig');
+const moment = require('moment');
 const { expect } = require('chai');
 const _ = require('lodash');
 
@@ -25,6 +26,10 @@ after(() => {
   global.expect = globalVariables.expect;
 });
 
+async function setButtonHistory(buttonHistoryJson) {
+  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
+  await client.set('buttonHistory', JSON.stringify(buttonHistoryJson));
+}
 
 async function withButtonHistoryData() {
   // Following should provide the standing:
@@ -61,8 +66,7 @@ async function withButtonHistoryData() {
     // {"team": 3, "button": 2, "day": 2, "time": "10:02:00", "score": 1}
   ];
 
-  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
-  await client.set('buttonHistory', JSON.stringify(testData));
+  setButtonHistory(testData);
 
   return [
     { team: 2, score: 8 },
@@ -87,6 +91,25 @@ async function withStartDate(dateInFormatYYYYMMDD) {
   await client.set('startDate', JSON.stringify(startDate));
 }
 
+async function withStartDateToday() {
+  const TODAY = moment().format('YYYY-MM-DD');
+  await withStartDate(TODAY);
+}
+
+async function getText(page, tagName) {
+  const TAG = `[data-test="${tagName}"]`;
+  await page.waitFor(TAG);
+
+  return page.$eval(TAG, element => element.innerText);
+}
+
+
 module.exports.testHelper = {
-  withButtonHistoryData, withoutButtonHistoryData, withStartDate, withoutStartDate
+  withButtonHistoryData,
+  withoutButtonHistoryData,
+  withStartDate,
+  withoutStartDate,
+  withStartDateToday,
+  getText,
+  setButtonHistory
 };

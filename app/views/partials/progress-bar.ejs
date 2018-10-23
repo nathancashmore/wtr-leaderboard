@@ -4,21 +4,21 @@
             <div role="progressbar" style="height: <%= data.percentage %>%;" class="progress-bar progress-bar-default">
                 <span class="sr-only"></span></div>
         </div>
-        <%= data.percentage %>%
+        <span data-test="percentage"><%= data.percentage %>%</span>
     </div>
 
     <% if (data.finished) { %>
-        <p class="xmas-red strong center">Congratulations you found them all !!</p>
-        <p class="xmas-green strong center">Well Done. Your host has some goodies for you as a prize</p>
+        <p class="xmas-red strong center" data-test="finish-text"><%= __(`progress.text-end-1`) %></p>
+        <p class="xmas-green strong center"><%= __(`progress.text-end-2`) %></p>
     <% } else { %>
     <p>
-        Your next button is:
+        <%= __(`progress.text-next-button`) %>
     </p>
-    <span class="xmas-red"><%= __(`button-name-${data.nextButton}`) %></span>
+    <span class="xmas-red" data-test="button"><%= __(`button-name-${data.nextButton}`) %></span>
     <p>
-        And your next clue is:
+        <%= __(`progress.text-next-clue`) %>
     </p>
-    <span class="xmas-green"><%= __(`button-clue-${data.nextButton}`) %></span>
+    <span class="xmas-green" data-test="clue"><%= __(`button-clue-${data.nextButton}`) %></span>
 
     <% } %>
 </div>
