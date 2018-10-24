@@ -217,4 +217,35 @@ module.exports = class DataHelper {
 
     return { percentage, nextButton, finished };
   }
+
+  async addStatus(statusInfo) {
+    let buttonStatus = [];
+    const statusInfoJson = statusInfo;
+
+    const cachedStatus = await this.client.get('buttonStatus')
+      .catch((e) => {
+        logger.info(`No button status found : ${e}`);
+      });
+
+    if (cachedStatus !== null) {
+      buttonStatus = JSON.parse(cachedStatus);
+    }
+
+    const filteredButtonStatus = buttonStatus.filter(x => x.button !== statusInfo.button);
+    filteredButtonStatus.push(statusInfoJson);
+
+    await this.client.set('buttonStatus', JSON.stringify(filteredButtonStatus))
+      .catch((e) => {
+        logger.error(`Call to addStatus failed when setting buttonStatus due to : ${e}`);
+      });
+  }
+
+  async getStatus() {
+    const status = await this.client.get('buttonStatus')
+      .catch((e) => {
+        logger.error(`Call to getStatus failed due to : ${e}`);
+      });
+
+    return JSON.parse(status);
+  }
 };

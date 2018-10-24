@@ -172,6 +172,28 @@ describe('Helper', () => {
         expect(result.nextButton).to.equal(2);
         expect(result.finished).to.equal(false);
       });
+
+      it('should add a status entry for a given device and only update it', async () => {
+        await testHelper.withoutButtonStatus();
+
+        const updateData1 = { button: 1, ip: '10.10.0.99', time: '2018-10-24 22:00' };
+        const updateData2 = { button: 2, ip: '10.10.0.66', time: '2018-10-24 22:30' };
+        const updateData3 = { button: 1, ip: '10.10.0.99', time: '2018-10-24 23:00' };
+
+        await helper.addStatus(updateData1);
+        await helper.addStatus(updateData2);
+        await helper.addStatus(updateData3);
+
+        const result = await helper.getStatus();
+
+        expect(result.length).to.eql(2);
+
+        const button1statusEntry = result.filter(x => x.button === 1);
+
+        expect(button1statusEntry[0].button).to.equal(1);
+        expect(button1statusEntry[0].ip).to.equal('10.10.0.99');
+        expect(button1statusEntry[0].time).to.equal('2018-10-24 23:00');
+      });
     });
   });
 });

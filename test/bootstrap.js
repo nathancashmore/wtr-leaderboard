@@ -85,6 +85,11 @@ async function withoutStartDate() {
   await client.del('startDate');
 }
 
+async function withoutButtonStatus() {
+  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
+  await client.del('buttonStatus');
+}
+
 async function withStartDate(dateInFormatYYYYMMDD) {
   const startDate = dateInFormatYYYYMMDD;
   const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
@@ -109,6 +114,7 @@ module.exports.testHelper = {
   withoutButtonHistoryData,
   withStartDate,
   withoutStartDate,
+  withoutButtonStatus,
   withStartDateToday,
   getText,
   setButtonHistory
