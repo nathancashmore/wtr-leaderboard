@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= __('title') %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body class="limited-width">
+<%- include('partials/snow'); %>
+<div id="header">
+    <img src="/images/christmastree.png">
+    <h1 [data-test="title" ]>
+        <%= __('title-1') %>
+        <span class="xmas-red"><%= __('title-2') %></span><%= __('title-3') %><span
+                class="xmas-green"><%= __('title-4') %></span>
+        <%= __('title-5') %>
+    </h1>
+</div>
+<div id="status">
+    <table>
+        <tr>
+            <th>Number</th>
+            <th>Name</th>
+            <th>IP</th>
+            <th>Status</th>
+        </tr>
+        <% for(var i=0; i < status.length; i++) { %>
+        <tr>
+            <td data-test="number-<%= i %>"><%= status[i].button %></td>
+            <td data-test="name-<%= i %>"><%= __(`button-name-${status[i].button}`) %></td>
+            <td data-test="ip-<%= i %>"><%= status[i].ip %></td>
+            <td>
+                <span data-test="indicator-<%= i %>" class="status-indicator <%= status[i].indicator %>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </td>
+        </tr>
+        <% } %>
+    </table>
+</div>
+
+</body>
+</html>

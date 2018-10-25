@@ -17,6 +17,7 @@ const teamRouter = require('./routes/team');
 const introRouter = require('./routes/intro');
 const ifttRouter = require('./routes/iftt');
 const progressRouter = require('./routes/progress');
+const statusRouter = require('./routes/status');
 
 const app = module.exports = express();
 
@@ -54,6 +55,7 @@ app.use('/ifttt', ifttRouter);
 app.use('/intro', introRouter);
 app.use('/teams', teamRouter);
 app.use('/progress', progressRouter);
+app.use('/status', statusRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

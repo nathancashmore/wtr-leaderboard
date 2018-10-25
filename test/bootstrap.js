@@ -31,6 +31,11 @@ async function setButtonHistory(buttonHistoryJson) {
   await client.set('buttonHistory', JSON.stringify(buttonHistoryJson));
 }
 
+async function setButtonStatus(buttonStatusJson) {
+  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
+  await client.set('buttonStatus', JSON.stringify(buttonStatusJson));
+}
+
 async function withButtonHistoryData() {
   // Following should provide the standing:
   // Team  --  Score
@@ -96,20 +101,53 @@ async function withStartDateToday() {
   await withStartDate(TODAY);
 }
 
+async function withButtonStatus() {
+  const testData = [
+    {
+      button: 1, ip: '10.10.0.101', time: '2018-10-24 21:00', indicator: 'green'
+    },
+    {
+      button: 2, ip: '10.10.0.102', time: '2018-10-24 22:00', indicator: 'yellow'
+    },
+    {
+      button: 3, ip: '10.10.0.103', time: '2018-10-24 23:00', indicator: 'red'
+    }
+  ];
+
+  setButtonStatus(testData);
+
+  return testData;
+}
+
+async function withoutButtonStatus() {
+  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
+  await client.del('buttonStatus');
+}
+
 async function getText(page, tagName) {
   const TAG = `[data-test="${tagName}"]`;
   await page.waitFor(TAG);
 
-  return page.$eval(TAG, element => element.innerText);
+  const text = await page.$eval(TAG, element => element.innerText);
+  return text.replace('\t', '');
 }
 
+async function getStyle(page, tagName) {
+  const TAG = `[data-test="${tagName}"]`;
+  const element = await page.waitFor(TAG);
+  const classList = await element.getProperty('className');
+  return classList._remoteObject.value;
+}
 
 module.exports.testHelper = {
   withButtonHistoryData,
   withoutButtonHistoryData,
   withStartDate,
   withoutStartDate,
+  withoutButtonStatus,
   withStartDateToday,
   getText,
-  setButtonHistory
+  getStyle,
+  setButtonHistory,
+  withButtonStatus
 };
