@@ -176,9 +176,15 @@ describe('Helper', () => {
       it('should add a status entry for a given device and only update it', async () => {
         await testHelper.withoutButtonStatus();
 
-        const updateData1 = { button: 1, ip: '10.10.0.99', time: '2018-10-24 22:00' };
-        const updateData2 = { button: 2, ip: '10.10.0.66', time: '2018-10-24 22:30' };
-        const updateData3 = { button: 1, ip: '10.10.0.99', time: '2018-10-24 23:00' };
+        const updateData1 = {
+          button: 1, ip: '10.10.0.99', time: '2018-10-24 22:00', indicator: 'green'
+        };
+        const updateData2 = {
+          button: 2, ip: '10.10.0.66', time: '2018-10-24 22:30', indicator: 'red'
+        };
+        const updateData3 = {
+          button: 1, ip: '10.10.0.99', time: '2018-10-24 23:00', indicator: 'yellow'
+        };
 
         await helper.addStatus(updateData1);
         await helper.addStatus(updateData2);
@@ -193,6 +199,7 @@ describe('Helper', () => {
         expect(button1statusEntry[0].button).to.equal(1);
         expect(button1statusEntry[0].ip).to.equal('10.10.0.99');
         expect(button1statusEntry[0].time).to.equal('2018-10-24 23:00');
+        expect(button1statusEntry[0].indicator).to.equal('yellow');
       });
     });
   });

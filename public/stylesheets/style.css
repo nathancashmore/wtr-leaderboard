@@ -135,7 +135,7 @@ a {
 
 }
 
-/* PROGRESS BAR */
+/* P R O G R E S S  B A R */
 .progress-bar-container {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -259,3 +259,64 @@ a {
   background-color: #ef1c1c;
 }
 
+/* T R A F F I C  L I G H T S */
+.status-indicator {
+  width: 20px;
+  height: 20px;
+  margin-left: 30%;
+  background-size: 5px 5px;
+  border-radius: 50%;
+}
+
+.red{
+  background: red;
+  background-image: radial-gradient(brown, transparent);
+  animation: 13s red infinite;
+  border: dotted 2px red;
+  box-shadow:
+          0 0 20px #111 inset,
+          0 0 10px red;
+}
+
+.yellow{
+  background: yellow;
+  background-image: radial-gradient(orange, transparent);
+  border: dotted 2px yellow;
+  animation: 13s yellow infinite;
+  box-shadow:
+          0 0 20px #111 inset,
+          0 0 10px yellow;
+}
+
+.green{
+  background: green;
+  background-image: radial-gradient(lime, transparent);
+  border: dotted 2px lime;
+  animation: 10s green infinite;
+  box-shadow:
+          0 0 20px #111 inset,
+          0 0 10px lime;
+}
+
+@keyframes red{
+  10%{opacity: .1}
+  20%{opacity: 1}
+  30%{opacity: .1}
+  40%{opacity: 1}
+  50%{opacity: .1}
+  60%{opacity: 1}
+  70%{opacity: .1}
+  80%{opacity: 1}
+  90%{opacity: .1}
+  100%{opacity: 1}
+}
+
+@keyframes yellow{
+  0%{opacity: .1}
+  10%{opacity: 1}
+}
+
+@keyframes green{
+  0%{opacity: .1}
+  10%{opacity: 1}
+}
