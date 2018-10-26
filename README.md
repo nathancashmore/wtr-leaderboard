@@ -50,7 +50,9 @@ npm start
 ## Deploy
 This is currently being deployed to [Heroku](https://iot-hunt.herokuapp.com/)
 
-## IoT Scripts
+## IoT Devices
+
+### Raspberry Pi as an IoT device
 
 This directory contains snippits of python code that can be
 dropped onto a raspberry pi and used with a module to turn
@@ -75,6 +77,20 @@ sudo raspi-config
 
 Any additional requirements for the scripts can be found in a comment at the top of each file.
 
-### button-push.py
-![Button Push wiring](https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/button-push-diagram.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Button Push wiring")
+#### button-push.py
+![ButtonPushWiring]
+
+### IFTTT
+
+### Google VR ![GoogleVRLogo]
+
+## References
+
+https://developers.google.com/vr/develop/android/get-started
+https://platform.ifttt.com/docs/applets
+
+
+
+[ButtonPushWiring]: https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/button-push-diagram.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Button Push wiring"
+[GoogleVRLogo]: https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/GoogleVRLogo.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Google VR"
 
