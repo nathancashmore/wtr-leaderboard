@@ -1,8 +1,8 @@
 const i18n = require('i18n');
 const { testHelper } = require('./bootstrap');
 
-describe('Integration', () => {
-  describe('Status Page', () => {
+describe('Status Page', () => {
+  describe('with Status Information', () => {
     let page;
     let expectedStatus;
 
@@ -35,6 +35,24 @@ describe('Integration', () => {
       expect(await testHelper.getText(page, 'name-2')).to.equal(i18n.__(`button-name-${expectedStatus[2].button}`));
       expect(await testHelper.getText(page, 'ip-2')).to.equal(expectedStatus[2].ip);
       expect(await testHelper.getStyle(page, 'indicator-2')).to.contain(`${expectedStatus[2].indicator}`);
+    });
+  });
+
+  describe('without status information', () => {
+    let page;
+
+    before(async () => {
+      await testHelper.withoutButtonStatus();
+      page = await global.browser.newPage();
+      await page.goto('http://localhost:3000/status');
+    });
+
+    after(async () => {
+      await page.close();
+    });
+
+    it('should say if there is no reported status', async () => {
+      expect(await testHelper.getText(page, 'no-status')).to.equal(i18n.__('status.no-status'));
     });
   });
 });

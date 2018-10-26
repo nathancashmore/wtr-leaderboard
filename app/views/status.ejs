@@ -2,6 +2,7 @@
 <html>
 <head>
     <title><%= __('title') %></title>
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
 </head>
 <body class="limited-width">
@@ -16,6 +17,7 @@
     </h1>
 </div>
 <div id="status">
+    <% if (status) { %>
     <table>
         <tr>
             <th>Number</th>
@@ -23,7 +25,7 @@
             <th>IP</th>
             <th>Status</th>
         </tr>
-        <% for(var i=0; i < status.length; i++) { %>
+        <% for(var i = 0; i < status.length; i++) { %>
         <tr>
             <td data-test="number-<%= i %>"><%= status[i].button %></td>
             <td data-test="name-<%= i %>"><%= __(`button-name-${status[i].button}`) %></td>
@@ -33,7 +35,12 @@
             </td>
         </tr>
         <% } %>
+
     </table>
+    <% } else { %>
+        <p data-test="no-status" class="center"><%= __('status.no-status') %></p>
+        <p class="center"><i class="em em-sob center"></i><p>
+    <% } %>
 </div>
 
 </body>
