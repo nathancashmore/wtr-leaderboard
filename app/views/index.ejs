@@ -4,6 +4,8 @@
     <title><%= __('title') %></title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
 
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/javascripts/refresh.js"></script>
 
@@ -13,10 +15,12 @@
 <div id="header">
     <img class=image-center src="/images/christmastree.png">
     <h1 class="center" [data-test="title" ]>
+        <i class="em em-christmas_tree"></i>
         <%= __('title-1') %>
         <span class="xmas-red"><%= __('title-2') %></span><%= __('title-3') %><span
                 class="xmas-green"><%= __('title-4') %></span>
         <%= __('title-5') %>
+        <i class="em em-christmas_tree"></i>
     </h1>
 </div>
 <div id="score-table">
