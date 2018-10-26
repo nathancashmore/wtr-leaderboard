@@ -47,25 +47,28 @@ npm test
 ```
 npm start
 ```
-## Deploy
+## Deployment
 This is currently being deployed to [Heroku](https://iot-hunt.herokuapp.com/)
 
-## IoT Devices
+## Hardware
 
-### Raspberry Pi as an IoT device
+### ![RaspPiLogo] Raspberry Pi
+Python scripts for use with a Raspberry Pi can be found in the ```iot-scripts``` directory.
 
-This directory contains snippits of python code that can be
-dropped onto a raspberry pi and used with a module to turn
-it into an IoT device.
+#### button-push.py
+This combined with a simple button can be used to trigger a ```POST``` to the button
+endpoint.   
 
-To have the scripts start when the raspberry pi starts add them to the ```/etc/rc.local``` file.
+To have the script start when the raspberry pi starts add 
+them to the ```/etc/rc.local``` file.
 
 e.g.
 ```
 sudo -H -u pi /usr/bin/python /home/pi/button-push.py &
 ```
 
-The scripts will determine the button number to use based on the hostname of the device.
+The script will determine the button number to use based on the hostname 
+of the device.
 e.g. 
 ```
 button-5
@@ -76,21 +79,24 @@ sudo raspi-config
 ```
 
 Any additional requirements for the scripts can be found in a comment at the top of each file.
+The diagram below details how to wire a button based on the script.
 
-#### button-push.py
 ![ButtonPushWiring]
 
-### IFTTT
+### ![IFTTTLogo]
+IFTTT is a free platform that helps you do more with all your apps and devices.  You can create your own Applets and
+Services which tie together different IoT devices.  Endpoints in the application have been added to allow the 
+creation of a IFTTT service.  As such you could use the service with an another IoT associated device.
 
-### Google VR ![GoogleVRLogo]
+![IFTTTApplet]
 
 ## References
 
-https://developers.google.com/vr/develop/android/get-started
 https://platform.ifttt.com/docs/applets
-
-
 
 [ButtonPushWiring]: https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/button-push-diagram.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Button Push wiring"
 [GoogleVRLogo]: https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/GoogleVRLogo.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Google VR"
+[RaspPiLogo]: https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/RaspPiLogo.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Raspberry Pi"
+[IFTTTLogo]: https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/IFTTTLogo.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "IFTTT"
+[IFTTTApplet]: https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/IFTTTApplet.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "IFTTT Applet"
 
