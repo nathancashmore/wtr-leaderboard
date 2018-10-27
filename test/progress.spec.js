@@ -16,7 +16,7 @@ describe('Integration', () => {
     });
 
     it('should have the correct page title', async () => {
-      expect(await page.title()).to.eql('Christmas IoT Hunt');
+      expect(await page.title()).to.eql(i18n.__('title'));
     });
 
     it('should have a heading', async () => {
