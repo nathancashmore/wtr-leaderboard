@@ -1,3 +1,6 @@
+const i18n = require('i18n');
+require('./bootstrap');
+
 describe('Integration', () => {
   describe('Introduction Page', () => {
     let page;
@@ -12,7 +15,7 @@ describe('Integration', () => {
     });
 
     it('should have the correct page title', async () => {
-      expect(await page.title()).to.eql('Christmas IoT Hunt');
+      expect(await page.title()).to.eql(i18n.__('title'));
     });
   });
 });

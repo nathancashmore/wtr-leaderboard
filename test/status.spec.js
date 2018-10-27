@@ -17,7 +17,7 @@ describe('Status Page', () => {
     });
 
     it('should have the correct page title', async () => {
-      expect(await page.title()).to.eql('Christmas IoT Hunt');
+      expect(await page.title()).to.eql(i18n.__('title'));
     });
 
     it('should display the correct status information', async () => {
