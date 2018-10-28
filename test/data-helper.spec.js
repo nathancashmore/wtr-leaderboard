@@ -6,6 +6,10 @@ const DataHelper = require('../app/helper/data-helper');
 
 const NO_OF_TEAMS = 3;
 
+const DATE_TIME_NOW = moment().format('YYYY-MM-DD HH:mm');
+const DATE_TIME_10_MINS_AGO = moment().subtract(10, 'm').format('YYYY-MM-DD HH:mm');
+const DATE_TIME_30_MINS_AGO = moment().subtract(30, 'm').format('YYYY-MM-DD HH:mm');
+
 const helper = new DataHelper(NO_OF_TEAMS, config.REDIS_URL);
 let expectedScores;
 
@@ -177,29 +181,47 @@ describe('Helper', () => {
         await testHelper.withoutButtonStatus();
 
         const updateData1 = {
-          button: 1, ip: '10.10.0.99', time: '2018-10-24 22:00', indicator: 'green'
+          button: 1, ip: '10.10.0.99', time: DATE_TIME_30_MINS_AGO
         };
         const updateData2 = {
-          button: 2, ip: '10.10.0.66', time: '2018-10-24 22:30', indicator: 'red'
+          button: 2, ip: '10.10.0.66', time: DATE_TIME_10_MINS_AGO
         };
         const updateData3 = {
-          button: 1, ip: '10.10.0.99', time: '2018-10-24 23:00', indicator: 'yellow'
+          button: 1, ip: '10.10.0.99', time: DATE_TIME_NOW
+        };
+        const updateData4 = {
+          button: 3, ip: '10.10.0.33', time: DATE_TIME_30_MINS_AGO
         };
 
         await helper.addStatus(updateData1);
         await helper.addStatus(updateData2);
         await helper.addStatus(updateData3);
+        await helper.addStatus(updateData4);
 
         const result = await helper.getStatus();
 
-        expect(result.length).to.eql(2);
+        expect(result.length).to.eql(3);
 
         const button1statusEntry = result.filter(x => x.button === 1);
 
         expect(button1statusEntry[0].button).to.equal(1);
         expect(button1statusEntry[0].ip).to.equal('10.10.0.99');
-        expect(button1statusEntry[0].time).to.equal('2018-10-24 23:00');
-        expect(button1statusEntry[0].indicator).to.equal('yellow');
+        expect(button1statusEntry[0].time).to.equal(DATE_TIME_NOW);
+        expect(button1statusEntry[0].indicator).to.equal('green');
+
+        const button2statusEntry = result.filter(x => x.button === 2);
+
+        expect(button2statusEntry[0].button).to.equal(2);
+        expect(button2statusEntry[0].ip).to.equal('10.10.0.66');
+        expect(button2statusEntry[0].time).to.equal(DATE_TIME_10_MINS_AGO);
+        expect(button2statusEntry[0].indicator).to.equal('yellow');
+
+        const button3statusEntry = result.filter(x => x.button === 3);
+
+        expect(button3statusEntry[0].button).to.equal(3);
+        expect(button3statusEntry[0].ip).to.equal('10.10.0.33');
+        expect(button3statusEntry[0].time).to.equal(DATE_TIME_30_MINS_AGO);
+        expect(button3statusEntry[0].indicator).to.equal('red');
       });
     });
   });

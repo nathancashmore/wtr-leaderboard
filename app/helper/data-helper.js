@@ -241,11 +241,38 @@ module.exports = class DataHelper {
   }
 
   async getStatus() {
-    const status = await this.client.get('buttonStatus')
+    const dateTimeNow = moment();
+
+    const statusRaw = await this.client.get('buttonStatus')
       .catch((e) => {
         logger.error(`Call to getStatus failed due to : ${e}`);
       });
 
-    return JSON.parse(status);
+    let status = JSON.parse(statusRaw);
+
+    const enrichedStatus = [];
+
+    if (status) {
+      status.forEach((s) => {
+        const noOfMinutesSinceButtonWasPressed = moment(s.time, 'YYYY-MM-DD HH:mm').diff(dateTimeNow, 'minutes');
+        let determinedStatus;
+
+        if (noOfMinutesSinceButtonWasPressed > -10) {
+          determinedStatus = 'green';
+        } else if (noOfMinutesSinceButtonWasPressed > -30) {
+          determinedStatus = 'yellow';
+        } else {
+          determinedStatus = 'red';
+        }
+
+        const newInfo = s;
+        newInfo.indicator = determinedStatus;
+        enrichedStatus.push(newInfo);
+      });
+
+      status = enrichedStatus;
+    }
+
+    return status;
   }
 };
