@@ -9,8 +9,6 @@ const server = require('../app/app');
 
 const START_DATE = moment().format('YYYY-MM-DD');
 
-chai.use(chaiHttp);
-
 describe('Time', () => {
   describe('Happy path', () => {
     it('it should POST the date', (done) => {

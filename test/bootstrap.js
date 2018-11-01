@@ -104,19 +104,25 @@ async function withStartDateToday() {
 async function withButtonStatus() {
   const testData = [
     {
-      button: 1, ip: '10.10.0.101', time: '2018-10-24 21:00', indicator: 'green'
+      button: 1, ip: '10.10.0.101', time: moment().subtract(5, 'minutes').format('YYYY-MM-DD HH:mm')
     },
     {
-      button: 2, ip: '10.10.0.102', time: '2018-10-24 22:00', indicator: 'yellow'
+      button: 2, ip: '10.10.0.102', time: moment().subtract(15, 'minutes').format('YYYY-MM-DD HH:mm')
     },
     {
-      button: 3, ip: '10.10.0.103', time: '2018-10-24 23:00', indicator: 'red'
+      button: 3, ip: '10.10.0.103', time: moment().subtract(45, 'minutes').format('YYYY-MM-DD HH:mm')
     }
   ];
 
   setButtonStatus(testData);
 
-  return testData;
+  const expectedData = testData;
+
+  expectedData[0].indicator = 'green';
+  expectedData[1].indicator = 'yellow';
+  expectedData[2].indicator = 'red';
+
+  return expectedData;
 }
 
 async function withoutButtonStatus() {
