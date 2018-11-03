@@ -1,4 +1,4 @@
-![leaderboard logo](https://raw.githubusercontent.com/nathancashmore/wtr-leaderboard/master/public/images/ChristmasIoTLeaderboard.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Christmas IoT Hunt Leaderboard")
+![leaderboard logo](http://iot-hunt.herokuapp.com/images/ChristmasIoTLeaderboard.png "Christmas IoT Hunt Leaderboard")
 
 # Christmas IoT Hunt Leaderboard
 
@@ -30,7 +30,7 @@ will only add points to a team once.
 | ```PATCH```| ```/history/clear```          | --                                    | Clears all button press history. |
 | ```GET```  | ```/teams/<team-number>```    | --                                    | Returns the team information included current days button and clue |
 | ```POST``` | ```/buttons/<button-number>```| --                                    | Adds a record to the button press history |	
-
+| ```PUT```  | ```/status```                 | ```{"button": "1", "ip": "10.10.0.99" }```  | Used to report the status of a button and disclose its IP address |	
 
 ### Prerequisites
 * REDIS running locally
@@ -50,10 +50,10 @@ npm start
 ## Deployment
 This is currently being deployed to [Heroku](https://iot-hunt.herokuapp.com/)
 
-## Hardware
+## Button Ideas
 
 ### ![RaspPiLogo] Raspberry Pi
-Python scripts for use with a Raspberry Pi can be found in the ```iot-scripts``` directory.
+Python scripts for use with a Raspberry Pi can be found in the ```button-ideas/raspberry-pi``` directory.
 
 #### button-push.py
 This combined with a simple button can be used to trigger a ```POST``` to the button
@@ -94,9 +94,9 @@ creation of a IFTTT service.  As such you could use the service with an another 
 
 https://platform.ifttt.com/docs/applets
 
-[ButtonPushWiring]: https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/button-push-diagram.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Button Push wiring"
-[GoogleVRLogo]: https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/GoogleVRLogo.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Google VR"
-[RaspPiLogo]: https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/RaspPiLogo.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "Raspberry Pi"
-[IFTTTLogo]: https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/IFTTTLogo.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "IFTTT"
-[IFTTTApplet]: https://github.com/nathancashmore/wtr-leaderboard/blob/master/iot-scripts/IFTTTApplet.png?token=ABz_XYXRAWHHkHSyRqbUEiWiHkxx8GLzks5bpYmuwA%3D%3D&_sm_au_=iVVJ6QkrJBQkvNWs "IFTTT Applet"
+[ButtonPushWiring]: http://iot-hunt.herokuapp.com/images/button-push-diagram.png "Button Push wiring"
+[GoogleVRLogo]: http://iot-hunt.herokuapp.com/images/GoogleVRLogo.png "Google VR"
+[RaspPiLogo]: http://iot-hunt.herokuapp.com/images/RaspPiLogo.png "Raspberry Pi"
+[IFTTTLogo]: http://iot-hunt.herokuapp.com/images/IFTTTLogo.png "IFTTT"
+[IFTTTApplet]: http://iot-hunt.herokuapp.com/images/IFTTTApplet.png "IFTTT Applet"
 
