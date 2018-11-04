@@ -106,6 +106,4 @@ describe('Status Endpoint', () => {
         done();
       });
   });
-
-
 });

@@ -1,6 +1,7 @@
 const express = require('express');
 const i18n = require('i18n');
 const moment = require('moment');
+const logger = require('heroku-logger');
 
 const router = express.Router();
 

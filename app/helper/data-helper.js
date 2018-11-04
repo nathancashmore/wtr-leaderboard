@@ -286,5 +286,4 @@ module.exports = class DataHelper {
 
     return 'OK';
   }
-
 };
