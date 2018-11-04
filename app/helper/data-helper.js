@@ -275,4 +275,16 @@ module.exports = class DataHelper {
 
     return status;
   }
+
+  async clearStatus() {
+    const noOfKeysRemoved = await this.client.del('buttonStatus')
+      .catch((e) => {
+        logger.error(`Call to delete buttonStatus failed due to : ${e}`);
+      });
+
+    logger.info(`Removed ${noOfKeysRemoved} from the cache`);
+
+    return 'OK';
+  }
+
 };

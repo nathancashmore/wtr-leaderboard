@@ -21,4 +21,11 @@ router.put('/', async (req, res) => {
   res.json(statusInfo);
 });
 
+router.patch('/clear', async (req, res) => {
+  const status = await req.app.locals.dataHelper.clearStatus()
+    .catch(e => logger.error(`Call to clear status failed due to : ${e}`));
+
+  res.json({ status });
+});
+
 module.exports = router;
