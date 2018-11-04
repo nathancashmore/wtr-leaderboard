@@ -108,9 +108,13 @@ or command is triggered in Minecraft.
 ## References
 
 https://platform.ifttt.com/docs/applets
+
 https://www.raspberrypi.org/blog/button/
+
 https://developers.google.com/vr/?hl=en
+
 https://www.spigotmc.org/wiki/spigot/
+
 https://bukkit.gamepedia.com/Plugin_Tutorial
 
 [ButtonPushWiring]: http://iot-hunt.herokuapp.com/images/button-push-diagram.png "Button Push wiring"
