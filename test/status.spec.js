@@ -45,6 +45,18 @@ describe('Status Page', () => {
       expect(await testHelper.getText(page, 'ip-2')).to.equal(expectedStatus[2].ip);
       expect(await testHelper.getStyle(page, 'indicator-2')).to.contain(`${expectedStatus[2].indicator}`);
     });
+
+    it('it should clear the button history data', (done) => {
+      const endpoint = '/status/clear';
+
+      chai.request(server)
+        .patch(endpoint)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.status).to.equal('OK');
+          done();
+        });
+    });
   });
 
   describe('without status information', () => {
@@ -62,6 +74,18 @@ describe('Status Page', () => {
 
     it('should say if there is no reported status', async () => {
       expect(await testHelper.getText(page, 'no-status')).to.equal(i18n.__('status.no-status'));
+    });
+
+    it('it should clear the button history data', (done) => {
+      const endpoint = '/history/clear';
+
+      chai.request(server)
+        .patch(endpoint)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.status).to.equal('OK');
+          done();
+        });
     });
   });
 });

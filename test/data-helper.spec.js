@@ -138,6 +138,11 @@ describe('Helper', () => {
         expect(result).to.equal('OK');
       });
 
+      it('should clear the status history', async () => {
+        const result = await helper.clearStatus();
+        expect(result).to.equal('OK');
+      });
+
       it('should return the number of teams', () => {
         expect(helper.noOfTeams).to.equal(NO_OF_TEAMS);
       });
