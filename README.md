@@ -90,13 +90,33 @@ creation of a IFTTT service.  As such you could use the service with an another 
 
 ![IFTTTApplet]
 
+### ![GoogleVRLogo]
+Google VR provides SDKs for many popular development environments. These SDKs provide native APIs for key VR features 
+like user input, controller support, and rendering, which you can use to build new VR experiences on either Daydream or Cardboard.
+Being able to capture the users action we can then call the REST API endpoint to push the button.
+
+### ![MinecraftLogo]
+Minecraft provides a virtual 8-bit world of blocks and items you can use to build pretty much anything.  Think of it 
+like the latest version of LEGO.
+CraftBukkit is lightly modified version of the Vanilla minecraft software allowing it to be able to run Bukkit plugins.
+Bukkit is an API that allows programmers to make plugins for server software.  Spigot is the most popular used Minecraft 
+server software in the world. Spigot is a modified version of CraftBukkit with hundreds of improvements and optimizations 
+that can only make CraftBukkit shrink in shame.
+By progamming a Bukkit plugin you can trigger the sending of a REST API call to push the button when an event 
+or command is triggered in Minecraft.  
+
 ## References
 
 https://platform.ifttt.com/docs/applets
+https://www.raspberrypi.org/blog/button/
+https://developers.google.com/vr/?hl=en
+https://www.spigotmc.org/wiki/spigot/
+https://bukkit.gamepedia.com/Plugin_Tutorial
 
 [ButtonPushWiring]: http://iot-hunt.herokuapp.com/images/button-push-diagram.png "Button Push wiring"
 [GoogleVRLogo]: http://iot-hunt.herokuapp.com/images/GoogleVRLogo.png "Google VR"
 [RaspPiLogo]: http://iot-hunt.herokuapp.com/images/RaspPiLogo.png "Raspberry Pi"
 [IFTTTLogo]: http://iot-hunt.herokuapp.com/images/IFTTTLogo.png "IFTTT"
 [IFTTTApplet]: http://iot-hunt.herokuapp.com/images/IFTTTApplet.png "IFTTT Applet"
+[MinecraftLogo]: http://iot-hunt.herokuapp.com/images/MinecraftLogo.png "Minecraft"
 
