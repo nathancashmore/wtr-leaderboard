@@ -83,7 +83,7 @@ This can be run as a cron job to check the button-push process is running.  To d
 pi users home directory and then the following crontab entry using ```crontab -e```
 
 ```
-9 * * * * /home/pi/status.sh
+*/10 * * * * /home/pi/status.sh
 ```
 
 Any additional requirements for the scripts can be found in a comment at the top of each file.
