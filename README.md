@@ -78,6 +78,14 @@ To change the hostname, wifi setup or the ability to SSH to the device use
 sudo raspi-config
 ```
 
+#### status.sh
+This can be run as a cron job to check the button-push process is running.  To do this add ```status.sh``` to the
+pi users home directory and then the following crontab entry using ```crontab -e```
+
+```
+9 * * * * /home/pi/status.sh
+```
+
 Any additional requirements for the scripts can be found in a comment at the top of each file.
 The diagram below details how to wire a button based on the script.
 
