@@ -6,6 +6,7 @@ let expectedScores;
 describe('Integration', () => {
   before(async () => {
     expectedScores = await testHelper.withButtonHistoryData();
+    await testHelper.withStartDateToday();
   });
 
   describe('Main Page', () => {
@@ -31,6 +32,11 @@ describe('Integration', () => {
       const heading = await page.$eval(HEADING_SELECTOR, x => x.innerText);
 
       expect(heading).to.eql('Christmas IoT Hunt');
+    });
+
+    it('should display the day information', async () => {
+      const dayInfo = await testHelper.getText(page, 'day-title');
+      expect(dayInfo).to.eql(i18n.__('day-0'));
     });
 
     it('should show the leader', async () => {

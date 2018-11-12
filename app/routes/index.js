@@ -5,7 +5,8 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', async (req, res) => {
   const standing = await req.app.locals.dataHelper.getStanding();
-  res.render('index', { standing });
+  const day = await req.app.locals.dataHelper.getDay();
+  res.render('index', { standing, day });
 });
 
 router.get('/score-table', async (req, res) => {

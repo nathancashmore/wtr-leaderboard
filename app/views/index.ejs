@@ -14,7 +14,7 @@
 <%- include('partials/snow'); %>
 <div id="header">
     <img class=image-center src="/images/christmastree.png">
-    <h1 class="center" [data-test="title" ]>
+    <h1 class="center" data-test="title" >
         <i class="em em-christmas_tree"></i>
         <%= __('title-1') %>
         <span class="xmas-red"><%= __('title-2') %></span><%= __('title-3') %><span
@@ -22,6 +22,7 @@
         <%= __('title-5') %>
         <i class="em em-christmas_tree"></i>
     </h1>
+    <h2 data-test="day-title"><%= __(`day-${day}`) %></h2>
 </div>
 <div id="score-table">
     <%- include('partials/score-table', {standing}); %>
