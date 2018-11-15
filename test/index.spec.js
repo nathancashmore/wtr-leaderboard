@@ -49,6 +49,47 @@ describe('Integration', () => {
     });
   });
 
+  describe('Before event', () => {
+    let page;
+
+    before(async () => {
+      await testHelper.withStartDateBeforeEvent();
+      page = await global.browser.newPage();
+      await page.goto('http://localhost:3000');
+    });
+
+    after(async () => {
+      await page.close();
+    });
+
+    it('should show information before event', async () => {
+      const pageText = await testHelper.getText(page, 'before-event-text');
+      expect(pageText).to.eql(i18n.__('before-event-text'));
+    });
+  });
+
+  describe('After event', () => {
+    let page;
+
+    before(async () => {
+      await testHelper.withStartDateAfterEvent();
+      page = await global.browser.newPage();
+      await page.goto('http://localhost:3000');
+    });
+
+    after(async () => {
+      await page.close();
+    });
+
+    it('should show winner information after event and winning team', async () => {
+      const pageText = await testHelper.getText(page, 'after-event-text');
+      expect(pageText).to.eql(i18n.__('after-event-text-1'));
+
+      const winningTeam = await testHelper.getText(page, 'winning-team');
+      expect(winningTeam.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[0].team}`));
+    });
+  });
+
   describe('Score Table', () => {
     let page;
 

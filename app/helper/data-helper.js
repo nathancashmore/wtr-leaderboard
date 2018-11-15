@@ -30,7 +30,28 @@ module.exports = class DataHelper {
 
     const day = moment().diff(moment(startDate, 'YYYY-MM-DD'), 'days');
 
-    return (!(day > -1) || day >= this.noOfTeams) ? -1 : day;
+    if (!(day > -1)) {
+      return -1;
+    }
+    if (day >= this.noOfTeams) {
+      return -2;
+    }
+
+    return day;
+  }
+
+  async getEventState() {
+    const day = await this.getDay();
+
+    if (day === -2) {
+      return 'after';
+    }
+
+    if (day === -1) {
+      return 'before';
+    }
+
+    return 'during';
   }
 
   async clearHistory() {

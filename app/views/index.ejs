@@ -15,18 +15,44 @@
 <div id="header">
     <img class=image-center src="/images/christmastree.png">
     <h1 class="center" data-test="title" >
-        <i class="em em-christmas_tree"></i>
         <%= __('title-1') %>
         <span class="xmas-red"><%= __('title-2') %></span><%= __('title-3') %><span
                 class="xmas-green"><%= __('title-4') %></span>
         <%= __('title-5') %>
-        <i class="em em-christmas_tree"></i>
     </h1>
-    <h2 data-test="day-title"><%= __(`day-${day}`) %></h2>
 </div>
-<div id="score-table">
-    <%- include('partials/score-table', {standing}); %>
+
+<div>
+<% if(eventState === 'before') { %>
+    <div class="center">
+        <span data-test="before-event-text"><%= __('before-event-text') %></span>
+    </div>
+<% } %>
+
+<% if(eventState === 'after') { %>
+
+    <div class="pyro">
+        <div class="before"></div>
+        <div class="center">
+            <span data-test="after-event-text"><%= __('after-event-text-1') %></span>
+            <h1 class="xmas-green" data-test="winning-team"><%= __(`team-${standing[0].name}`) %></h1>
+            <i class="em em-gift"></i><span data-test="after-event-text"><%= __('after-event-text-2') %></span><i class="em em-gift"></i>
+        </div>
+        <div class="after"></div>
+    </div>
+
+<% } %>
 </div>
+
+<% if(eventState === 'during') { %>
+    <div class="center">
+        <h2 data-test="day-title"><i class="em em-christmas_tree"></i>  <%= __(`day-${day}`) %>  <i class="em em-christmas_tree"></i></h2>
+    </div>
+
+    <div id="score-table">
+        <%- include('partials/score-table', {standing}); %>
+    </div>
+<% } %>
 
 </body>
 </html>
