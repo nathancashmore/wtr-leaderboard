@@ -56,10 +56,13 @@ a {
 button {
   font-family: inherit;
   background: #2a942f;
-  padding: 1vh 1vh 1vh 1vh;
   float: right;
   color: white;
-  font-size: small;
+  font-size: 2.2vw;
+}
+
+button:hover {
+  background: #ff0000;
 }
 
 .xmas-red {

@@ -73,5 +73,6 @@
 	"day-9": "Day 10",
 	"before-event-text": "Santa is hiding buttons... please wait",
 	"after-event-text-1": "And the winner is",
-	"after-event-text-2": "  Merry Christmas   "
+	"after-event-text-2": "  Merry Christmas   ",
+	"leaderboard-button": "<<< Back to the Leaderboard"
 }

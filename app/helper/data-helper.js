@@ -135,11 +135,10 @@ module.exports = class DataHelper {
         logger.info(`No button press history found : ${e}`);
       });
 
-    if (cachedHistory === null) {
-      return [];
+    let history = [];
+    if (cachedHistory !== null) {
+      history = JSON.parse(cachedHistory);
     }
-
-    const history = JSON.parse(cachedHistory);
 
     while (team < this.noOfTeams + 1) {
       const teamIndex = team;

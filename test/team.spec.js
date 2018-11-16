@@ -5,7 +5,6 @@ const { testHelper } = require('./bootstrap');
 let expectedScores;
 
 const DAY_2 = moment().subtract(2, 'days').format('YYYY-MM-DD');
-const DAY_3 = moment().subtract(3, 'days').format('YYYY-MM-DD');
 
 describe('Team Integration', () => {
   describe('Team Page', () => {
@@ -64,42 +63,6 @@ describe('Team Integration', () => {
         const text = await page.$eval(TAG, element => element.innerText);
 
         expect(text.replace('\t', '')).to.eql(i18n.__('button-clue-3'));
-      });
-    });
-
-    describe('Day after the last day', () => {
-      before(async () => {
-        expectedScores = await testHelper.withButtonHistoryData();
-        await testHelper.withStartDate(DAY_3);
-      });
-
-      let page;
-
-      before(async () => {
-        page = await global.browser.newPage();
-        await page.goto('http://localhost:3000/teams/1');
-      });
-
-      after(async () => {
-        await page.close();
-      });
-
-      it('should have the correct team name', async () => {
-        const TAG = '[data-test="team-name"]';
-        await page.waitFor(TAG);
-
-        const text = await page.$eval(TAG, element => element.innerText);
-
-        expect(text.replace('\t', '')).to.eql(i18n.__('team-1'));
-      });
-
-      it('should have the correct team score', async () => {
-        const TAG = '[data-test="team-score"]';
-        await page.waitFor(TAG);
-
-        const text = await page.$eval(TAG, element => element.innerText);
-
-        expect(text.replace('\t', '')).to.eql(`${expectedScores[1].score}`);
       });
 
       it('should have a link back to the leaderboard', async () => {
