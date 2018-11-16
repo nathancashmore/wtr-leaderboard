@@ -28,7 +28,7 @@ module.exports = class DataHelper {
         logger.error(`Call to getDay failed due to : ${e}`);
       });
 
-    const day = moment().diff(moment(startDate, 'YYYY-MM-DD'), 'days');
+    const day = moment().startOf('day').diff(moment(startDate, 'YYYY-MM-DD'), 'days');
 
     if (!(day > -1)) {
       return -1;

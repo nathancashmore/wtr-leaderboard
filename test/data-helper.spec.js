@@ -86,6 +86,15 @@ describe('Helper', () => {
       });
 
       it('should be able to set a date and work out the day no from it', async () => {
+        const tomorrow = moment().add(1, 'day').format('YYYY-MM-DD');
+
+        await helper.setStartDate(tomorrow);
+        const day = await helper.getDay();
+
+        expect(day).to.equal(-1);
+      });
+
+      it('should be able to set a date and work out the day no from it', async () => {
         const yesterday = moment().subtract(2, 'days').format('YYYY-MM-DD');
 
         await helper.setStartDate(yesterday);
@@ -125,7 +134,10 @@ describe('Helper', () => {
 
       it('should increase a teams score when button pressed', async () => {
         // Where starting score for team 1 is 5
-        const button = 3; const team = 1; const day = 2; const
+        const button = 3;
+        const team = 1;
+        const day = 2;
+        const
           score = 10;
 
         await helper.pressButton(button, team, day, score);
@@ -138,7 +150,10 @@ describe('Helper', () => {
 
       it('should not allow button to be pressed twice in one day', async () => {
         // Where starting score for team 1 is 15
-        const button = 3; const team = 1; const day = 2; const
+        const button = 3;
+        const team = 1;
+        const day = 2;
+        const
           score = 5;
 
         const buttonReseponse = await helper.pressButton(button, team, day, score);
@@ -183,7 +198,10 @@ describe('Helper', () => {
       });
 
       it('should add history when button pressed', async () => {
-        const button = 1; const team = 1; const day = 1; const
+        const button = 1;
+        const team = 1;
+        const day = 1;
+        const
           score = 10;
 
         const result = await helper.pressButton(button, team, day, score);
