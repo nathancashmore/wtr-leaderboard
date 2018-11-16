@@ -15,6 +15,7 @@
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
+    "express-favicon": "^2.0.1",
     "getconfig": "^4.5.0",
     "heroku-logger": "^0.3.1",
     "http-errors": "~1.6.2",

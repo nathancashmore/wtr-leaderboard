@@ -6,6 +6,7 @@ const logger = require('heroku-logger');
 const bodyParser = require('body-parser');
 const config = require('getconfig');
 const i18n = require('i18n');
+const favicon = require('express-favicon');
 
 const DataHelper = require('./helper/data-helper');
 
@@ -44,6 +45,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(i18n.init);
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(favicon(path.join(__dirname + '/../public/images/iot-hunt.ico.png')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -60,6 +62,7 @@ app.use('/status', statusRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
+  logger.error(`Unable to find route for ${req.url}`);
   next(createError(404));
 });
 
