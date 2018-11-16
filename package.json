@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "lint": "./node_modules/.bin/eslint . --fix",
     "mocha": "NODE_ENV=test mocha --exit --recursive --timeout 10000",
-    "test" : "npm run lint && npm run mocha"
+    "test": "npm run lint && npm run mocha"
   },
   "dependencies": {
     "async-redis": "^1.1.4",
