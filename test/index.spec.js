@@ -1,4 +1,5 @@
 const i18n = require('i18n');
+const moment = require('moment');
 const { testHelper } = require('./bootstrap');
 
 let expectedScores;
@@ -89,67 +90,69 @@ describe('Integration', () => {
       expect(winningTeam.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[0].team}`));
     });
   });
+});
 
-  describe('Score Table', () => {
-    let page;
+describe('Score Table', () => {
+  let page;
 
-    before(async () => {
-      page = await global.browser.newPage();
-      await page.goto('http://localhost:3000/score-table');
-    });
+  before(async () => {
+    await testHelper.withStartDate(moment().subtract(2, 'days').format('YYYY-MM-DD'));
+    page = await global.browser.newPage();
 
-    after(async () => {
-      await page.close();
-    });
+    await page.goto('http://localhost:3000/score-table');
+  });
 
-    it('should show the leader', async () => {
-      const FIRST_PLACE_NAME = '[data-test="name-0"]';
-      const SECOND_PLACE_NAME = '[data-test="name-1"]';
-      const THIRD_PLACE_NAME = '[data-test="name-2"]';
+  after(async () => {
+    await page.close();
+  });
 
-      const FIRST_PLACE_SCORE = '[data-test="score-0"]';
-      const SECOND_PLACE_SCORE = '[data-test="score-1"]';
-      const THIRD_PLACE_SCORE = '[data-test="score-2"]';
+  it('should show the leader', async () => {
+    const FIRST_PLACE_NAME = '[data-test="name-0"]';
+    const SECOND_PLACE_NAME = '[data-test="name-1"]';
+    const THIRD_PLACE_NAME = '[data-test="name-2"]';
 
-      await page.waitFor(FIRST_PLACE_NAME);
+    const FIRST_PLACE_SCORE = '[data-test="score-0"]';
+    const SECOND_PLACE_SCORE = '[data-test="score-1"]';
+    const THIRD_PLACE_SCORE = '[data-test="score-2"]';
 
-      const firstName = await page.$eval(FIRST_PLACE_NAME, html => html.innerText);
-      const firstScore = await page.$eval(FIRST_PLACE_SCORE, html => html.innerText);
+    await page.waitFor(FIRST_PLACE_NAME);
 
-      const secondName = await page.$eval(SECOND_PLACE_NAME, html => html.innerText);
-      const secondScore = await page.$eval(SECOND_PLACE_SCORE, html => html.innerText);
+    const firstName = await page.$eval(FIRST_PLACE_NAME, html => html.innerText);
+    const firstScore = await page.$eval(FIRST_PLACE_SCORE, html => html.innerText);
 
-      const thirdName = await page.$eval(THIRD_PLACE_NAME, html => html.innerText);
-      const thirdScore = await page.$eval(THIRD_PLACE_SCORE, html => html.innerText);
+    const secondName = await page.$eval(SECOND_PLACE_NAME, html => html.innerText);
+    const secondScore = await page.$eval(SECOND_PLACE_SCORE, html => html.innerText);
 
-      expect(firstName.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[0].team}`));
-      expect(firstScore.replace('\t', '')).to.eql(expectedScores[0].score.toString());
+    const thirdName = await page.$eval(THIRD_PLACE_NAME, html => html.innerText);
+    const thirdScore = await page.$eval(THIRD_PLACE_SCORE, html => html.innerText);
 
-      expect(secondName.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[1].team}`));
-      expect(secondScore.replace('\t', '')).to.eql(expectedScores[1].score.toString());
+    expect(firstName.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[0].team}`));
+    expect(firstScore.replace('\t', '')).to.eql(expectedScores[0].score.toString());
 
-      expect(thirdName.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[2].team}`));
-      expect(thirdScore.replace('\t', '')).to.eql(expectedScores[2].score.toString());
-    });
+    expect(secondName.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[1].team}`));
+    expect(secondScore.replace('\t', '')).to.eql(expectedScores[1].score.toString());
 
-    it('should link to the different teams pages', async () => {
-      const FIRST_PLACE_NAME = '[data-test="name-0"]';
-      const SECOND_PLACE_NAME = '[data-test="name-1"]';
-      const THIRD_PLACE_NAME = '[data-test="name-2"]';
+    expect(thirdName.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[2].team}`));
+    expect(thirdScore.replace('\t', '')).to.eql(expectedScores[2].score.toString());
+  });
 
-      await page.waitFor(FIRST_PLACE_NAME);
-      await page.click(FIRST_PLACE_NAME);
-      expect(page.url()).to.contain('teams/2');
+  it('should link to the different teams pages', async () => {
+    const FIRST_PLACE_NAME = '[data-test="name-0"]';
+    const SECOND_PLACE_NAME = '[data-test="name-1"]';
+    const THIRD_PLACE_NAME = '[data-test="name-2"]';
 
-      await page.goto('http://localhost:3000/score-table');
-      await page.waitFor(SECOND_PLACE_NAME);
-      await page.click(SECOND_PLACE_NAME);
-      expect(page.url()).to.contain('teams/1');
+    await page.waitFor(FIRST_PLACE_NAME);
+    await page.click(FIRST_PLACE_NAME);
+    expect(page.url()).to.contain('teams/2');
 
-      await page.goto('http://localhost:3000/score-table');
-      await page.waitFor(THIRD_PLACE_NAME);
-      await page.click(THIRD_PLACE_NAME);
-      expect(page.url()).to.contain('teams/3');
-    });
+    await page.goto('http://localhost:3000/score-table');
+    await page.waitFor(SECOND_PLACE_NAME);
+    await page.click(SECOND_PLACE_NAME);
+    expect(page.url()).to.contain('teams/1');
+
+    await page.goto('http://localhost:3000/score-table');
+    await page.waitFor(THIRD_PLACE_NAME);
+    await page.click(THIRD_PLACE_NAME);
+    expect(page.url()).to.contain('teams/3');
   });
 });

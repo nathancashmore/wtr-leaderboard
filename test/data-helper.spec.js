@@ -186,9 +186,9 @@ describe('Helper', () => {
         await testHelper.withoutButtonHistoryData();
       });
 
-      it('should retrieve current standing', async () => {
+      it('should still retrieve current standing', async () => {
         const result = await helper.getStanding();
-        expect(result.length).to.equal(0);
+        expect(result.length).to.equal(3);
       });
 
       it('should give a teams score of zero', async () => {
