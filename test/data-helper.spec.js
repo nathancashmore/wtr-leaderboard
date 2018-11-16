@@ -18,6 +18,7 @@ describe('Helper', () => {
     describe('With button history data', () => {
       before(async () => {
         expectedScores = await testHelper.withButtonHistoryData();
+        await testHelper.withStartDate();
       });
 
       [
@@ -99,11 +100,28 @@ describe('Helper', () => {
         expect(day).to.equal(-1);
       });
 
-      it('should return -1 for the day if there are more days than teams', async () => {
+      it('should return -2 for the day if there are more days than teams', async () => {
         await helper.setStartDate(moment().subtract(NO_OF_TEAMS, 'days').format('YYYY-MM-DD'));
         const day = await helper.getDay();
-        expect(day).to.equal(-1);
+        expect(day).to.equal(-2);
       });
+
+      it('should return correct event state', async () => {
+        let eventState = 'NOT-SET';
+
+        await testHelper.withStartDateToday();
+        eventState = await helper.getEventState();
+        expect(eventState).to.equal('during');
+
+        await testHelper.withStartDateBeforeEvent();
+        eventState = await helper.getEventState();
+        expect(eventState).to.equal('before');
+
+        await testHelper.withStartDateAfterEvent();
+        eventState = await helper.getEventState();
+        expect(eventState).to.equal('after');
+      });
+
 
       it('should increase a teams score when button pressed', async () => {
         // Where starting score for team 1 is 5

@@ -36,6 +36,32 @@ async function setButtonStatus(buttonStatusJson) {
   await client.set('buttonStatus', JSON.stringify(buttonStatusJson));
 }
 
+async function withoutStartDate() {
+  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
+  await client.del('startDate');
+}
+
+async function withStartDate(dateInFormatYYYYMMDD) {
+  const startDate = dateInFormatYYYYMMDD;
+  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
+  await client.set('startDate', JSON.stringify(startDate));
+}
+
+async function withStartDateToday() {
+  const TODAY = moment().format('YYYY-MM-DD');
+  await withStartDate(TODAY);
+}
+
+async function withStartDateBeforeEvent() {
+  const FUTURE = moment().add(10, 'days').format('YYYY-MM-DD');
+  await withStartDate(FUTURE);
+}
+
+async function withStartDateAfterEvent() {
+  const PAST = moment().subtract(10, 'days').format('YYYY-MM-DD');
+  await withStartDate(PAST);
+}
+
 async function withButtonHistoryData() {
   // Following should provide the standing:
   // Team  --  Score
@@ -72,6 +98,7 @@ async function withButtonHistoryData() {
   ];
 
   setButtonHistory(testData);
+  withStartDate(moment().subtract(2, 'days').format('YYYY-MM-DD'));
 
   return [
     { team: 2, score: 8 },
@@ -83,22 +110,6 @@ async function withButtonHistoryData() {
 async function withoutButtonHistoryData() {
   const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
   await client.del('buttonHistory');
-}
-
-async function withoutStartDate() {
-  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
-  await client.del('startDate');
-}
-
-async function withStartDate(dateInFormatYYYYMMDD) {
-  const startDate = dateInFormatYYYYMMDD;
-  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
-  await client.set('startDate', JSON.stringify(startDate));
-}
-
-async function withStartDateToday() {
-  const TODAY = moment().format('YYYY-MM-DD');
-  await withStartDate(TODAY);
 }
 
 async function withButtonStatus() {
@@ -150,6 +161,8 @@ module.exports.testHelper = {
   withoutButtonHistoryData,
   withStartDate,
   withoutStartDate,
+  withStartDateBeforeEvent,
+  withStartDateAfterEvent,
   withoutButtonStatus,
   withStartDateToday,
   getText,

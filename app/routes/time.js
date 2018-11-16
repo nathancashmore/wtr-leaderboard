@@ -9,12 +9,7 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  let day = await req.app.locals.dataHelper.getDay();
-
-  // Not really sure about this but it covers NaN and dates in the past
-  if (!(day > -1)) {
-    day = -1;
-  }
+  const day = await req.app.locals.dataHelper.getDay();
   res.json({ day });
 });
 

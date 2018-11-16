@@ -6,6 +6,7 @@ let expectedScores;
 describe('Integration', () => {
   before(async () => {
     expectedScores = await testHelper.withButtonHistoryData();
+    await testHelper.withStartDateToday();
   });
 
   describe('Main Page', () => {
@@ -33,6 +34,11 @@ describe('Integration', () => {
       expect(heading).to.eql('Christmas IoT Hunt');
     });
 
+    it('should display the day information', async () => {
+      const dayInfo = await testHelper.getText(page, 'day-title');
+      expect(dayInfo).to.eql(i18n.__('day-0'));
+    });
+
     it('should show the leader', async () => {
       const LEADER = '[data-test="name-0"]';
       await page.waitFor(LEADER);
@@ -40,6 +46,47 @@ describe('Integration', () => {
       const leader = await page.$eval(LEADER, x => x.innerText);
 
       expect(leader.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[0].team}`));
+    });
+  });
+
+  describe('Before event', () => {
+    let page;
+
+    before(async () => {
+      await testHelper.withStartDateBeforeEvent();
+      page = await global.browser.newPage();
+      await page.goto('http://localhost:3000');
+    });
+
+    after(async () => {
+      await page.close();
+    });
+
+    it('should show information before event', async () => {
+      const pageText = await testHelper.getText(page, 'before-event-text');
+      expect(pageText).to.eql(i18n.__('before-event-text'));
+    });
+  });
+
+  describe('After event', () => {
+    let page;
+
+    before(async () => {
+      await testHelper.withStartDateAfterEvent();
+      page = await global.browser.newPage();
+      await page.goto('http://localhost:3000');
+    });
+
+    after(async () => {
+      await page.close();
+    });
+
+    it('should show winner information after event and winning team', async () => {
+      const pageText = await testHelper.getText(page, 'after-event-text');
+      expect(pageText).to.eql(i18n.__('after-event-text-1'));
+
+      const winningTeam = await testHelper.getText(page, 'winning-team');
+      expect(winningTeam.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[0].team}`));
     });
   });
 
