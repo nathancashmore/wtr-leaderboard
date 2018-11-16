@@ -101,6 +101,11 @@ describe('Team Integration', () => {
 
         expect(text.replace('\t', '')).to.eql(`${expectedScores[1].score}`);
       });
+
+      it('should have a link back to the leaderboard', async () => {
+        await page.click('[data-test="leaderboard-button"]');
+        expect(page.url()).to.contain('/leaderboard');
+      });
     });
   });
 });

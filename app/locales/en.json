@@ -74,5 +74,9 @@
 	"before-event-text": "Santa is hiding buttons... please wait",
 	"after-event-text-1": "And the winner is",
 	"after-event-text-2": "  Merry Christmas   ",
-	"after-event-text": "after-event-text"
+	"leaderboard-button": "<< Back to the Leaderboard",
+	"button-name-0": "button-name-0",
+	"button-clue-0": "button-clue-0",
+	"button-name--1": "button-name--1",
+	"button-clue--1": "button-clue--1"
 }

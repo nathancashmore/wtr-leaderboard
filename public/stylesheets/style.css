@@ -52,6 +52,16 @@ dt {
 a {
   color: #2a942f;
 }
+
+button {
+  font-family: inherit;
+  background: #2a942f;
+  padding: 1vh 1vh 1vh 1vh;
+  float: right;
+  color: white;
+  font-size: small;
+}
+
 .xmas-red {
   color : #ff0000;
 }

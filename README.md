@@ -31,6 +31,7 @@ will only add points to a team once.
 | ```GET```  | ```/teams/<team-number>```    | --                                    | Returns the team information included current days button and clue |
 | ```POST``` | ```/buttons/<button-number>```| --                                    | Adds a record to the button press history |	
 | ```PUT```  | ```/status```                 | ```{"button": "1", "ip": "10.10.0.99" }```  | Used to report the status of a button and disclose its IP address |	
+| ```PATCH```| ```/status/clear```           | --                                    | Clears all the button status information |	
 
 ### Prerequisites
 * REDIS running locally
