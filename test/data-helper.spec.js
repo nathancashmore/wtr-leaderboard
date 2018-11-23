@@ -18,7 +18,6 @@ describe('Helper', () => {
     describe('With button history data', () => {
       before(async () => {
         expectedScores = await testHelper.withButtonHistoryData();
-        await testHelper.withStartDate();
       });
 
       [
@@ -81,8 +80,11 @@ describe('Helper', () => {
       it('should retrieve current standing', async () => {
         const result = await helper.getStanding();
 
-        expect(result[0].name).to.equal(expectedScores[0].team);
-        expect(result[0].score).to.equal(expectedScores[0].score);
+        [0, 1, 2].forEach((idx) => {
+          expect(result[idx].name).to.equal(expectedScores[idx].team);
+          expect(result[idx].score).to.equal(expectedScores[idx].score);
+          expect(result[idx].pressed).to.equal(expectedScores[idx].pressed);
+        });
       });
 
       it('should be able to set a date and work out the day no from it', async () => {

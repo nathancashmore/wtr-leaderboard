@@ -73,6 +73,11 @@ button:hover {
   color : #2a942f;
 }
 
+.pressed {
+  background: #2a942f;
+  color: white;
+}
+
 .center {
   text-align: center;
 }

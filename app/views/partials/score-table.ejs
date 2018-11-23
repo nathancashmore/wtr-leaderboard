@@ -12,7 +12,9 @@
                     <%= __(`team-${standing[i].name}`) %>
                 </a>
             </td>
-            <td data-test="score-<%= i %>" class="center"><%= standing[i].score %></td>
+            <td data-test="score-<%= i %>" class="center <% if(standing[i].pressed) { %>pressed<% } else { %>not-yet-found<% } %>">
+                <%= standing[i].score %>
+            </td>
         </tr>
         <% } %>
     </table>

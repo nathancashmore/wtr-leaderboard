@@ -62,6 +62,11 @@ async function withStartDateAfterEvent() {
   await withStartDate(PAST);
 }
 
+async function withoutButtonHistoryData() {
+  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
+  await client.del('buttonHistory');
+}
+
 async function withButtonHistoryData() {
   // Following should provide the standing:
   // Team  --  Score
@@ -97,19 +102,15 @@ async function withButtonHistoryData() {
     // {"team": 3, "button": 2, "day": 2, "time": "10:02:00", "score": 1}
   ];
 
+  withoutButtonHistoryData();
   setButtonHistory(testData);
   withStartDate(moment().subtract(2, 'days').format('YYYY-MM-DD'));
 
   return [
-    { team: 2, score: 8 },
-    { team: 1, score: 5 },
-    { team: 3, score: 2 },
+    { team: 2, score: 8, pressed: true },
+    { team: 1, score: 5, pressed: false },
+    { team: 3, score: 2, pressed: false },
   ];
-}
-
-async function withoutButtonHistoryData() {
-  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
-  await client.del('buttonHistory');
 }
 
 async function withButtonStatus() {

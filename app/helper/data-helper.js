@@ -129,6 +129,7 @@ module.exports = class DataHelper {
   async getStanding() {
     let team = 1;
     const teamScores = [];
+    const day = await this.getDay();
 
     const cachedHistory = await this.client.get('buttonHistory')
       .catch((e) => {
@@ -149,9 +150,13 @@ module.exports = class DataHelper {
           .map(x => x.score)
           .reduce((prev, curr) => prev + curr);
 
-        teamScores.push({ name: team, score });
+        const hasPressedButtonToday = teamHistory
+          .filter(y => y.day === day)
+          .length > 0;
+
+        teamScores.push({ name: team, score, pressed: hasPressedButtonToday });
       } else {
-        teamScores.push({ name: team, score: 0 });
+        teamScores.push({ name: team, score: 0, pressed: false });
       }
 
       team += 1;
