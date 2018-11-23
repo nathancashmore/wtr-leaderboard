@@ -1,5 +1,4 @@
 const i18n = require('i18n');
-const moment = require('moment');
 const { testHelper } = require('./bootstrap');
 
 let expectedScores;
@@ -7,7 +6,6 @@ let expectedScores;
 describe('Integration', () => {
   before(async () => {
     expectedScores = await testHelper.withButtonHistoryData();
-    await testHelper.withStartDateToday();
   });
 
   describe('Main Page', () => {
@@ -37,7 +35,7 @@ describe('Integration', () => {
 
     it('should display the day information', async () => {
       const dayInfo = await testHelper.getText(page, 'day-title');
-      expect(dayInfo).to.eql(i18n.__('day-0'));
+      expect(dayInfo).to.eql(i18n.__('day-2'));
     });
 
     it('should show the leader', async () => {
@@ -95,8 +93,8 @@ describe('Integration', () => {
 describe('Score Table', () => {
   let page;
 
-  before(async () => {
-    await testHelper.withStartDate(moment().subtract(2, 'days').format('YYYY-MM-DD'));
+  beforeEach(async () => {
+    expectedScores = await testHelper.withButtonHistoryData();
     page = await global.browser.newPage();
 
     await page.goto('http://localhost:3000/score-table');
@@ -154,5 +152,11 @@ describe('Score Table', () => {
     await page.waitFor(THIRD_PLACE_NAME);
     await page.click(THIRD_PLACE_NAME);
     expect(page.url()).to.contain('teams/3');
+  });
+
+  it('should highlight score if button pressed today', async () => {
+    expect(await testHelper.getStyle(page, 'score-0')).to.contain('pressed');
+    expect(await testHelper.getStyle(page, 'score-1')).to.contain('not-yet-found');
+    expect(await testHelper.getStyle(page, 'score-2')).to.contain('not-yet-found');
   });
 });
