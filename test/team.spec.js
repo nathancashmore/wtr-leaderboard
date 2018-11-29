@@ -1,17 +1,19 @@
-const moment = require('moment');
 const i18n = require('i18n');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+
+chai.use(chaiHttp);
+const server = require('../app/app');
+
 const { testHelper } = require('./bootstrap');
 
 let expectedScores;
-
-const DAY_2 = moment().subtract(2, 'days').format('YYYY-MM-DD');
 
 describe('Team Integration', () => {
   describe('Team Page', () => {
     describe('Last day', () => {
       before(async () => {
         expectedScores = await testHelper.withButtonHistoryData();
-        await testHelper.withStartDate(DAY_2);
       });
 
       let page;
@@ -69,6 +71,36 @@ describe('Team Integration', () => {
         await page.click('[data-test="leaderboard-button"]');
         expect(page.url()).to.contain('/leaderboard');
       });
+    });
+  });
+
+  describe('Team Endpoint', () => {
+    // Based on:
+    // Day = 2
+    // [
+    //     { team: 2, score: 8, pressed: true },
+    //     { team: 1, score: 5, pressed: false },
+    //     { team: 3, score: 2, pressed: false },
+    // ]
+    // Day 2 / team 1 = button 3
+    before(async () => {
+      expectedScores = await testHelper.withButtonHistoryData();
+    });
+
+    it('it should GET the team information', (done) => {
+      const endpoint = '/teams/1';
+
+      chai.request(server)
+        .get(endpoint)
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.team).to.equal(i18n.__('team-1'));
+          expect(res.body.clue).to.equal(i18n.__('button-clue-3'));
+          expect(res.body.button).to.equal(i18n.__('button-name-3'));
+          expect(res.body.score).to.equal(5);
+          done();
+        });
     });
   });
 });
