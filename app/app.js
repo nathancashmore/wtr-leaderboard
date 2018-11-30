@@ -19,6 +19,7 @@ const introRouter = require('./routes/intro');
 const ifttRouter = require('./routes/iftt');
 const progressRouter = require('./routes/progress');
 const statusRouter = require('./routes/status');
+const slackRouter = require('./routes/slack');
 
 const app = module.exports = express();
 
@@ -55,6 +56,7 @@ app.use('/time', timeRouter);
 app.use('/buttons', buttonRouter);
 app.use('/history', historyRouter);
 app.use('/ifttt', ifttRouter);
+app.use('/slack', slackRouter);
 app.use('/intro', introRouter);
 app.use('/teams', teamRouter);
 app.use('/progress', progressRouter);
@@ -62,7 +64,7 @@ app.use('/status', statusRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  logger.error(`Unable to find route for ${req.url}`);
+  logger.error(`Unable to find route for [${req.method}] - ${req.url}`);
   next(createError(404));
 });
 
