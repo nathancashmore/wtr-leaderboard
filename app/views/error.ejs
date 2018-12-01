@@ -1,3 +1,34 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= __('title') %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/refresh.js"></script>
+
+</head>
+<body>
+<%- include('partials/snow'); %>
+<div id="header">
+    <img class=image-center src="/images/christmastree.png">
+    <h1 class="center" data-test="title" >
+        <%= __('title-1') %>
+        <span class="xmas-red"><%= __('title-2') %></span><%= __('title-3') %><span
+                class="xmas-green"><%= __('title-4') %></span>
+        <%= __('title-5') %>
+    </h1>
+</div>
+
+<div id="error-section" class="center">
+    <% if (error.output.statusCode === 500) { %>
+        <h2 data-test="error"><%= __('error.500') %></h2>
+    <% } else { %>
+        <h2 data-test="error"><%= `${error.output.statusCode} - ${error.message}` %></h2>
+    <% } %>
+</div>
+
+</body>
+</html>
