@@ -1,4 +1,4 @@
-const createError = require('http-errors');
+const boom = require('boom');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -61,22 +61,21 @@ app.use('/intro', introRouter);
 app.use('/teams', teamRouter);
 app.use('/progress', progressRouter);
 app.use('/status', statusRouter);
+app.use('/pear-shaped', () => { throw boom.internal(); });
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   logger.error(`Unable to find route for [${req.method}] - ${req.url}`);
-  next(createError(404));
+  next(boom.notFound());
 });
 
-// error handler
-app.use((err, req, res) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  boom.boomify(err);
+  logger.error(`Problem occurred at [${req.method}] - ${req.url} - ${err}`);
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  res.status(err.output.statusCode);
+  res.render('error', { error: err });
 });
 
 module.exports = app;
