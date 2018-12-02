@@ -11,6 +11,48 @@ let expectedScores;
 
 describe('Team Integration', () => {
   describe('Team Page', () => {
+    describe('Before event', () => {
+      before(async () => {
+        expectedScores = await testHelper.withStartDateBeforeEvent();
+      });
+
+      let page;
+
+      before(async () => {
+        page = await global.browser.newPage();
+        await page.goto('http://localhost:3000/teams/1');
+      });
+
+      after(async () => {
+        await page.close();
+      });
+
+      it('should return 404 for teams before event takes place', async () => {
+        expect(await testHelper.getText(page, 'error')).to.contain('404');
+      });
+    });
+
+    describe('After event', () => {
+      before(async () => {
+        expectedScores = await testHelper.withStartDateAfterEvent();
+      });
+
+      let page;
+
+      before(async () => {
+        page = await global.browser.newPage();
+        await page.goto('http://localhost:3000/teams/1');
+      });
+
+      after(async () => {
+        await page.close();
+      });
+
+      it('should return 404 for teams after event takes place', async () => {
+        expect(await testHelper.getText(page, 'error')).to.contain('404');
+      });
+    });
+
     describe('Last day', () => {
       before(async () => {
         expectedScores = await testHelper.withButtonHistoryData();
@@ -70,6 +112,23 @@ describe('Team Integration', () => {
       it('should have a link back to the leaderboard', async () => {
         await page.click('[data-test="leaderboard-button"]');
         expect(page.url()).to.contain('/leaderboard');
+      });
+
+      it('should only return valid teams', async () => {
+        await page.goto('http://localhost:3000/teams/0');
+        expect(await testHelper.getText(page, 'error')).to.contain('404');
+
+        await page.goto('http://localhost:3000/teams/1');
+        expect(await testHelper.getText(page, 'team-name')).to.eql(i18n.__('team-1'));
+
+        await page.goto('http://localhost:3000/teams/2');
+        expect(await testHelper.getText(page, 'team-name')).to.eql(i18n.__('team-2'));
+
+        await page.goto('http://localhost:3000/teams/3');
+        expect(await testHelper.getText(page, 'team-name')).to.eql(i18n.__('team-3'));
+
+        await page.goto('http://localhost:3000/teams/4');
+        expect(await testHelper.getText(page, 'error')).to.contain('404');
       });
     });
   });
