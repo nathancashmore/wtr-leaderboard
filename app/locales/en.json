@@ -77,5 +77,8 @@
 	"leaderboard-button": "<<< Back to the Leaderboard",
 	"error.500": "Well this is very bad. The Elves are on high alert. Please come back later.",
 	"slack.title": ":christmas_tree:Christmas IoT Hunt Scores:christmas_tree:",
-	"slack.pretext": "Results just in from elf HQ..."
+	"slack.pretext": "Results just in from elf HQ...",
+	"intro.text-10": "TIPS:",
+	"intro.tip-1": "If you find it, keep the button location a secret. Tomorrow a different team will be looking for it.",
+	"intro.tip-2": "Don't press the same button on a following day, as you'll just be giving points to another team"
 }
