@@ -75,5 +75,7 @@
 	"after-event-text-1": "And the winner is",
 	"after-event-text-2": "  Merry Christmas   ",
 	"leaderboard-button": "<<< Back to the Leaderboard",
-	"error.500": "Well this is very bad. The Elves are on high alert. Please come back later."
+	"error.500": "Well this is very bad. The Elves are on high alert. Please come back later.",
+	"slack.title": ":christmas_tree:Christmas IoT Hunt Scores:christmas_tree:",
+	"slack.pretext": "Results just in from elf HQ..."
 }

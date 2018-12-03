@@ -10,8 +10,6 @@ let expectedResult;
 
 chai.use(chaiHttp);
 
-const TEAM_SIZE = 3;
-
 describe('Slack', () => {
   before(async () => {
     // Based on the following response:
@@ -33,11 +31,12 @@ describe('Slack', () => {
       .send(payload)
       .end((err, res) => {
         expect(res.status).to.equal(200);
-        expect(res.body.length).to.equal(TEAM_SIZE);
-        [0, 1, 2].forEach((idx) => {
-          expect(res.body[idx].team).to.equal(i18n.__(`team-${expectedResult[idx].team}`));
-          expect(res.body[idx].score).to.equal(expectedResult[idx].score);
-        });
+        expect(res.body.attachments[0].text).to.contain(i18n.__(`team-${expectedResult[0].team}`));
+        expect(res.body.attachments[0].text).to.contain(i18n.__(`team-${expectedResult[1].team}`));
+        expect(res.body.attachments[0].text).to.contain(i18n.__(`team-${expectedResult[2].team}`));
+        expect(res.body.attachments[0].text).to.contain(`${expectedResult[0].score}pts`);
+        expect(res.body.attachments[0].text).to.contain(`${expectedResult[1].score}pts`);
+        expect(res.body.attachments[0].text).to.contain(`${expectedResult[2].score}pts`);
         done();
       });
   });

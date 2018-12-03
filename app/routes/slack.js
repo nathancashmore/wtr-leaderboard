@@ -4,9 +4,35 @@ const logger = require('heroku-logger');
 
 const router = express.Router();
 
+function formatForSlack(standing) {
+  let text = '';
+  let idx = 1;
+
+  standing.forEach((x) => {
+    text = `${text}${idx}. _${x.team}_ - *${x.score}pts*`;
+    text = `${text}\n`;
+    idx += 1;
+  });
+
+  return {
+    attachments: [
+      {
+        title: i18n.__('slack.title'),
+        pretext: i18n.__('slack.pretext'),
+        text,
+        mrkdwn_in: [
+          'text',
+          'pretext'
+        ]
+      }
+    ]
+  };
+}
+
 async function getScore(req) {
   const standing = await req.app.locals.dataHelper.getStanding();
-  return standing.map(x => ({ team: i18n.__(`team-${x.name}`), score: x.score }));
+  const standingWithContent = standing.map(x => ({ team: i18n.__(`team-${x.name}`), score: x.score }));
+  return formatForSlack(standingWithContent);
 }
 
 router.post('/', async (req, res) => {
