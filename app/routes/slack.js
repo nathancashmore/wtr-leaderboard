@@ -36,7 +36,7 @@ async function getScore(req) {
 }
 
 router.post('/', async (req, res) => {
-  logger.info(`Slack request received for [${req.body.text}]`);
+  logger.info(`Slack request received for [${req.body.text}] by ${req.body.user_name} in ${req.body.channel_name}`);
 
   switch (req.body.text) {
     case 'score':
