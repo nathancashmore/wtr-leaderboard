@@ -106,4 +106,32 @@ describe('Status Endpoint', () => {
         done();
       });
   });
+
+  it('should return 200 as code if json requested and no indicator red ', (done) => {
+    const endpoint = '/status';
+
+    testHelper.withoutButtonStatus().then(() => {
+      chai.request(server)
+        .get(endpoint)
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          done();
+        });
+    });
+  });
+
+  it('should return 410 as code if json requested and indicator red ', (done) => {
+    const endpoint = '/status';
+
+    testHelper.withButtonStatus().then(() => {
+      chai.request(server)
+        .get(endpoint)
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.status).to.equal(410);
+          done();
+        });
+    });
+  });
 });

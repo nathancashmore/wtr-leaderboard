@@ -7,7 +7,18 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const status = await req.app.locals.dataHelper.getStatus();
-  res.render('status', { title: i18n.__('title'), status });
+
+  const contentType = req.get('Content-Type');
+
+  if (contentType === 'application/json') {
+    if (status) {
+      status.filter(x => x.indicator === 'red');
+      if (status.length > 1) { res.status(410); } else { res.status(200); }
+    }
+    res.json();
+  } else {
+    res.render('status', { title: i18n.__('title'), status });
+  }
 });
 
 router.put('/', async (req, res) => {
