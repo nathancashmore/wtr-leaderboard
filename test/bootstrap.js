@@ -68,6 +68,27 @@ async function withoutButtonHistoryData() {
   await client.del('buttonHistory');
 }
 
+async function setWindow(window) {
+  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
+  await client.set('buttonWindow', JSON.stringify((window)));
+}
+
+async function outsideWindow() {
+  const BEFORE_NOW = moment().subtract(10, 'minutes').format('HH:mm:ss');
+  await setWindow({ start: BEFORE_NOW, end: BEFORE_NOW });
+}
+
+async function insideWindow() {
+  const BEFORE_NOW = moment().subtract(10, 'minutes').format('HH:mm:ss');
+  const AFTER_NOW = moment().add(10, 'minutes').format('HH:mm:ss');
+  await setWindow({ start: BEFORE_NOW, end: AFTER_NOW });
+}
+
+async function noWindow() {
+  const client = await asyncRedis.createClient(config.REDIS_URL, { no_ready_check: true });
+  await client.del('buttonWindow');
+}
+
 async function withButtonHistoryData() {
   // Following should provide the standing:
   // Team  --  Score
@@ -103,6 +124,7 @@ async function withButtonHistoryData() {
     // {"team": 3, "button": 2, "day": 2, "time": "10:02:00", "score": 1}
   ];
 
+  noWindow();
   withoutButtonHistoryData();
   setButtonHistory(testData);
   withStartDate(moment().subtract(2, 'days').format('YYYY-MM-DD'));
@@ -170,5 +192,8 @@ module.exports.testHelper = {
   getText,
   getStyle,
   setButtonHistory,
-  withButtonStatus
+  withButtonStatus,
+  outsideWindow,
+  insideWindow,
+  noWindow
 };

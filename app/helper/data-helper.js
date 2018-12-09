@@ -106,7 +106,13 @@ module.exports = class DataHelper {
 
     const dayHistory = history.filter(x => x.day === day);
 
-    return this.noOfTeams - dayHistory.length;
+    let score = this.noOfTeams - dayHistory.length;
+
+    if (await this.insideWindow() === false) {
+      score *= -1;
+    }
+
+    return score;
   }
 
   getTeam(buttonNumber, day) {
@@ -173,7 +179,7 @@ module.exports = class DataHelper {
     const score = await this.getScore(day);
 
     if (day === -1) {
-      return { error: true };
+      return new Error('Cannot press button until event is underway');
     }
 
     return this.pressButton(buttonNumber, team, day, score);
@@ -310,5 +316,33 @@ module.exports = class DataHelper {
     logger.info(`Removed ${noOfKeysRemoved} from the cache`);
 
     return 'OK';
+  }
+
+  async insideWindow() {
+    const window = await this.getWindow();
+
+    if (window !== null) {
+      const startTime = moment.utc(window.start, 'HH:mm:ss');
+      const endTime = moment.utc(window.end, 'HH:mm:ss');
+
+      return (moment().isAfter(startTime) && moment().isBefore(endTime));
+    }
+    return true;
+  }
+
+  async setWindow(window) {
+    await this.client.set('buttonWindow', JSON.stringify(window))
+      .catch((e) => {
+        logger.error(`Call to setWindow failed due to : ${e}`);
+      });
+  }
+
+  async getWindow() {
+    const window = await this.client.get('buttonWindow')
+      .catch((e) => {
+        logger.error(`Call to getWindow failed due to : ${e}`);
+      });
+
+    return JSON.parse(window);
   }
 };
