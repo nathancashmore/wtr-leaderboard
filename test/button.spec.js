@@ -21,6 +21,7 @@ describe('Button', () => {
       // Make sure the start date is set to today so
       // we know that the day will be 0
 
+      await testHelper.insideWindow();
       await testHelper.withoutButtonHistoryData();
       await testHelper.withStartDate(today);
     });
@@ -86,6 +87,7 @@ describe('Button', () => {
         });
     });
   });
+
   describe('Day 2', () => {
     before(async () => {
       // Make sure the start date is set to today so
@@ -141,6 +143,92 @@ describe('Button', () => {
           expect(res.status).to.equal(405);
           done();
         });
+    });
+  });
+
+  describe('Button window', () => {
+    after(async () => {
+      await testHelper.noWindow();
+    });
+
+    describe('Add and Remove', () => {
+      it('should be able to set button window', (done) => {
+        const endpoint = '/buttons/window';
+        const START = '09:00:00';
+        const END = '15:00:00';
+
+        const payload = {
+          start: START,
+          end: END
+        };
+
+        chai.request(server)
+          .put(endpoint)
+          .send(payload)
+          .end((err, res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body.start).to.equal(START);
+            expect(res.body.end).to.equal(END);
+            done();
+          });
+      });
+
+      it('should be able to clear button window', (done) => {
+        const endpoint = '/buttons/window/clear';
+
+        chai.request(server)
+          .patch(endpoint)
+          .end((err, res) => {
+            expect(res.status).to.equal(200);
+            done();
+          });
+      });
+    });
+
+    describe('Outside window', () => {
+      describe('Day 1', () => {
+        before(async () => {
+          await testHelper.outsideWindow();
+          await testHelper.withoutButtonHistoryData();
+          await testHelper.withStartDateToday();
+        });
+
+        it('should add scores', (done) => {
+          const endpoint = '/buttons/1';
+
+          chai.request(server)
+            .post(endpoint)
+            .end((err, res) => {
+              expect(res.status).to.equal(200);
+              expect(res.body.button).to.equal(1);
+              expect(res.body.day).to.equal(0);
+              expect(res.body.team).to.equal(1);
+              expect(res.body.score).to.equal(-3);
+              done();
+            });
+        });
+      });
+
+      describe('Day 2', () => {
+        before(async () => {
+          await testHelper.withStartDate(yesterday);
+        });
+
+        it('should minus scores', (done) => {
+          const endpoint = '/buttons/1';
+
+          chai.request(server)
+            .post(endpoint)
+            .end((err, res) => {
+              expect(res.status).to.equal(200);
+              expect(res.body.button).to.equal(1);
+              expect(res.body.day).to.equal(1);
+              expect(res.body.team).to.equal(3);
+              expect(res.body.score).to.equal(-3);
+              done();
+            });
+        });
+      });
     });
   });
 });

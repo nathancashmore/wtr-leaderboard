@@ -98,15 +98,15 @@ module.exports = class DataHelper {
         logger.info(`No button press history found : ${e}`);
       });
 
+    let score = 0;
+
     if (cachedHistory === null) {
-      return this.noOfTeams;
+      score = this.noOfTeams;
+    } else {
+      const history = JSON.parse(cachedHistory);
+      const dayHistory = history.filter(x => x.day === day);
+      score = this.noOfTeams - dayHistory.length;
     }
-
-    const history = JSON.parse(cachedHistory);
-
-    const dayHistory = history.filter(x => x.day === day);
-
-    let score = this.noOfTeams - dayHistory.length;
 
     if (await this.insideWindow() === false) {
       score *= -1;
@@ -335,6 +335,17 @@ module.exports = class DataHelper {
       .catch((e) => {
         logger.error(`Call to setWindow failed due to : ${e}`);
       });
+  }
+
+  async clearWindow() {
+    const noOfKeysRemoved = await this.client.del('buttonWindow')
+      .catch((e) => {
+        logger.error(`Call to delete buttonWindow failed due to : ${e}`);
+      });
+
+    logger.info(`Removed ${noOfKeysRemoved} from the cache`);
+
+    return 'OK';
   }
 
   async getWindow() {
