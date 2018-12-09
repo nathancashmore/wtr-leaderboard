@@ -267,5 +267,63 @@ describe('Helper', () => {
         expect(button3statusEntry[0].indicator).to.equal('red');
       });
     });
+
+    describe('Button window', () => {
+      beforeEach(async () => {
+        await testHelper.withButtonHistoryData();
+      });
+
+      it('Should set/get the button window', async () => {
+        await helper.setWindow({ start: '09:00:00', end: '17:00:00' });
+
+        const window = await helper.getWindow();
+
+        expect(window.start).to.equal('09:00:00');
+        expect(window.end).to.equal('17:00:00');
+      });
+
+      it('Should be able to determine if inside/outside window', async () => {
+        await testHelper.outsideWindow();
+        expect(await helper.insideWindow()).to.equal(false);
+
+        await testHelper.insideWindow();
+        expect(await helper.insideWindow()).to.equal(true);
+      });
+
+      it('Should be insideWindow by default', async () => {
+        await testHelper.noWindow();
+        expect(await helper.insideWindow()).to.equal(true);
+      });
+
+      it('Should deduct points when outside window', async () => {
+        await testHelper.outsideWindow();
+
+        // Where starting score for team 1 is 5 and
+        // second button press of the day so 2 point to be awarded
+        const button = 3;
+
+        await helper.pressButtonOnly(button);
+
+        const result = await helper.getStanding();
+
+        expect(result[1].name).to.equal(1);
+        expect(result[1].score).to.equal(3);
+      });
+
+      it('Should add points when inside window', async () => {
+        await testHelper.insideWindow();
+
+        // Where starting score for team 1 is 5 and
+        // second button press of the day so 2 point to be awarded
+        const button = 3;
+
+        await helper.pressButtonOnly(button);
+
+        const result = await helper.getStanding();
+
+        expect(result[1].name).to.equal(1);
+        expect(result[1].score).to.equal(7);
+      });
+    });
   });
 });

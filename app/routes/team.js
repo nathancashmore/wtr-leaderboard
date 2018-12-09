@@ -27,7 +27,9 @@ router.get('/:team', async (req, res, next) => {
       team: teamName, button: buttonName, clue, score
     });
   } else {
-    res.render('team', { team, button, score });
+    next(boom.notFound('Now what do i do for a clue !?!'));
+
+    // res.render('team', { team, button, score });
   }
 });
 

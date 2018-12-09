@@ -98,15 +98,21 @@ module.exports = class DataHelper {
         logger.info(`No button press history found : ${e}`);
       });
 
+    let score = 0;
+
     if (cachedHistory === null) {
-      return this.noOfTeams;
+      score = this.noOfTeams;
+    } else {
+      const history = JSON.parse(cachedHistory);
+      const dayHistory = history.filter(x => x.day === day);
+      score = this.noOfTeams - dayHistory.length;
     }
 
-    const history = JSON.parse(cachedHistory);
+    if (await this.insideWindow() === false) {
+      score *= -1;
+    }
 
-    const dayHistory = history.filter(x => x.day === day);
-
-    return this.noOfTeams - dayHistory.length;
+    return score;
   }
 
   getTeam(buttonNumber, day) {
@@ -173,7 +179,7 @@ module.exports = class DataHelper {
     const score = await this.getScore(day);
 
     if (day === -1) {
-      return { error: true };
+      return new Error('Cannot press button until event is underway');
     }
 
     return this.pressButton(buttonNumber, team, day, score);
@@ -310,5 +316,44 @@ module.exports = class DataHelper {
     logger.info(`Removed ${noOfKeysRemoved} from the cache`);
 
     return 'OK';
+  }
+
+  async insideWindow() {
+    const window = await this.getWindow();
+
+    if (window !== null) {
+      const startTime = moment.utc(window.start, 'HH:mm:ss');
+      const endTime = moment.utc(window.end, 'HH:mm:ss');
+
+      return (moment().isAfter(startTime) && moment().isBefore(endTime));
+    }
+    return true;
+  }
+
+  async setWindow(window) {
+    await this.client.set('buttonWindow', JSON.stringify(window))
+      .catch((e) => {
+        logger.error(`Call to setWindow failed due to : ${e}`);
+      });
+  }
+
+  async clearWindow() {
+    const noOfKeysRemoved = await this.client.del('buttonWindow')
+      .catch((e) => {
+        logger.error(`Call to delete buttonWindow failed due to : ${e}`);
+      });
+
+    logger.info(`Removed ${noOfKeysRemoved} from the cache`);
+
+    return 'OK';
+  }
+
+  async getWindow() {
+    const window = await this.client.get('buttonWindow')
+      .catch((e) => {
+        logger.error(`Call to getWindow failed due to : ${e}`);
+      });
+
+    return JSON.parse(window);
   }
 };
