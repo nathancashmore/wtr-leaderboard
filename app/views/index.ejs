@@ -35,7 +35,9 @@
         <div class="before"></div>
         <div class="center">
             <span data-test="after-event-text"><%= __('after-event-text-1') %></span>
-            <h1 class="xmas-green" data-test="winning-team"><%= __(`team-${standing[0].name}`) %></h1>
+            <h1 class="xmas-green" data-test="first-place-team"><i class="em em-first_place_medal"></i><%= __(`team-${standing[0].name}`) %><i class="em em-first_place_medal"></i></h1>
+            <h2 class="xmas-green" data-test="second-place-team"><i class="em em-second_place_medal"></i><%= __(`team-${standing[1].name}`) %><i class="em em-second_place_medal"></i></h2>
+            <h3 class="xmas-green" data-test="third-place-team"><i class="em em-third_place_medal"></i><%= __(`team-${standing[2].name}`) %><i class="em em-third_place_medal"></i></h3>
             <i class="em em-gift"></i><span data-test="after-event-text"><%= __('after-event-text-2') %></span><i class="em em-gift"></i>
         </div>
         <div class="after"></div>

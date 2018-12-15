@@ -80,12 +80,17 @@ describe('Integration', () => {
       await page.close();
     });
 
-    it('should show winner information after event and winning team', async () => {
+    it('should show winner information after event and second and third places', async () => {
       const pageText = await testHelper.getText(page, 'after-event-text');
       expect(pageText).to.eql(i18n.__('after-event-text-1'));
 
-      const winningTeam = await testHelper.getText(page, 'winning-team');
-      expect(winningTeam.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[0].team}`));
+      const firstPlaceTeam = await testHelper.getText(page, 'first-place-team');
+      const secondPlaceTeam = await testHelper.getText(page, 'second-place-team');
+      const thirdPlaceTeam = await testHelper.getText(page, 'third-place-team');
+
+      expect(firstPlaceTeam.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[0].team}`));
+      expect(secondPlaceTeam.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[1].team}`));
+      expect(thirdPlaceTeam.replace('\t', '')).to.eql(i18n.__(`team-${expectedScores[2].team}`));
     });
   });
 });
