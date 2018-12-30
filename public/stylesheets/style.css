@@ -519,3 +519,45 @@ button:hover {
   80%, 99.9% {
     margin-top: 30%;
     margin-left: 80%; } }
+
+/* C O U N T D O W N */
+
+#countdown {
+  width: 100%;
+  text-align: center;
+}
+
+#countdown .text {
+  padding: 10px;
+
+}
+
+.clock {
+  overflow: hidden;
+  display: inline-block;
+  text-align: center;
+}
+
+.col-md-12 {
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
+.top-pane {
+  margin-bottom: 0px;
+  border-radius: 5px 5px 0px 0px;
+  background-color: #34495E;
+  border: 0px;
+  color: white;
+}
+
+.bottom-pane {
+  margin-top: 0px;
+  border-radius: 0px 0px 5px 5px;
+  background-color: #2C3E50;
+  border: 0px;
+  color: white;
+}
+
+
+

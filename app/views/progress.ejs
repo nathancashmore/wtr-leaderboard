@@ -5,33 +5,34 @@
     <link rel='stylesheet' href='/stylesheets/style.css'/>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
     <script type="text/javascript" src="/javascripts/refresh.js"></script>
+    <script type="text/javascript" src="/javascripts/countdown.js"></script>
 
 </head>
 <body class="limited-width">
-<%- include('partials/snow'); %>
-<div id="header">
-    <h1 class="center" [data-test="title" ]>
-        <span class="xmas-red"><%= __('title-2') %></span><%= __('title-3') %><span
-                class="xmas-green"><%= __('title-4') %></span>
-        <%= __('title-5') %>
-    </h1>
-</div>
-<div id="progress">
-    <p>
-        Welcome to the <span class="xmas-red">I</span>o<span class="xmas-green">T</span>hunt.
-    </p>
-    <p>
-        You and your friends have the task of finding and pressing a number of hidden buttons in order to win a prize.
-    </p>
-        <%- include('partials/progress-bar', {data}); %>
-    <p>
-        The bar above shows how well you are getting on.
-    </p>
-    <p>
-        Happy Hunting.
-    </p>
-</div>
 
+    <%- include('partials/countdown'); %>
+
+    <div class="pyro">
+        <div class="before"></div>
+
+        <div id="progress">
+            <p class="center">
+                <%= __('progress.text-1') %><%= __('title-1') %><span class="xmas-red"><%= __('title-2') %></span><%= __('title-3') %><span class="xmas-green"><%= __('title-4') %></span><%= __('title-5') %>
+            </p>
+            <p>
+                <%= __('progress.text-2') %>
+            </p>
+                <%- include('partials/progress-bar', {data}); %>
+            <p>
+                <%= __('progress.text-3') %>
+            </p>
+            <p>
+                <%= __('progress.text-4') %>
+            </p>
+        </div>
+    </div>
+    <div class="after"></div>
 </body>
 </html>
