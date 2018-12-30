@@ -25,7 +25,7 @@ describe('Integration', () => {
       await page.waitFor(HEADING_SELECTOR);
       const heading = await page.$eval(HEADING_SELECTOR, x => x.innerText);
 
-      expect(heading).to.eql('IoT Hunt');
+      expect(heading).to.eql(i18n.__('progress.heading'));
     });
   });
 
