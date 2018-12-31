@@ -6,7 +6,7 @@
 
     <groupId>uk.co.staticvoid</groupId>
     <artifactId>IOTHunt</artifactId>
-    <version>0.4</version>
+    <version>0.5</version>
 
     <properties>
         <testSpigotPluginDir>${basedir}/../Spigot/plugins</testSpigotPluginDir>
@@ -82,7 +82,7 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.12.2-R0.1-SNAPSHOT</version>
+            <version>1.13-R0.1-SNAPSHOT</version>
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
