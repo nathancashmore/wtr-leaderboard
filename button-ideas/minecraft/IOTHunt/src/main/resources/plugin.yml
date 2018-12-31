@@ -1,7 +1,7 @@
 name: IOTHunt
 main: uk.co.staticvoid.iothunt.IOTHunt
-version: 0.4
-api-version: 1.12.2
+version: 0.5
+api-version: 1.13
 author: MajorSlackmore
 commands:
    push-button:
