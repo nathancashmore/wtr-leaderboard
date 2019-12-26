@@ -29,9 +29,10 @@ will only add points to a team once.
 | ```POST``` | ```/time```                   | ```{ "startDate" : "YYYY-MM-DD" }```  | Set the start date |
 | ```PATCH```| ```/history/clear```          | --                                    | Clears all button press history. |
 | ```GET```  | ```/teams/<team-number>```    | --                                    | Returns the team information included current days button and clue |
-| ```POST``` | ```/buttons/<button-number>```| --                                    | Adds a record to the button press history |	
+| ```POST``` | ```/buttons/<button-number>```| -- N.B. Must include header Content-Type application/json | Adds a record to the button press history |	
 | ```PUT```  | ```/status```                 | ```{"button": "1", "ip": "10.10.0.99" }```  | Used to report the status of a button and disclose its IP address |	
 | ```PATCH```| ```/status/clear```           | --                                    | Clears all the button status information |	
+| ```GET```  | ```/slack```                  | { "text" : "status" }                 | Returns Slack formatted response for Slack slash command |
 
 ### Prerequisites
 * REDIS running locally
@@ -48,8 +49,16 @@ npm test
 ```
 npm start
 ```
+
+* [Leaderboard - http://localhost:3000](http://localhost:3000)
+* [Introduction - http://localhost:3000/intro](http://localhost:3000/intro)
+
 ## Deployment
-This is currently being deployed to [Heroku](https://iot-hunt.herokuapp.com/)
+This is currently being deployed to [Heroku](https://iot-hunt.herokuapp.com/intro)
+
+## Configuration
+
+
 
 ## Button Ideas
 
@@ -114,6 +123,28 @@ that can only make CraftBukkit shrink in shame.
 By progamming a Bukkit plugin you can trigger the sending of a REST API call to push the button when an event 
 or command is triggered in Minecraft.  
 
+### ![SlackLogo]
+Slack is a cloud-based proprietary instant messaging platform developed by Slack Technologies.  If you or your company already
+use Slack for messaging then its relatively easy to create a [Slack App](https://api.slack.com/apps) for your workspace.
+
+An endpoint has been provided that will return markdown detailing the latest scores.
+
+```
+curl --request POST \
+     --url http://localhost:3000/slack \
+     --header 'Content-Type: application/json' \
+     --data '{ "text": "score" }'
+```
+
+This endpoint may then be used in a [Slack Command](https://api.slack.com/interactivity/slash-commands) to provide a live update
+of the scoreboard.  Just specify the Request URL as http://your.site.address/slack on a new app for example called `leaderboard`
+and then you can issue the command:
+```
+/leaderboard score
+```
+to get the latest results.
+
+
 ## References
 
 https://platform.ifttt.com/docs/applets
@@ -124,6 +155,8 @@ https://developers.google.com/vr/?hl=en
 
 https://www.spigotmc.org/wiki/spigot/
 
+https://api.slack.com/
+
 https://bukkit.gamepedia.com/Plugin_Tutorial
 
 [ButtonPushWiring]: http://iot-hunt.herokuapp.com/images/button-push-diagram.png "Button Push wiring"
@@ -132,4 +165,5 @@ https://bukkit.gamepedia.com/Plugin_Tutorial
 [IFTTTLogo]: http://iot-hunt.herokuapp.com/images/IFTTTLogo.png "IFTTT"
 [IFTTTApplet]: http://iot-hunt.herokuapp.com/images/IFTTTApplet.png "IFTTT Applet"
 [MinecraftLogo]: http://iot-hunt.herokuapp.com/images/MinecraftLogo.png "Minecraft"
+[SlackLogo]: http://iot-hunt.herokuapp.com/images/SlackLogo.png "Slack"
 
