@@ -37,7 +37,7 @@
     "eslint-plugin-import": "^2.14.0",
     "lodash": "^4.17.11",
     "mocha": "^5.2.0",
-    "puppeteer": "^1.8.0",
+    "puppeteer": "^1.13.0",
     "zombie": "^6.1.3"
   }
 }
